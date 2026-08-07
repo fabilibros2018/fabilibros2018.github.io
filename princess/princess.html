@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Princesa Diseñadora</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Palatino', serif;
+            background: linear-gradient(135deg, #4a1259, #7b2cbf);
+            color: #f8e3ff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg, 
+                #e0aaff, #c77dff, #9d4edd, #7b2cbf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            padding: 0 20px;
+        }
+
+        a {
+            background: linear-gradient(45deg, #e0aaff, #9d4edd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cover {
+            position: relative;
+            text-align: center;
+            padding: 0;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            display: block;
+            filter: brightness(0.8) sepia(0.2);
+            
+        }
+
+        .title-name {
+            font-size: 2em;
+            background: linear-gradient(45deg, 
+                #e0aaff, #c77dff, #9d4edd, #7b2cbf);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: gradient 3s ease infinite;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-image {
+            max-width: 90%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 3px solid #9d4edd;
+        }
+
+        .song-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid #9d4edd;
+        }
+
+        .read-more {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            padding: 5px;
+            color: #e0aaff;
+        }
+
+        footer {
+            background: linear-gradient(135deg, 
+                rgba(74, 18, 89, 0.9), 
+                rgba(123, 44, 191, 0.9));
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 2px solid #9d4edd;
+        }
+
+        footer p{
+            text-align: center;
+            font-family: cursive;
+        }
+        /* Rest of the styles remain the same structure but with updated colors */
+        /* ... */
+        .video-showcase {
+            position: relative;
+            padding: 3rem 1rem;
+            margin: 4rem auto;
+            max-width: 1000px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            border: 2px solid #9d4edd;
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            margin: 2rem auto;
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100px;
+            height: 100%;
+            pointer-events: none;
+            background: url('sparkle.png') repeat;
+            opacity: 0.5;
+            animation: sparkleFloat 20s linear infinite;
+        }
+
+        .sparkles-left {
+            left: 0;
+            transform: rotate(15deg);
+        }
+
+        .sparkles-right {
+            right: 0;
+            transform: rotate(-15deg);
+        }
+
+        .video-description {
+            margin-top: 2rem;
+            font-style: italic;
+            color: #e0aaff;
+            font-size: 1.2rem;
+        }
+
+        @keyframes sparkleFloat {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1000px; }
+        }
+
+        .video-showcase h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #ffd700, #e0aaff, #9d4edd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(224, 170, 255, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(224, 170, 255, 0.8); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <img src="princesa-castillo.jpg" alt="Portada del Libro" placeholder="Insertar imagen aquí">
+        <h1><span class="title-name">La Princesa</span> Diseñadora</h1>
+    </div>
+
+    <div class="song-section">
+        <h2>♪ Melodía Real ♪</h2>
+        <audio controls>
+            <source src="princess-song.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <div class="content">
+        <div class="chapter">
+            <h2>Capítulo 1: El Castillo de los Sueños</h2>
+            <img src="castillo-medieval.jpg" alt="Castillo Medieval" class="chapter-image">
+            <p>En un majestuoso castillo del año 1128, vivía una princesa de ojos morados que soñaba con algo más que su destino real...</p>
+            <a onclick="toggleText('cap1')" class="read-more">Leer más</a>
+            <div id="cap1" class="full-text">
+                <p>
+                    La princesa pasaba sus días recorriendo los enormes pasillos del castillo, admirando los tapices y los vestidos de la corte. Sus ojos morados, únicos en todo el reino, brillaban cada vez que imaginaba crear hermosos vestidos para todas las personas, sin importar su clase social.
+
+                    Sin embargo, sus obligaciones reales pesaban sobre sus hombros como una corona de hierro, recordándole constantemente que su destino estaba trazado desde su nacimiento.
+                </p>
+            </div>
+        </div>
+
+        <!-- Continuar con los siguientes capítulos -->
+        <!-- ... -->
+
+            <!-- Add after the first chapter -->
+    <div class="chapter">
+        <h2>Capítulo 2: El Pergamino Dorado</h2>
+        <img src="pergamino-dorado.jpg" alt="Pergamino Mágico" class="chapter-image">
+        <p>Durante uno de sus paseos por el castillo, un brillo dorado llamó la atención de la princesa...</p>
+        <a onclick="toggleText('cap2')" class="read-more">Leer más</a>
+        <div id="cap2" class="full-text">
+            <p>
+                En un rincón olvidado del castillo, entre antiguos tapices y armaduras oxidadas, un pergamino bañado en oro captó su mirada. Las extrañas inscripciones parecían danzar ante sus ojos morados, como si la llamaran.
+
+                Sin pensarlo dos veces, la princesa comenzó a leer las misteriosas palabras en voz alta, sin imaginar que cada sílaba la acercaba más a un destino extraordinario.
+            </p>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>Capítulo 3: El Viaje en el Tiempo</h2>
+        <img src="portal-tiempo.png" alt="Portal del Tiempo" class="chapter-image">
+        <p>Las palabras del pergamino desataron una magia antigua y poderosa...</p>
+        <a onclick="toggleText('cap3')" class="read-more">Leer más</a>
+        <div id="cap3" class="full-text">
+            <p>
+                De repente, el mundo comenzó a girar a su alrededor. Luces brillantes y túneles de colores la envolvieron mientras viajaba a través del tiempo. La princesa flotaba entre épocas y siglos, atravesando el tejido mismo del tiempo.
+
+                Su vestido medieval ondeaba en el viento temporal mientras cruzaba agujeros de gusano que conectaban su época con un futuro desconocido.
+            </p>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>Capítulo 4: Un Nuevo Mundo</h2>
+        <img src="ciudad-moderna.png" alt="Ciudad del Futuro" class="chapter-image">
+        <p>El año 2025 la recibió con un espectáculo de luces y sonidos nunca antes imaginados...</p>
+        <a onclick="toggleText('cap4')" class="read-more">Leer más</a>
+        <div id="cap4" class="full-text">
+            <p>
+                Cuando el mundo dejó de girar, la princesa se encontró en una ciudad irreconocible. Donde antes se alzaba su majestuoso castillo, ahora se erguían edificios de cristal que tocaban el cielo. Las calles estaban llenas de extraños carruajes sin caballos y personas vestidas de formas que jamás había imaginado.
+
+                Su vestido medieval y su porte real llamaban la atención de los transeúntes, que la miraban con curiosidad mientras ella contemplaba maravillada este nuevo mundo.
+            </p>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>Capítulo 5: Peter, el Mentor</h2>
+        <img src="peter-princesa.png" alt="Peter y la Princesa" class="chapter-image">
+        <p>En medio de su confusión, un amable anciano se acercó a ayudarla...</p>
+        <a onclick="toggleText('cap5')" class="read-more">Leer más</a>
+        <div id="cap5" class="full-text">
+            <p>
+                Peter, un sastre jubilado de ojos bondadosos, vio algo especial en aquella joven desorientada. Sin hacer demasiadas preguntas, le ofreció su ayuda y un lugar seguro donde quedarse. La princesa encontró en él no solo un mentor, sino también un amigo que creía en sus sueños.
+
+                Con paciencia y sabiduría, Peter comenzó a enseñarle sobre este nuevo mundo, mientras ella le compartía historias de su época que lo fascinaban.
+            </p>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>Capítulo 6: Adaptándose al Futuro</h2>
+        <img src="aprendizaje-moderno.png" alt="Adaptación al Presente" class="chapter-image">
+        <p>Los meses pasaron mientras la princesa descubría las maravillas del siglo XXI...</p>
+        <a onclick="toggleText('cap6')" class="read-more">Leer más</a>
+        <div id="cap6" class="full-text">
+            <p>
+                Poco a poco, la princesa fue aprendiendo a usar las "máquinas mágicas" de la época moderna: teléfonos, computadoras e internet. Cada nuevo descubrimiento la maravillaba y le abría un mundo de posibilidades.
+
+                Sus ojos morados brillaban con cada nueva experiencia, y su mente medieval comenzaba a entender que había llegado a esta época por una razón especial.
+            </p>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>Capítulo 7: El Sueño de Diseñar</h2>
+        <img src="taller-diseno.png" alt="Taller de Diseño" class="chapter-image">
+        <p>Con el apoyo de Peter, la princesa comenzó a dar sus primeros pasos en el mundo del diseño...</p>
+        <a onclick="toggleText('cap7')" class="read-more">Leer más</a>
+        <div id="cap7" class="full-text">
+            <p>
+                En el pequeño taller de Peter, la princesa comenzó a aprender las bases del diseño moderno. Sus conocimientos de los elegantes vestidos medievales se mezclaban perfectamente con las técnicas contemporáneas.
+
+                Peter la ayudó a inscribirse en una escuela de diseño, donde su perspectiva única y su pasión por la moda medieval llamaron la atención de profesores y compañeros.
+            </p>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>Capítulo 8: Primeros Pasos en la Moda</h2>
+        <img src="primera-coleccion.png" alt="Primera Colección" class="chapter-image">
+        <p>Su primera colección fue una fusión mágica entre dos mundos...</p>
+        <a onclick="toggleText('cap8')" class="read-more">Leer más</a>
+        <div id="cap8" class="full-text">
+            <p>
+                Con determinación y creatividad, la princesa comenzó a crear diseños que mezclaban la elegancia medieval con la practicidad moderna. Sus vestidos contaban historias de dos épocas, unidos por hilos de imaginación y nostalgia.
+
+                Su primer desfile fue un éxito rotundo, donde cada prenda reflejaba la magia de su viaje a través del tiempo.
+            </p>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>Capítulo 9: Fusión de Dos Mundos</h2>
+        <img src="coleccion-exitosa.png" alt="Fusión de Épocas" class="chapter-image">
+        <p>Sus diseños revolucionaron la industria de la moda...</p>
+        <a onclick="toggleText('cap9')" class="read-more">Leer más</a>
+        <div id="cap9" class="full-text">
+            <p>
+                La princesa diseñadora se convirtió en un fenómeno de la moda. Sus creaciones, que mezclaban los detalles ornamentados del siglo XII con la funcionalidad del siglo XXI, cautivaron al mundo.
+
+                Cada colección era un puente entre épocas, una celebración de la historia y el futuro unidos en perfecta armonía.
+            </p>
+        </div>
+    </div>
+
+    <div class="chapter">
+        <h2>Capítulo 10: La Diseñadora Real</h2>
+        <img src="exito-final.png" alt="Triunfo Final" class="chapter-image">
+        <p>Su sueño finalmente se había hecho realidad, de una manera que jamás imaginó...</p>
+        <a onclick="toggleText('cap10')" class="read-more">Leer más</a>
+        <div id="cap10" class="full-text">
+            <p>
+                La princesa había encontrado su verdadero reino en el mundo de la moda. Sus diseños no solo eran admirados por su belleza, sino que habían revolucionado la forma en que las personas veían la moda histórica.
+
+                Junto a Peter, quien se había convertido en su familia en este nuevo mundo, la princesa comprendió que a veces los sueños se cumplen de las maneras más inesperadas, y que la verdadera realeza está en ser fiel a uno mismo.
+            </p>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="video-showcase">
+        <div class="sparkles sparkles-left"></div>
+        <div class="sparkles sparkles-right"></div>
+        <h2>✨ La Princesa Diseñadora ✨</h2>
+        <div class="video-container">
+            <video controls poster="coleccion-exitoss.png" loop>
+                <source src="princess.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+        <div class="video-description">
+            <p>Un viaje mágico a través del tiempo y la moda</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <span>La Princesa Diseñadora</span><br>
+            <span>© 2025 Todos los derechos reservados</span><br>
+            <span>Lucía Editorial</span>
+        </p>
+    </footer>
+
+    <script>
+        // Same JavaScript as spike.html
+        window.onload = function() {
+            const fullTexts = document.querySelectorAll('.full-text');
+            fullTexts.forEach(text => {
+                text.style.display = 'none';
+            });
+        }
+
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+            
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                button.textContent = "Leer menos";
+            } else {
+                element.style.display = "none";
+                button.textContent = "Leer más";
+            }
+        }
+    </script>
+</body>
+</html>
