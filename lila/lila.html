@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lila y el Misterio de la Luz Robada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Palatino', serif;
+            background: linear-gradient(135deg, #0a0a20, #101030); /* Darker night background */
+            color: #f0f0f0; /* Lighter text color */
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg,
+                #ffcc66, #ffbb33, #ffaa00, #cc8800); /* Warm yellow/orange gradient for titles */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 1.15rem; /* Slightly smaller font size */
+            text-align: justify;
+            padding: 0 20px;
+            color: #e0e0e0; /* Slightly darker text color for paragraphs */
+        }
+
+        .dialogue {
+            color: #ffdd88; /* Lighter yellow for dialogue */
+            font-style: italic;
+            margin: 10px 0;
+            display: block;
+        }
+
+        a {
+            background: linear-gradient(45deg, #ffbb33, #ffaa00); /* Orange/yellow gradient for links */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: 0;
+            margin-bottom: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            margin: 0;
+            display: block;
+            filter: brightness(0.7) contrast(1.1); /* Slightly brighter and more contrast */
+        }
+
+        .title-name {
+            font-size: 2em; /* Slightly larger title */
+            background: linear-gradient(45deg,
+                #ffcc66, #ffbb33, #ffaa00, #cc8800); /* Same warm gradient */
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: gradient 5s ease infinite; /* Slower gradient animation */
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-image {
+            max-width: 90%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(255, 170, 0, 0.4); /* Yellowish shadow */
+            border: 3px solid #ffaa00; /* Yellow border */
+        }
+
+        .song-section {
+            background: rgba(10, 10, 30, 0.7); /* Slightly more opaque song section */
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid #ffaa00; /* Yellow border */
+        }
+        .song-section h2{
+            text-align:center;
+
+           } 
+
+        .read-more {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            padding: 5px;
+            color: #ffbb33; /* Lighter orange for "Read More" */
+        }
+
+        footer {
+            background: linear-gradient(135deg,
+                rgba(10, 10, 30, 0.9),
+                rgba(16, 16, 48, 0.9)); /* Darker footer background */
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 2px solid #ffaa00; /* Yellow border */
+        }
+
+        .chapter-icon {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 2rem;
+            color: #ffbb33; /* Lighter orange for icons */
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            border-radius: 30px;
+        }
+
+        .full-text {
+            display: none;
+            margin-top: 10px;
+        }
+
+        footer p{
+            text-align: center;
+            font-family: cursive;
+            color: #e0e0e0;
+        }
+
+        /* Audio Card Styling (from previous response) */
+        .audio-card {
+            background-color: #1a1a3a; /* Slightly darker card background */
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 8px rgba(255, 170, 0, 0.2); /* Lighter yellow shadow */
+            text-align: center;
+        }
+
+        .audio-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffbb33; /* Lighter orange title */
+            margin-bottom: 0.5rem;
+            text-align:center;
+        }
+
+        .custom-audio-player {
+            width: 100%;
+            max-width: 500px;
+            margin: 0.5rem 0;
+            border-radius: 30px;
+        }
+
+        .audio-description {
+            font-size: 1rem;
+            color: #e0e0e0;
+            margin-top: 0.5rem;
+            text-align: center;
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <img src="night-village.jpg" alt="Pueblo Nocturno" placeholder="Insertar imagen aquí">
+        <h1><span class="title-name">Lila y el Misterio de la Luz Robada</span></h1>
+    </div>
+
+    <div class="song-section">
+        <h2>♪ Canción de las Sombras Traviesas ♪</h2>
+        <div class="audio-card">
+            <div class="audio-title">Melodía Nocturna</div>
+            <audio controls class="custom-audio-player">
+                <source src="Shadows Melody.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <p class="audio-description">Una melodía misteriosa y juguetona para acompañar las aventuras de Lila en la oscuridad.</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h2>Capítulo 1: Lila, la Niña de las Mil Ideas</h2>
+            <img src="lila-drawing.png" alt="Lila Dibujando" class="chapter-image">
+            <p>En el corazón de un lugar llamado "La Comunidad", donde las casas se acurrucaban como gatitos bajo el sol, vivía Lila...</p>
+            <a onclick="toggleText('cap1')" class="read-more">Leer más</a>
+            <div id="cap1" class="full-text">
+                <p>
+                    Tenía seis años, una melena color miel que siempre atrapaba rayos de sol y unos ojos que brillaban como luciérnagas en la noche. Lila no caminaba, ¡exploraba! Cada rincón de La Comunidad era un nuevo mundo por descubrir, cada charco un océano para barcos de papel, cada nube una criatura fantástica.
+
+                    Su casa era un hervidero de risas y cariño. Sus padres, siempre listos para un abrazo; sus abuelos, contadores de historias con voces de caramelo. Lila pasaba horas dibujando dragones con calcetines a rayas, inventando diálogos para las ardillas del jardín y construyendo castillos de cojines más grandes que ella.
+
+                    La felicidad de Lila era como una burbuja de jabón, brillante y llena de color… hasta que, de repente, ¡PUM! La luz se iba.
+
+                    Y entonces, todo cambiaba. La risa se apagaba como una vela soplada por un gigante invisible. Las sombras se alargaban como dedos huesudos, y el silencio se llenaba de pequeños ruidos que antes no notaba. El mundo de colores de Lila se convertía en un lugar gris y gruñón.
+
+                    <b class="dialogue">"¡Otra vez no!"</b> 
+               suspiraba Lila, con su vocecita que de pronto sonaba más pequeña. La oscuridad le hacía cosquillas en el estómago, pero no cosquillas divertidas, sino esas que te hacen sentir un poco… brrr.
+
+                    En su mente de niña, Lila había inventado una explicación para estas molestas ausencias de luz. No era un problema técnico, ¡no señor! Era un villano, un ser oscuro y escurridizo que, en secreto, se dedicaba a robar la luz de La Comunidad. Lo imaginaba con capa negra y bigotes retorcidos, riéndose a carcajadas mientras sumía al pueblo en la penumbra.
+
+                    Sin saberlo, la fantasía de Lila… no estaba tan lejos de la verdad.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-eye-slash"></i>
+            </div>
+            <h2>Capítulo 2: El Misterioso Chupaluces</h2>
+            <img src="lila-window.png" alt="Lila en la Ventana" class="chapter-image">
+            <p>Las semanas se deslizaban entre juegos y apagones. Lila ya conocía el ritual: la luz se iba, su alegría se escondía, y la oscuridad… bueno, la oscuridad simplemente era...</p>
+            <a onclick="toggleText('cap2')" class="read-more">Leer más</a>
+            <div id="cap2" class="full-text">
+                <p> Pero Lila era una niña de acción, ¡no de resignación! Decidió que era hora de investigar.
+
+                    Una noche, sentada en el alféizar de su ventana, mirando las estrellas que titilaban como pequeños ojos curiosos, Lila tuvo una idea. Si el villano robaba la luz, ¡seguro que lo hacía desde algún lugar alto! Así que levantó la vista, más allá de los tejados de La Comunidad, hacia el cielo estrellado.
+
+                    Y allí lo vio.
+
+                    No era un ser con capa y bigotes, como había imaginado. Era… algo más extraño. Una especie de sombra temblorosa, como una mancha de tinta moviéndose en el aire, flotando entre los cables de la luz. Se movía con suavidad, como si estuviera bebiendo de las bombillas invisibles que conectaban las casas.
+
+                    Lila parpadeó. ¿Era real? ¿O era su imaginación jugándole una broma en la oscuridad? No, ahí estaba de nuevo, moviéndose, succionando… ¡robando la luz!
+
+                    Corrió a contárselo a sus padres, con el corazón latiéndole como un tambor loco.
+
+                    <b class="dialogue">"¡Mamá, papá! ¡Lo vi! ¡Vi al que roba la luz!"</b> exclamó, señalando frenéticamente hacia la ventana oscura.
+
+                    Sus padres se acercaron, con una sonrisa dulce pero un poco incrédula.
+
+                    <b class="dialogue">"¿Ah sí, Lila? ¿Y qué era?"</b> preguntó su papá, con tono divertido.
+
+                    <b class="dialogue">"¡Era una sombra que bebía luz! ¡Estaba en los cables, lo juro!"</b> Lila insistió, con los ojos muy abiertos.
+
+                    Sus padres se miraron, intercambiando una sonrisa cómplice.
+
+                    <b class="dialogue">"Cariño, seguro que era solo tu imaginación. A veces, las sombras nos juegan trucos en la oscuridad"</b> dijo su mamá, acariciándole el pelo. <b class="dialogue">"Pero qué imaginación tienes, ¡eres toda una aventurera!"</b>
+
+                    Lila suspiró. No le creían. ¡Pero ella lo había visto! Tenía que demostrarles que no estaba loca, que el villano de la luz era real. Y tenía un plan… ¡un plan muy astuto!
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-binoculars"></i>
+            </div>
+            <h2>Capítulo 3: Operación "Caza al Chispadrón"</h2>
+            <img src="lila-flashlight.png" alt="Lila con Linterna" class="chapter-image">
+            <p>Lila bautizó a su villano "El Chispadrón", un nombre que sonaba un poco ridículo pero también un poco amenazante. Y si El Chispadrón robaba la luz… ¡ella lo atraparía con luz!</p>
+            <a onclick="toggleText('cap3')" class="read-more">Leer más</a>
+            <div id="cap3" class="full-text">
+                <p>
+                    
+
+                    Su plan era ingenioso y, a ojos de una niña de seis años, ¡infalible! Reunió sus herramientas: una linterna gigante (la de acampar de su abuelo, que pesaba casi más que ella), un espejo brillante, papel de aluminio reluciente y todos sus juguetes que brillaban en la oscuridad.
+
+                    Esperó pacientemente a que la noche cayera y, con ella, el temido apagón. Cuando las luces parpadearon y se fueron, Lila entró en acción.
+
+                    <b class="dialogue">"¡Operación Caza al Chispadrón, en marcha!"</b> susurró para sí misma, con un guiño decidido.
+
+                    Se colocó en el jardín, apuntando la linterna hacia el cielo. La luz rasgó la oscuridad, creando un haz brillante que parecía querer alcanzar las estrellas. Con el espejo, intentó reflejar la luz en diferentes direcciones, creando destellos y movimientos confusos. El papel de aluminio lo agitaba como si fueran alas brillantes, y sus juguetes fosforescentes los colocó alrededor, esperando atraer al Chispadrón con su brillo.
+
+                    Parecía una pequeña directora de orquesta de luces, dirigiendo un espectáculo solo para ella… y para el Chispadrón.
+
+                    Esperó, esperó y esperó. El frío de la noche le mordisqueaba las mejillas, y el peso de la linterna le hacía temblar los brazos. Pero Lila no se rendía. ¡Iba a atrapar a ese ladrón de luz!
+
+                    De repente, algo se movió en los cables. Lila contuvo la respiración. ¿Era él? ¿Había funcionado su plan?
+
+                    La sombra temblorosa apareció, flotando entre los cables, justo donde Lila esperaba. Parecía… curiosa. Se acercó un poco al haz de luz, como si estuviera examinando aquel despliegue luminoso.
+
+                    Lila sonrió, triunfante. ¡Lo había atraído! Ahora solo tenía que… ¿qué se suponía que tenía que hacer ahora?
+
+                    En ese momento, el espejo resbaló de sus manos con un *clank* metálico. La linterna, tambaleándose, cayó al suelo, apagándose con un *clonc* sordo. El papel de aluminio salió volando con una ráfaga de viento, y los juguetes brillantes… bueno, seguían brillando en el suelo, sin hacer mucho más.
+
+                    La oscuridad volvió a envolver a Lila, más densa y burlona que antes. Y el Chispadrón… simplemente se desvaneció, como si nunca hubiera estado allí.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-laugh-beam"></i>
+            </div>
+            <h2>Capítulo 4: Risas en la Oscuridad (y un poco de Frío)</h2>
+            <img src="lila-parents-laugh.png" alt="Lila y sus Padres Riendo" class="chapter-image">
+            <p>Lila se sentó en el suelo, rodeada de sus juguetes brillantes y su plan fallido. Suspiró profundamente. El Chispadrón era más listo de lo que pensaba. O tal vez… su plan no era tan infalible después de todo...</p>
+            <a onclick="toggleText('cap4')" class="read-more">Leer más</a>
+            <div id="cap4" class="full-text">
+                <p>
+
+                    De repente, escuchó pasos acercándose. Eran sus padres, con linternas en mano y caras preocupadas.
+
+                    <b class="dialogue">"¡Lila! ¿Estás bien? ¿Qué pasó?"</b> preguntó su mamá, arrodillándose a su lado.
+
+                    Lila les contó todo: el plan, la linterna, el espejo, el Chispadrón… y el gran *flop*. Sus padres la escucharon atentamente, sin interrumpirla, con una mezcla de ternura y… ¿sorpresa?
+
+                    Cuando terminó, hubo un momento de silencio. Lila esperaba reproches, o al menos más sonrisas incrédulas. Pero en lugar de eso, su papá se sentó a su lado y le rodeó los hombros con un brazo.
+
+                    <b class="dialogue">"Sabes, Lila,"</b> dijo con voz suave, <b class="dialogue">"has hecho algo muy valiente. Has intentado resolver un problema, has usado tu imaginación y has sido muy persistente."</b>
+
+                    <b class="dialogue">"Pero no funcionó,"</b> murmuró Lila, con un puchero.
+
+                    <b class="dialogue">"A veces las cosas no funcionan a la primera,"</b> respondió su mamá, sonriendo. <b class="dialogue">"Pero eso no significa que debamos dejar de intentarlo. Y además… ¡has creado un espectáculo de luces increíble! ¿Viste cómo brillaba todo?"</b>
+
+                    Y entonces, pasó algo inesperado. Sus padres empezaron a reírse. No una risa burlona, sino una risa cálida y contagiosa, una risa que llenaba la oscuridad y hacía que todo pareciera un poco menos… oscuro. Lila se unió a la risa, al principio tímidamente, luego con más fuerza, hasta que los tres estaban riendo a carcajadas en medio del jardín oscuro, iluminados solo por el suave brillo de los juguetes fosforescentes.
+
+                    <b class="dialogue">"¡Quizás el Chispadrón también se estaba riendo!"</b> exclamó Lila entre risitas, imaginando al villano sombra con una sonrisa escurridiza.
+
+                    <b class="dialogue">"Seguro que sí,"</b> dijo su papá, secándose una lágrima de risa. <b class="dialogue">"Y probablemente esté pensando: '¡Vaya, qué niña más brillante! Casi me atrapa con su espectáculo de luces!'"</b>
+
+                    <b class="dialogue">"¡Tendremos que pensar en un plan mejor!"</b> declaró Lila, con el espíritu renovado.  La oscuridad ya no parecía tan amenazante, ahora que estaba llena de risas y del calor de sus padres.
+
+                    <b class="dialogue">"Así se habla,"</b> dijo su mamá, poniéndose de pie y extendiéndole la mano a Lila. <b class="dialogue">"Pero por ahora, ¿qué te parece si volvemos adentro? Hace un poco de frío aquí fuera, y creo que alguien se merece un buen vaso de leche caliente y un cuento antes de dormir."</b>
+
+                    Lila asintió, sintiéndose mucho mejor.  El plan no había funcionado, pero no había sido un fracaso total. Había visto al Chispadrón más de cerca, había intentado algo valiente, y lo más importante, había compartido una noche de risas con sus padres en medio de la oscuridad.  Quizás la oscuridad no era tan mala después de todo… cuando tenías con quien compartirla.
+
+                    Mientras volvían a casa, cogidos de la mano, Lila miró hacia el cielo estrellado. Las estrellas seguían titilando, como pequeños farolillos en la noche infinita.  Y aunque la luz en La Comunidad seguía apagada, dentro de su corazón, una pequeña chispa de esperanza y determinación seguía brillando.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-lightbulb-o"></i>
+            </div>
+            <h2>Capítulo 5: El Secreto del Abuelo y una Nueva Pista</h2>
+            <img src="lila-grandpa-tools.png" alt="Lila y su Abuelo en el Taller" class="chapter-image">
+            <p>A la mañana siguiente, el sol entró por la ventana de Lila como un rayo de alegría.  La Comunidad seguía a oscuras, pero el sol siempre encontraba la manera de colarse, incluso en los días más grises...</p>
+            <a onclick="toggleText('cap5')" class="read-more">Leer más</a>
+            <div id="cap5" class="full-text">
+                <p>
+                    
+
+                    Después de desayunar, Lila fue a buscar a su abuelo, que siempre estaba en su taller, rodeado de herramientas, madera y ese olor mágico a serrín.  El abuelo era un inventor en secreto, un mago de los cacharros, capaz de arreglar cualquier cosa y de crear juguetes increíbles con sus manos.
+
+                    <b class="dialogue">"Abuelo,"</b> comenzó Lila, sentándose en un taburete junto a su banco de trabajo, <b class="dialogue">"¿sabes por qué se va la luz siempre en La Comunidad?"</b>
+
+                    El abuelo dejó de lijar una pieza de madera y se quitó las gafas para mirarla con sus ojos sabios y arrugados como cortezas de árbol.
+
+                    <b class="dialogue">"Hmm, es un misterio, ¿verdad?"</b> dijo, pensativo. <b class="dialogue">"Dicen que son problemas con la central eléctrica, pero… yo no estoy tan seguro."</b>
+
+                    Lila se enderezó en el taburete, interesada. <b class="dialogue">"¿Tú qué crees que es, abuelo?"</b>
+
+                    El abuelo sonrió misteriosamente y se acercó a un viejo arcón de madera que guardaba en un rincón del taller.  Lo abrió con cuidado, como si contuviera un tesoro secreto.  Dentro, había un montón de objetos extraños:  engranajes oxidados, cables de colores, bombillas antiguas, y un cuaderno de tapas de cuero lleno de dibujos y notas escritas a mano.
+
+                    <b class="dialogue">"Hace mucho, mucho tiempo,"</b> comenzó el abuelo, con voz suave como el susurro del viento, <b class="dialogue">"cuando yo era joven, como tú, también vivíamos en un pueblo donde la luz se iba siempre.  Decían que era por el mal tiempo, o por las tormentas… pero yo sospechaba que había algo más."</b>
+
+                    Sacó el cuaderno del arcón y lo abrió por una página llena de dibujos intrincados.  Eran diagramas de extraños aparatos, esquemas de circuitos y un dibujo grande y un poco… ¿aterrador?… de una criatura oscura con forma de sombra, con tentáculos finos y ojos brillantes.
+
+                    <b class="dialogue">"Investigué mucho,"</b> continuó el abuelo, señalando el dibujo de la criatura. <b class="dialogue">"Leí libros antiguos, hablé con gente mayor… y descubrí una leyenda.  Una leyenda sobre seres que se alimentan de energía, de… luz.  Les llamaban… Chupaluces."</b>
+
+                    Lila abrió los ojos como platos. <b class="dialogue">"¿Chupaluces?"</b> repitió, con un escalofrío de emoción recorriéndole la espalda.  <b class="dialogue">"¡Como el Chispadrón!"</b>
+
+                    El abuelo asintió lentamente. <b class="dialogue">"Quizás tu 'Chispadrón' no sea solo un invento de tu imaginación, Lila.  Quizás… sea algo más real de lo que pensamos."</b>
+
+                    Señaló otro dibujo en el cuaderno, un aparato extraño con forma de jaula, rodeado de cables y bombillas. <b class="dialogue">"En este cuaderno,"</b> dijo, <b class="dialogue">"hay planos para… ahuyentarlos.  Para proteger la luz.  Pero nunca llegué a construirlo.  Pensé que solo eran leyendas… hasta ahora."</b>
+
+                    Lila miró el cuaderno con fascinación.  El secreto del abuelo, la leyenda de los Chupaluces, los planos para un aparato misterioso… todo encajaba.  El Chispadrón era real, ¡y su abuelo tenía la clave para detenerlo!
+
+                    <b class="dialogue">"Abuelo,"</b> dijo Lila, con los ojos brillantes de determinación, <b class="dialogue">"¡tenemos que construir ese aparato! ¡Tenemos que atrapar al Chispadrón y devolver la luz a La Comunidad!"</b>
+
+                    El abuelo sonrió, con una chispa traviesa en los ojos. <b class="dialogue">"Bueno, Lila,"</b> dijo, <b class="dialogue">"parece que tenemos mucho trabajo por delante… ¿Qué te parece si empezamos por estudiar estos planos?"</b>
+
+                    Y así, Lila y su abuelo se inclinaron sobre el viejo cuaderno, con la luz del sol entrando por la ventana del taller, listos para comenzar una nueva aventura, una aventura mucho más real y misteriosa de lo que Lila jamás hubiera imaginado…
+
+                    <p style="text-align: center; font-style: italic; margin-top: 2rem;">Continuará...</p>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <span>Lila y el Misterio de la Luz Robada</span><br>
+            <span>© 2025 Todos los derechos reservados</span><br>
+            <span>Lucía Editorial</span>
+        </p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const fullTexts = document.querySelectorAll('.full-text');
+            fullTexts.forEach(text => {
+                text.style.display = 'none';
+            });
+        }
+
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                button.textContent = "Leer menos";
+            } else {
+                element.style.display = "none";
+                button.textContent = "Leer más";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>El Jardín de los Relojes Dormidos</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Palatino', serif;
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            color: #2c4a3d;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg, 
+                #4a7259, #3d8b5f, #2d6a4f, #1b4332);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            padding: 0 20px;
+            color: #2c4a3d;
+        }
+
+        .dialogue {
+            color: #3d8b5f;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        a {
+            background: linear-gradient(45deg, #4a7259, #2d6a4f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cover {
+            position: relative;
+            text-align: center;
+            padding: 0;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction:column;
+            Justify-content:center;
+            align-items: center;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            margin: 0;
+            display: block;
+            filter: brightness(0.8) saturate(1.2);
+        }
+
+        .title-name {
+            font-size: 1.7em;
+            background: linear-gradient(45deg, 
+                #4a7259, #3d8b5f, #2d6a4f, #1b4332);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: gradient 3s ease infinite;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-image {
+            max-width: 90%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(74, 114, 89, 0.3);
+            border: 3px solid #2d6a4f;
+        }
+
+        .song-section {
+            background: rgba(240, 248, 255, 0.6);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid #2d6a4f;
+        }
+
+        .read-more {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            padding: 5px;
+            color: #4a7259;
+        }
+
+        footer {
+            background: linear-gradient(135deg, 
+                rgba(240, 248, 255, 0.9), 
+                rgba(230, 243, 255, 0.9));
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 2px solid #2d6a4f;
+        }
+
+        .chapter-icon {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 2rem;
+            color: #4a7259;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            border-radius: 30px;
+        }
+
+        .full-text {
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* Decorative elements */
+        .flower-decoration {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .clock-overlay {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            opacity: 0.2;
+            pointer-events: none;
+            animation: clockRotate 12s linear infinite;
+        }
+
+        @keyframes clockRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        footer p {
+            text-align: center;
+            font-family: cursive;
+            color: #2c4a3d;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <img src="magical-garden.jpg" alt="Jardín Mágico" placeholder="Insertar imagen aquí">
+        <h1><span class="title-name">El Jardín de los Relojes Dormidos</span></h1>
+    </div>
+
+    <div class="song-section">
+        <h2>♪ Melodía del Tiempo ♪</h2>
+        <audio controls>
+            <source src="El Jardín Interior del Tiempo.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <div class="content">
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-seedling"></i>
+            </div>
+            <h2>Capítulo 1: El Despertar de las Flores</h2>
+            <img src="morning-garden.jpg" alt="Jardín al Amanecer" class="chapter-image">
+            <p>En un rincón olvidado del jardín de su abuela, Tomás descubrió que las flores no solo marcaban las horas del día, sino que guardaban secretos del tiempo mismo...</p>
+            <a onclick="toggleText('cap1')" class="read-more">Leer más</a>
+            <div id="cap1" class="full-text">
+                <p>
+                    La mañana en que todo comenzó, el rocío brillaba como diminutos relojes de cristal sobre los pétalos. Tomás, un niño de once años con una curiosidad más grande que su colección de libros de aventuras, había sido enviado a pasar el verano en la casa de su abuela Hortensia.
+
+                    <span class="dialogue">"¡Pero mamá, me voy a aburrir mortalmente!"</span>, había protestado días antes. Qué equivocado estaba.
+
+                    La casa de la abuela Hortensia era un edificio victoriano rodeado por un jardín que parecía existir en su propia dimensión temporal. Las enredaderas trepaban por las paredes como manecillas de reloj en cámara lenta, y el aire siempre olía a tiempo: a veces a mañanas recién horneadas, otras a tardes de lluvia que aún no habían llegado.
+
+                    <span class="dialogue">"Los jardines, mi querido Tomás"</span>, solía decir la abuela mientras regaba sus misteriosas flores, <span class="dialogue">"son relojes que miden algo más profundo que las horas."</span>
+
+                    Fue durante su primera mañana allí cuando Tomás notó algo extraño. Una dalia azul, que según su reloj de pulsera no debería florecer hasta el atardecer, estaba completamente abierta y emitía un suave resplandor. Al acercarse, escuchó un susurro que parecía venir de otra época:
+
+                    <span class="dialogue">"En 1922, un niño plantó aquí sus sueños..."</span>
+
+                    Tomás parpadeó confundido. <span class="dialogue">"¿Las flores... hablan?"</span>
+
+                    <span class="dialogue">"Solo si sabes escuchar el tiempo correctamente"</span>, respondió la abuela Hortensia, apareciendo de la nada con su regadera de cobre. Sus ojos brillaban con un destello de picardía. <span class="dialogue">"Cada flor es un reloj que marca una memoria diferente. Y tú, mi querido nieto, parece que has heredado el don de escucharlas."</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h2>Capítulo 2: Las Horas Perdidas</h2>
+            <img src="clock-flowers.jpg" alt="Flores Reloj" class="chapter-image">
+            <p>Cada flor del jardín guardaba una historia diferente, y algunas contenían horas que nunca llegaron a existir...</p>
+            <a onclick="toggleText('cap2')" class="read-more">Leer más</a>
+            <div id="cap2" class="full-text">
+                <p>
+                    La abuela Hortensia le explicó a Tomás que su jardín no era un jardín cualquiera. Era un repositorio de momentos, un archivo viviente de tiempos que fueron, que son y que podrían haber sido.
+
+                    <span class="dialogue">"¿Ves esas rosas de medianoche?"</span>, señaló la abuela hacia unas flores de pétalos negro azulado. <span class="dialogue">"Guardan todas las horas que la gente ha perdido buscando sus llaves."</span>
+
+                    Tomás soltó una carcajada. <span class="dialogue">"¡Abuela, eso es ridículo!"</span>
+
+                    <span class="dialogue">"¿Ah, sí? ¿Y dónde dejaste tu reloj de pulsera esta mañana?"</span>
+
+                    El niño se miró la muñeca vacía y se sonrojó. La abuela sonrió con esa sabiduría que solo tienen las abuelas y las flores antiguas.
+
+                    Durante toda la tarde, Tomás exploró el jardín con nuevos ojos. Descubrió girasoles que seguían el movimiento del sol de otros veranos, violetas que guardaban los minutos de silencio entre las notas de una serenata olvidada, y margaritas que coleccionaban las pausas entre los latidos de corazones enamorados.
+
+                    <span class="dialogue">"¡Mira, abuela!"</span>, exclamó emocionado señalando un grupo de flores amarillas. <span class="dialogue">"¡Estas danzan al ritmo de un vals!"</span>
+
+                    <span class="dialogue">"Ah, las prímulas del tiempo"</span>, asintió Hortensia. <span class="dialogue">"Bailan al compás de todos los relojes que se han detenido en momentos felices. Porque, ¿sabes? A veces la felicidad consiste en que el tiempo se detenga un instante."</span>
+
+                    Una mariposa pasó volando entre las flores, dejando tras de sí una estela de segundos brillantes que caían como polvo de estrellas. Tomás intentó atrapar algunos en sus manos.
+
+                    <span class="dialogue">"Ten cuidado con esos momentos"</span>, advirtió la abuela con una sonrisa. <span class="dialogue">"Son muy traviesos y les encanta esconderse en los bolsillos. La semana pasada encontré un jueves de 1985 en mi delantal."</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-hourglass-half"></i>
+            </div>
+            <h2>Capítulo 3: El Coleccionista de Momentos</h2>
+            <img src="time-collector.jpg" alt="El Coleccionista" class="chapter-image">
+            <p>Un misterioso visitante llegó al jardín, buscando robar los momentos más preciosos guardados en las flores...</p>
+            <a onclick="toggleText('cap3')" class="read-more">Leer más</a>
+            <div id="cap3" class="full-text">
+                <p>
+                    Una mañana, mientras Tomás conversaba con un pensamiento que recordaba la primera vez que alguien inventó el helado de chocolate, notó una sombra extraña moviéndose entre los arbustos. Era un hombre alto y delgado, vestido con un traje hecho de relojes de bolsillo.
+
+                    <span class="dialogue">"Buenos días, pequeño guardián del tiempo"</span>, saludó el extraño con una voz que sonaba como el tictac de mil relojes desincronizados. <span class="dialogue">"Soy el Coleccionista, y he venido por algunos momentos especiales."</span>
+
+                    Tomás sintió que las flores temblaban, cerrando sus pétalos protectoramente sobre sus memorias. La abuela Hortensia había salido a comprar semillas de recuerdos futuros, y él estaba solo frente a este inquietante visitante.
+
+                    <span class="dialogue">"Lo siento, señor"</span>, respondió Tomás con más valentía de la que sentía, <span class="dialogue">"pero los momentos del jardín no están a la venta."</span>
+
+                    El Coleccionista sonrió, y su sonrisa era como el brillo de un reloj de arena roto. <span class="dialogue">"Oh, pero no pretendo comprarlos. Verás, hay personas que pagarían fortunas por revivir ciertos momentos. Imagina: la primera vez que alguien se enamoró, el instante exacto de un gran descubrimiento, el segundo preciso en que alguien tuvo la mejor idea de su vida..."</span>
+
+                    Las flores comenzaron a murmurar entre ellas, compartiendo advertencias en el lenguaje secreto del tiempo. Una rosa antigua, que guardaba el momento en que se escribió el primer poema de amor, se irguió valientemente y soltó su espina más afilada hacia el Coleccionista.
+
+                    <span class="dialogue">"¡Ay!"</span>, exclamó el hombre, sacudiendo su mano picada. <span class="dialogue">"Vaya, vaya... parece que tus flores tienen espíritu."</span>
+
+                    <span class="dialogue">"Tienen más que espíritu"</span>, respondió Tomás, recordando las palabras de su abuela. <span class="dialogue">"Tienen tiempo, y el tiempo siempre se protege a sí mismo."</span>
+
+                    Como si sus palabras hubieran activado algo, todas las flores del jardín comenzaron a brillar al unísono. Los relojes del traje del Coleccionista empezaron a girar en direcciones opuestas, y el hombre se tambaleó, desorientado.
+
+                    <span class="dialogue">"¿Qué... qué está pasando?"</span>, preguntó, mientras sus propios relojes comenzaban a sonar en una cacofonía de alarmas y campanadas.
+
+                    <span class="dialogue">"El jardín"</span>, dijo Tomás con asombro, <span class="dialogue">"está defendiendo sus memorias."</span>
+
+                    El Coleccionista intentó moverse, pero cada paso que daba parecía llevarlo a un momento diferente. Un paso lo envejecía, otro lo rejuvenecía. Las flores tejían una red de tiempo a su alrededor, hasta que el hombre quedó atrapado en un instante eterno entre un segundo y el siguiente.
+
+                    <span class="dialogue">"¡Detengan esto!"</span>, suplicó el Coleccionista, su voz sonando cada vez más distante. <span class="dialogue">"¡Me estoy perdiendo en el tiempo!"</span>
+
+                    Fue entonces cuando regresó la abuela Hortensia, cargando una bolsa llena de semillas brillantes. Al ver la escena, suspiró y sacudió la cabeza.
+
+                    <span class="dialogue">"Ah, veo que has conocido a nuestro visitante ocasional"</span>, dijo tranquilamente mientras sacaba de su bolsillo un pequeño reloj de arena. <span class="dialogue">"Viene cada ciertos años, siempre intentando robar lo que no le pertenece."</span>
+
+                    Con un gesto suave, la abuela giró el reloj de arena y el Coleccionista comenzó a desvanecerse como niebla matutina, hasta que solo quedó el eco de su último tick-tack.
+
+                    <span class="dialogue">"¿Qué le pasó?"</span>, preguntó Tomás, entre fascinado y preocupado.
+
+                    <span class="dialogue">"Oh, simplemente está viviendo todos los momentos que intentó robar, uno tras otro, hasta que aprenda que el tiempo es un regalo, no una mercancía"</span>, respondió la abuela mientras regaba una pequeña planta que acababa de brotar. <span class="dialogue">"Volverá cuando haya aprendido la lección... siempre lo hacen."</span>
+                </p>
+            </div>
+            <div class="chapter">
+                <div class="chapter-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h2>Capítulo 4: El Jardín de los Recuerdos Perdidos</h2>
+                <img src="lost-memories.jpg" alt="Jardín de Recuerdos" class="chapter-image">
+                <p>Tomás descubre un rincón especial del jardín donde crecen las flores de los recuerdos olvidados...</p>
+                <a onclick="toggleText('cap4')" class="read-more">Leer más</a>
+                <div id="cap4" class="full-text">
+                    <p>
+                        Después del incidente con el Coleccionista, la abuela Hortensia decidió que era momento de mostrarle a Tomás la parte más especial del jardín. Detrás de un arco de glicinas que florecían con memorias de primaveras pasadas, había un pequeño sendero que parecía brillar con luz propia.
+    
+                        <span class="dialogue">"Este, querido Tomás"</span>, dijo la abuela mientras caminaban, <span class="dialogue">"es el Jardín de los Recuerdos Perdidos. Aquí crecen las flores que guardan los momentos que la gente ha olvidado."</span>
+    
+                        Tomás observó maravillado las flores que crecían allí. Eran diferentes a todas las que había visto antes: algunas eran transparentes como el cristal, otras cambiaban de color según los recuerdos que guardaban.
+    
+                        <span class="dialogue">"¿Por qué algunos pétalos brillan más que otros?"</span>, preguntó.
+    
+                        <span class="dialogue">"Ah, esos son los recuerdos que luchan por ser recordados"</span>, explicó Hortensia. <span class="dialogue">"A veces, cuando alguien tiene esa sensación de déjà vu, es porque una de estas flores está tratando de devolverle un recuerdo."</span>
+    
+                        Mientras caminaban, Tomás notó una flor particularmente hermosa que parecía llamarlo. Al acercarse, sintió una calidez familiar.
+    
+                        <span class="dialogue">"Esa"</span>, sonrió la abuela, <span class="dialogue">"es la flor que guarda tu primer recuerdo de hacer galletas conmigo. Tenías solo tres años."</span>
+    
+                        Tomás tocó suavemente los pétalos y de repente fue inundado por el aroma a vainilla y canela, el sonido de risas y el recuerdo de harina por todas partes. Sus ojos se humedecieron.
+    
+                        <span class="dialogue">"Pero yo... yo no recordaba eso"</span>, susurró.
+    
+                        <span class="dialogue">"Los recuerdos nunca se pierden realmente"</span>, respondió la abuela con ternura. <span class="dialogue">"Solo necesitan un jardín donde crecer hasta que estemos listos para recuperarlos."</span>
+                    </p>
+                </div>
+            </div>
+    
+            <div class="chapter">
+                <div class="chapter-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h2>Capítulo 5: El Tiempo Florece</h2>
+                <img src="blooming-time.jpg" alt="Tiempo Floreciendo" class="chapter-image">
+                <p>El verano llega a su fin, pero Tomás descubre que algunos jardines crecen en el corazón...</p>
+                <a onclick="toggleText('cap5')" class="read-more">Leer más</a>
+                <div id="cap5" class="full-text">
+                    <p>
+                        El verano estaba llegando a su fin, y con él, la estancia de Tomás en el jardín de los relojes dormidos. La última mañana, mientras ayudaba a su abuela a regar las flores del tiempo, notó que algo extraño sucedía con sus manos: pequeños destellos de luz brotaban de sus dedos cada vez que tocaba una planta.
+    
+                        <span class="dialogue">"Abuela, ¡mira!"</span>, exclamó emocionado. <span class="dialogue">"¿Qué está pasando?"</span>
+    
+                        Hortensia sonrió con orgullo. <span class="dialogue">"El jardín te ha elegido, querido. Ahora tú también puedes plantar tiempo."</span>
+    
+                        Con cuidado, la abuela sacó de su bolsillo una pequeña semilla que brillaba como una estrella en miniatura. <span class="dialogue">"Esta es una semilla de momentos futuros. ¿Quieres plantarla?"</span>
+    
+                        Tomás tomó la semilla con manos temblorosas. Al plantarla, sucedió algo mágico: brotó instantáneamente una flor cristalina que mostraba en sus pétalos imágenes de él mismo, mayor, cuidando un jardín similar al de su abuela.
+    
+                        <span class="dialogue">"Pero... ¿cómo cuidaré el jardín desde casa?"</span>, preguntó preocupado.
+    
+                        La abuela Hortensia rio suavemente. <span class="dialogue">"Oh, mi querido niño, ¿no lo has notado? Cada vez que has escuchado una historia del jardín, cada vez que has compartido un momento con las flores, has estado plantando tu propio jardín aquí"</span>, dijo tocando suavemente el pecho de Tomás.
+    
+                        <span class="dialogue">"Los jardines más importantes son los que crecen en el corazón"</span>, continuó. <span class="dialogue">"Y el tiempo... el tiempo siempre florece donde hay amor y memorias."</span>
+    
+                        Esa tarde, cuando Tomás se despidió, el jardín brillaba más que nunca. Y aunque dejaba atrás el jardín de su abuela, sabía que llevaba consigo semillas de tiempo, listas para florecer en nuevas aventuras.
+    
+                        Porque algunos jardines no necesitan tierra para crecer, solo necesitan ser recordados. Y en el corazón de Tomás, las flores del tiempo nunca dejarían de florecer.
+                    </p>
+                </div>
+            </div>
+    
+            <footer>
+                <p>✿ Fin ✿</p>
+            </footer>
+        </div>
+    
+        <script>
+            function toggleText(id) {
+                const text = document.getElementById(id);
+                if (text.style.display === "none" || text.style.display === "") {
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+            }
+        </script>
+    </body>
+    </html>
