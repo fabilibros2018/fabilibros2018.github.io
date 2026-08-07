@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Perico Dientes de Sable</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #f9f3e4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #ff6f61;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            padding: 0 20px;
+        }
+
+        a {
+            color: #ff6f61;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Portada */
+        .cover {
+            position: relative;
+            text-align: center;
+            background-color: #ffcccb;
+            padding: 50px 20px;
+        }
+
+        .cover img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .cover h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+        }
+
+        /* Contenido */
+        .content {
+            padding: 20px;
+        }
+
+        .chapter {
+            margin-bottom: 40px;
+        }
+
+        .chapter h2 {
+            font-size: 2rem;
+        }
+
+        .full-text {
+            display: none;
+            /* Ocultar el texto completo inicialmente */
+            margin-top: 10px;
+        }
+
+        /* Reproductor de Audio */
+        .audio-player {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .audio-player audio {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff6f61;
+            color: white;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Portada -->
+    <div class="cover">
+        <img src="portada.png" alt="Portada del Libro" placeholder="Insertar imagen aquí">
+        <h1>El Perico Dientes de Sable</h1>
+    </div>
+
+    <!-- Reproductor de Audio -->
+    <div class="audio-player">
+        <h2>Escucha la Canción Oficial</h2>
+        <audio controls>
+            <source src="cancion-tiko.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio. ¡Descarga el archivo para escucharlo!
+        </audio>
+    </div>
+
+    <!-- Contenido -->
+    <div class="content">
+        <div class="chapter">
+            <h2>Capítulo 1: El Perico Diferente</h2>
+            <p>En el corazón de un bosque vibrante y lleno de vida, vivía un perico llamado Tiko...</p>
+            <a onclick="toggleText('cap1')">Leer más</a>
+            <div id="cap1" class="full-text">
+                <p>
+                    A primera vista, parecía como cualquier otro perico: plumas brillantes de color verde esmeralda, alas largas y una cola elegante. Sin embargo, Tiko tenía algo que lo hacía único: ¡dientes de sable! Dos colmillos afilados sobresalían de su pico, lo que lo hacía ver intimidante para los demás animales.
+
+Aunque Tiko era amable y juguetón, los otros animales del bosque no querían acercarse a él. "¡Es peligroso!", decían los monos mientras se columpiaban entre las ramas. "¡No podemos confiar en alguien con esos dientes!", murmuraban los conejos desde sus madrigueras. Incluso los loros, sus primos más cercanos, evitaban jugar con él.
+
+Tiko se sentía solo. Intentaba ser amigable, pero nadie parecía darle una oportunidad. Cada día volaba por el bosque buscando amigos, pero siempre terminaba regresando a su rama solitaria al atardecer.
+                    
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Capítulo 2: La Llegada del Monstruo</h2>
+            <p>Una noche, mientras todos los animales dormían bajo la luz de la luna, un rugido ensordecedor sacudió el bosque...</p>
+            <a onclick="toggleText('cap2')">Leer más</a>
+            <div id="cap2" class="full-text">
+                <p>
+
+                     Era Grom, un monstruo gigante cubierto de escamas negras y ojos rojos como brasas. Había llegado al bosque con hambre insaciable y comenzó a destrozar todo a su paso: árboles, nidos y hogares.
+
+Los animales despertaron asustados y corrieron a esconderse. Los más valientes intentaron enfrentarlo, pero nada funcionaba. Las garras de Grom eran demasiado fuertes, y su rugido ahuyentaba hasta al animal más intrépido.
+
+Cuando todos estaban a punto de perder la esperanza, Tiko apareció volando sobre el caos. Nadie lo había llamado, pero sabía que debía hacer algo. Después de todo, este era su hogar también.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Capítulo 3: El Valor de Tiko</h2>
+            <a onclick="toggleText('cap3')">Leer más</a>
+            <div id="cap3" class="full-text">
+                <p>
+                    Mientras los animales observaban desde sus escondites, Tiko descendió frente a Grom. El monstruo miró al pequeño perico con desprecio. "¿Qué harás, pájaro insignificante?", gruñó Grom, mostrando sus enormes fauces.
+
+Pero Tiko no retrocedió. Con un graznido agudo, lanzó un picotazo certero hacia el ojo izquierdo de Grom. El monstruo rugió de dolor y trató de aplastar a Tiko con su garra, pero el perico era rápido. Usando sus dientes de sable, mordió la mano escamosa de Grom, haciéndolo retroceder.
+
+El combate continuó durante horas. Tiko utilizó su inteligencia y velocidad para evitar los ataques del monstruo, mientras buscaba puntos débiles en su armadura de escamas. Finalmente, encontró uno: la parte inferior del cuello de Grom. Con un último esfuerzo, Tiko clavó sus colmillos afilados en esa zona vulnerable.
+
+Grom rugió una última vez antes de caer derrotado. El bosque quedó en silencio, salvo por los jadeos cansados de Tiko.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Capítulo 4: Un Héroe Inesperado</h2>
+            <p>Cuando los animales emergieron de sus escondites, no podían creer lo que habían visto...</p>
+            <a onclick="toggleText('cap4')">Leer más</a>
+            <div id="cap4" class="full-text">
+                <p>
+                     Tiko, el perico con dientes de sable que todos temían, había salvado el bosque. Lentamente, comenzaron a acercarse a él.
+
+"Gracias, Tiko", dijo un mono tímidamente. "Nos salvaste".
+"Lo siento mucho por haber pensado mal de ti", añadió un conejo, inclinando la cabeza.
+Incluso los loros, que antes lo evitaban, se acercaron para felicitarlo.
+
+Por primera vez, Tiko sintió que pertenecía. Ya no era el pájaro extraño; ahora era un héroe.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Capítulo 5: El Rey del Bosque</h2>
+            <p>Días después, los animales organizaron una reunión especial en el claro central del bosque...</p>
+            <a onclick="toggleText('cap5')">Leer más</a>
+            <div id="cap5" class="full-text">
+                <p>
+                     Todos querían hablar sobre lo que había pasado. Cuando llegó el momento de decidir quién debería liderarlos, hubo unanimidad: Tiko sería el nuevo rey del bosque.
+
+"No soy tan diferente después de todo", dijo Tiko humildemente cuando lo coronaron con una guirnalda de flores. "Solo necesitaba una oportunidad para demostrar quién soy realmente".
+
+Desde entonces, Tiko gobernó el bosque con sabiduría y bondad. Bajo su liderazgo, los animales aprendieron a aceptar y valorar las diferencias entre ellos. Y aunque seguía siendo el único perico con dientes de sable, ya nadie lo veía con miedo. En cambio, lo veían con admiración y respeto.
+
+Fin.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2025 El Perico Dientes de Sable | Todos los derechos reservados</p>
+        Lucia Editoriales
+    </footer>
+
+    <script>
+        // Función para alternar la visibilidad del texto completo
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
