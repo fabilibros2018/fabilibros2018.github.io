@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Maldición del Oro: Una Historia Antigua</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Palatino', serif;
+            background: linear-gradient(135deg, #0a0a1a, #1a1a2e);
+            color: #c4c4c4;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg, 
+                #8b0000, #800020, #4a0404, #2b0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            padding: 0 20px;
+            color: #a8a8a8;
+        }
+
+        .dialogue {
+            color: #c17817;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        a {
+            background: linear-gradient(45deg, #8b0000, #4a0404);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cover {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: 0;
+            margin-bottom: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            margin: 0;
+            display: block;
+            filter: brightness(0.6) sepia(0.5);
+        }
+
+        .title-name {
+            font-size: 1.8em;
+            background: linear-gradient(45deg, 
+                #8b0000, #800020, #4a0404, #2b0000);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: gradient 3s ease infinite;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-image {
+            max-width: 90%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
+            border: 3px solid #4a0404;
+        }
+
+        .song-section {
+            background: rgba(10, 10, 26, 0.6);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid #4a0404;
+        }
+
+        .read-more {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            padding: 5px;
+            color: #8b0000;
+        }
+
+        footer {
+            background: linear-gradient(135deg, 
+                rgba(10, 10, 26, 0.9), 
+                rgba(26, 26, 46, 0.9));
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 2px solid #4a0404;
+        }
+
+        .chapter-icon {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 2rem;
+            color: #8b0000;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            border-radius: 30px;
+        }
+
+        .full-text {
+            display: none;
+            margin-top: 10px;
+        }
+        footer p{
+            text-align: center;
+            font-family: cursive;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <img src="ancient-kingdom.jpg" alt="Reino Antiguo" placeholder="Insertar imagen aquí">
+        <h1><span class="title-name">La Maldición del Oro</span>: Una Historia Antigua</h1>
+    </div>
+
+    <div class="song-section">
+        <h2>♪ Ecos del Pasado ♪</h2>
+        <audio controls>
+            <source src="Ecos del Pasado.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <div class="content">
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h2>Capítulo 1: Los Tres Reinos</h2>
+            <img src="three-kingdoms.jpg" alt="Los Tres Reinos" class="chapter-image">
+            <p>Hace doscientos mil años, cuando la magia fluía libremente por el mundo, tres grandes reinos coexistían en perfecta armonía...</p>
+            <a onclick="toggleText('cap1')" class="read-more">Leer más</a>
+            <div id="cap1" class="full-text">
+                <p>
+                    En las tierras del este, el Reino de los Elfos resplandecía con sus torres de cristal y jardines eternos. Sus construcciones se entrelazaban con árboles milenarios, y sus habitantes dominaban las artes de la naturaleza y la música. <span class="dialogue">"Nuestro reino es el reflejo de la eternidad misma"</span>, decían orgullosos sus habitantes.
+
+                    Al oeste, el Reino de los Magos se alzaba majestuoso, con sus torres flotantes y puentes de luz. La magia pura emanaba de cada rincón, y sus bibliotecas guardaban secretos ancestrales. <span class="dialogue">"El conocimiento es nuestro mayor tesoro"</span>, proclamaban sus sabios.
+
+                    Pero en el centro de todas las tierras, se erguía el más espléndido de todos: el Reino de los Humanos y Dragones. Sus edificios, bañados en oro puro, reflejaban la luz del sol como si fueran estrellas en la tierra. Los dragones, nobles y pacíficos, sobrevolaban la ciudad mientras los humanos trabajaban en armonía con ellos.
+
+                    <span class="dialogue">"Juntos, humanos y dragones, hemos creado el más hermoso de los reinos"</span>, declaraba el Rey Aurelius, mientras observaba cómo sus súbditos y los dragones extraían oro de las profundidades de la tierra, transformándolo en obras de arte inigualables.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-chess-rook"></i>
+            </div>
+            <h2>Capítulo 2: La Semilla de la Envidia</h2>
+            <img src="kingdom-celebration.jpg" alt="Celebración de los Reinos" class="chapter-image">
+            <p>Durante los grandes festivales donde los tres reinos se reunían, las diferencias comenzaban a hacerse evidentes...</p>
+            <a onclick="toggleText('cap2')" class="read-more">Leer más</a>
+            <div id="cap2" class="full-text">
+                <p>
+                    En los grandes juegos interreinos, el esplendor del Reino Humano-Dragón opacaba a todos los demás. Sus participantes llegaban en carruajes de oro, sus dragones realizaban espectáculos de vuelo que maravillaban a todos, y sus regalos eran los más codiciados.
+
+                    Entre las sombras, el Archimago Magnor observaba con creciente amargura. <span class="dialogue">"¿Por qué han de brillar más que nosotros?"</span>, susurraba a otros magos. <span class="dialogue">"Su riqueza no proviene de la sabiduría ni del poder verdadero, sino de las bestias que han domesticado."</span>
+
+                    Los elfos también comenzaron a murmurar. <span class="dialogue">"Nuestros bosques eternos palidecen ante sus torres doradas"</span>, se quejaban. <span class="dialogue">"¿Acaso la naturaleza vale menos que el metal?"</span>
+
+                    Magnor sonreía en secreto, viendo cómo sus palabras envenenaban lentamente los corazones de ambos reinos. <span class="dialogue">"El oro los ha cegado"</span>, decía, <span class="dialogue">"y por oro caerán"</span>.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-skull"></i>
+            </div>
+            <h2>Capítulo 3: La Conspiración</h2>
+            <img src="dark-council.jpg" alt="Consejo Oscuro" class="chapter-image">
+            <p>En las profundidades del Reino Mágico, Magnor tejía su red de engaños...</p>
+            <a onclick="toggleText('cap3')" class="read-more">Leer más</a>
+            <div id="cap3" class="full-text">
+                <p>
+                    Magnor convocó un consejo secreto en las catacumbas de su torre. <span class="dialogue">"Los dragones son una amenaza"</span>, declaró ante los representantes elfos. <span class="dialogue">"¿Qué pasará cuando decidan que ya no necesitan a los humanos? ¿Cuando vuelvan su poder contra nosotros?"</span>
+
+                    Los rumores se esparcieron como veneno. En el Reino Élfico, los ancianos comenzaron a ver amenazas donde antes había amistad. En el Reino Mágico, los aprendices susurraban sobre conspiraciones de dragones.
+
+                    Mientras tanto, en el Reino Humano-Dragón, la vida continuaba en paz. Solo los dragones más antiguos percibían el cambio en el viento, el olor a traición que se acercaba. <span class="dialogue">"Algo oscuro se aproxima"</span>, advertían, pero sus advertencias se perdían en el resplandor del oro.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-fire"></i>
+            </div>
+            <h2>Capítulo 4: La Caída</h2>
+            <img src="kingdom-fall.jpg" alt="La Caída del Reino" class="chapter-image">
+            <p>El día que el cielo se oscureció, el mundo cambió para siempre...</p>
+            <a onclick="toggleText('cap4')" class="read-more">Leer más</a>
+            <div id="cap4" class="full-text">
+                <p>
+                    Las nubes negras cubrieron el Reino Humano-Dragón como un manto de muerte. Los ejércitos combinados de elfos y magos surgieron de portales oscuros, sus armas envenenadas con magia negra.
+
+                    La batalla fue devastadora. Los dragones, criaturas de paz, dudaron en usar su poder total hasta que fue demasiado tarde. <span class="dialogue">"¡Defendamos nuestro hogar!"</span>, gritaban los humanos, montando a sus compañeros alados.
+
+                    Durante treinta días, el cielo ardió. El fuego de dragón se mezclaba con la magia negra, creando tormentas de poder que derretían el oro y abrían grietas en la tierra. Los elfos caían ante la furia draconiana, los magos se consumían en su propia oscuridad.
+
+                    Pero la victoria tuvo un precio terrible. El reino dorado se convirtió en ruinas, y algo más profundo se había roto: la pureza de corazón que caracterizaba a humanos y dragones.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon">
+                <i class="fas fa-dragon"></i>
+            </div>
+            <h2>Capítulo 5: La Maldición Eterna</h2>
+            <img src="last-dragon.jpg" alt="El Último Dragón" class="chapter-image">
+            <p>En sus últimos momentos, Magnor dejó un legado de oscuridad que perduraría por milenios...</p>
+            <a onclick="toggleText('cap5')" class="read-more">Leer más</a>
+            <div id="cap5" class="full-text">
+                <p>
+                    Antes de caer, Magnor pronunció su última maldición: <span class="dialogue">"Que el oro que tanto aman sea su perdición. Que cada pieza de este tesoro corrompa el corazón de quien lo posea, que despierte la codicia más oscura, que destruya reinos y familias. Solo cuando llegue alguien que vea más allá del brillo del oro, que busque no poseer sino compartir, que entiende que la verdadera riqueza está en la unión de todos los pueblos, solo entonces esta maldición podrá romperse."</span>
+
+                    Los dragones supervivientes, debilitados por la batalla y la oscuridad residual, tomaron una decisión. Esconderían el oro maldito en las profundidades de la tierra, protegiéndolo de aquellos que pudieran caer en su tentación.
+
+                    Hoy, solo queda un guardián: Drakorg, el último de los grandes dragones. Solo él conoce la verdadera naturaleza de la maldición y espera, paciente, a aquel corazón puro que pueda romperla.
+
+                    <span class="dialogue">"El oro brilla"</span>, dice Drakorg a los pocos que logran encontrarlo, <span class="dialogue">"pero su brillo es un espejismo que oculta la oscuridad más profunda. ¿Serás tú quien finalmente nos libere de esta antigua maldición?"</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <span>La Maldición del Oro: Una Historia Antigua</span><br>
+            <span>© 2025 Todos los derechos reservados</span><br>
+            <span>Lucía Editorial</span>
+        </p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const fullTexts = document.querySelectorAll('.full-text');
+            fullTexts.forEach(text => {
+                text.style.display = 'none';
+            });
+        }
+
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+            
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                button.textContent = "Leer menos";
+            } else {
+                element.style.display = "none";
+                button.textContent = "Leer más";
+            }
+        }
+    </script>
+</body>
+</html>
