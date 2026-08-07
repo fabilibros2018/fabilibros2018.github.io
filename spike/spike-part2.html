@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spike: El Perro Pirata</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Palatino', serif;
+            background: linear-gradient(135deg, #1a3f55, #2c5364);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg, 
+                #ffd700, #ffa500, #ff8c00, #daa520);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            padding: 0 20px;
+        }
+
+        a {
+            background: linear-gradient(45deg, #ffd700, #daa520);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cover {
+            position: relative;
+            text-align: center;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            margin: 0;
+            display: block;
+            filter: brightness(0.8) sepia(0.3);
+        }
+
+        .title-name {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, 
+                #ffd700, #ffa500, #daa520, #b8860b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: gradient 3s ease infinite;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-image {
+            max-width: 90%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 3px solid #daa520;
+        }
+
+        .song-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid #daa520;
+        }
+
+        .read-more {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            padding: 5px;
+            color: #ffd700;
+        }
+
+        footer {
+            background: linear-gradient(135deg, 
+                rgba(26, 63, 85, 0.9), 
+                rgba(44, 83, 100, 0.9));
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 2px solid #daa520;
+        }
+        footer p {
+            text-align: center;
+            font-family: cursive;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media (max-width: 767px) {
+            .cover img {
+                height: 50vh;
+            }
+            .title-name {
+                font-size: 2em;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .chapter-image {
+                max-width: 50%;
+            }
+        }
+
+        .full-text {
+            display: none;
+            margin-top: 10px;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            border-radius: 30px;
+        }
+                /* ... existing styles ... */
+                .dialogue {
+            color: #ffd700;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        .video-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid #daa520;
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #daa520;
+        }
+
+        .video-container h2 {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <img src="barco-pirata.jpg" alt="Portada del Libro" placeholder="Insertar imagen aquí">
+        <h1><span class="title-name">Spike</span>: El Perro Pirata (Parte 2)</h1>
+    </div>
+
+    <div class="song-section">
+        <h2>♪ El Duelo de las Mentes ♪</h2>
+        <audio controls>
+            <source src="El Duelo de las Mentes.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <div class="content">
+
+        <div class="chapter">
+            <h2>Capítulo 6: El Duelo de Ingenio (¿final?)</h2>
+            <img src="dragon-tesoro.png" alt="Dragón y Spike" class="chapter-image">
+            <p>Spike miró fijamente a los ojos del dragón, su mente trabajando rápidamente en el acertijo. El resplandor dorado del tesoro iluminaba la cueva, creando sombras danzantes en las paredes.
+
+                Tras un momento de reflexión, Spike respondió con firmeza: <span class="dialogue">"La respuesta es el corazón".</span>
+                
+                El dragón arqueó una ceja, sorprendido. <span class="dialogue">"Interesante... muy interesante. Pero no creas que será tan fácil, pequeño aventurero. Veamos qué tan astuto eres realmente."</span> Sus ojos brillaron con un destello de astucia. <span class="dialogue">"Responde esto: 'Soy un eco sin voz, un camino sin pies, y una sombra sin luz. ¿Qué soy?"</span>
+                
+                Spike sonrió, mostrando sus colmillos. <span class="dialogue">"Es 'Un recuerdo', señor dragón.."</span>
+                
+                <span class="dialogue">"¡Impresionante!"</span> rugió el dragón, aunque su voz denotaba cierta frustración. <span class="dialogue">"Pero aquí viene algo más complejo: 'Cuanto más me quitas, más grande me vuelvo. ¿Qué soy?'"</span>
+                
+                <span class="dialogue">"Un agujero"</span>, respondió Spike sin titubear. <span class="dialogue">"Cuanto más tierra le quitas, más grande se hace."</span>
+                
+                El dragón comenzó a pasearse por la caverna, sus escamas brillando con reflejos dorados. <span class="dialogue">"En todos mis años, nunca había encontrado una mente tan ágil en un ser tan pequeño. Pero tengo una última prueba para ti: 'Soy lo que soy, pero si me nombras, dejo de ser lo que soy. ¿Qué soy?'"</span>
+                
+                Spike cerró los ojos por un momento, pensativo. <span class="dialogue">"El silencio"</span>, respondió suavemente.
+                
+                El dragón se detuvo en seco, sus enormes alas plegándose contra su cuerpo. <span class="dialogue">"Spike, el perro pirata, has demostrado no solo valentía al adentrarte en estas cuevas, sino una sabiduría que pocos poseen."</span> Su voz se tornó grave y preocupada. <span class="dialogue">"Sin embargo, debo advertirte sobre algo crucial."</span>
+                
+                <span class="dialogue">"¿Qué sucede?"</span> preguntó Spike, notando el cambio en el tono del dragón.
+                
+                <span class="dialogue">"Este tesoro... estas piedras doradas que tanto has buscado... llevan consigo una maldición antigua. Durante doscientos mil años he sido su guardián, no por codicia, sino por deber. La maldición que contienen podría devastar al mundo exterior si alguna vez saliera de esta cueva."</span>
+                
+                Spike observó las montañas de oro que lo rodeaban, ahora con una nueva perspectiva. <span class="dialogue">"¿Qué tipo de maldición?"</span>
+                
+                El dragón se acercó, su aliento cálido moviendo el pelaje de Spike. <span class="dialogue">"Una maldición que puede corromper el corazón más puro, transformar el amor en odio, la alegría en desesperación. He visto imperios caer por apenas una de estas piedras. La codicia que despiertan... es solo el principio."</span>
+                
+                <span class="dialogue">"Pero entonces, ¿por qué permitirme llegar hasta aquí?"</span> cuestionó Spike.
+                
+                Los ojos del dragón brillaron con un destello de esperanza. <span class="dialogue">"Porque en todos estos milenios, nunca había encontrado a alguien como tú. Alguien que pudiera ver más allá de lo evidente, que pudiera resolver los acertijos no solo con inteligencia, sino con sabiduría. Quizás... quizás tú podrías ser la clave para romper esta maldición."</span>
+                
+                <span class="dialogue">"¿Romper la maldición? ¿Cómo?"</span>
+                
+                El dragón extendió sus alas, creando sombras que danzaban por toda la caverna. <span class="dialogue">"Existe una manera... pero el precio podría ser demasiado alto, incluso para alguien tan valiente como tú. La decisión que deberás tomar podría cambiar no solo tu destino, sino el de todos los que conoces."</span>
+                
+                Spike miró hacia la entrada de la cueva, pensando en su amo que lo esperaba arriba. <span class="dialogue">"¿Cuál es esa decisión?"</span>
+                
+                El dragón sonrió misteriosamente, sus dientes brillando en la penumbra. <span class="dialogue">"Primero, debes entender la verdadera naturaleza de esta maldición. Una historia que comenzó hace milenios, cuando los dioses aún caminaban entre los mortales..."</span>
+                
+                Continuará...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-container">
+        <h2>El Encuentro con el Dragón</h2>
+        <video controls loop>
+            <source src="dragon.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+    </div>
+</div>
+
+    <footer>
+        <p>
+            <span>Spike: El Perro Pirata</span><br>
+            <span>© 2025 Todos los derechos reservados</span><br>
+            <span>Lucía Editorial</span>
+        </p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const fullTexts = document.querySelectorAll('.full-text');
+            fullTexts.forEach(text => {
+                text.style.display = 'none';
+            });
+        }
+
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+            
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                button.textContent = "Leer menos";
+            } else {
+                element.style.display = "none";
+                button.textContent = "Leer más";
+            }
+        }
+    </script>
+</body>
+</html>

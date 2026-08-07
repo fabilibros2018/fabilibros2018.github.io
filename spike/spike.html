@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spike: El Perro Pirata</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Palatino', serif;
+            background: linear-gradient(135deg, #1a3f55, #2c5364);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg, 
+                #ffd700, #ffa500, #ff8c00, #daa520);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            padding: 0 20px;
+        }
+
+        a {
+            background: linear-gradient(45deg, #ffd700, #daa520);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cover {
+            position: relative;
+            text-align: center;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            margin: 0;
+            display: block;
+            filter: brightness(0.8) sepia(0.3);
+        }
+
+        .title-name {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, 
+                #ffd700, #ffa500, #daa520, #b8860b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: gradient 3s ease infinite;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-image {
+            max-width: 90%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 3px solid #daa520;
+        }
+
+        .song-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid #daa520;
+        }
+
+        .read-more {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            padding: 5px;
+            color: #ffd700;
+        }
+
+        footer {
+            background: linear-gradient(135deg, 
+                rgba(26, 63, 85, 0.9), 
+                rgba(44, 83, 100, 0.9));
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 2px solid #daa520;
+        }
+        footer p {
+            text-align: center;
+            font-family: cursive;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media (max-width: 767px) {
+            .cover img {
+                height: 50vh;
+            }
+            .title-name {
+                font-size: 2em;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .chapter-image {
+                max-width: 50%;
+            }
+        }
+
+        .full-text {
+            display: none;
+            margin-top: 10px;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <img src="barco-pirata.jpg" alt="Portada del Libro" placeholder="Insertar imagen aquí">
+        <h1><span class="title-name">Spike</span>: El Perro Pirata (Parte 1)</h1>
+    </div>
+
+    <div class="song-section">
+        <h2>♪ Aventuras en Alta Mar ♪</h2>
+        <audio controls>
+            <source src="spike-cancion.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <div class="content">
+        <div class="chapter">
+            <h2>Capítulo 1: Un Encuentro Misterioso</h2>
+            <img src="barco-fantasma.jpg" alt="Barco Fantasma" class="chapter-image">
+            <p>En las vastas aguas del océano, donde las olas danzan con el viento, navegaba un valiente perro pirata llamado Spike junto a su fiel amo...</p>
+            <a onclick="toggleText('cap1')" class="read-more">Leer más</a>
+            <div id="cap1" class="full-text">
+                <p>
+                    Spike era conocido por su valentía y astucia en todos los puertos. Su pelaje dorado brillaba bajo el sol del Caribe, y su pañuelo rojo ondeaba con la brisa marina. Junto a su amo, habían recorrido los siete mares en busca de aventuras y tesoros.
+
+                    Una mañana brumosa, mientras navegaban por aguas desconocidas, se toparon con algo extraordinario: un barco fantasma emergió de la niebla, sus velas rasgadas danzaban con el viento como si fueran espectros marinos.
+                </p>
+            </div>
+        </div>
+
+        <!-- Continuar con los demás capítulos siguiendo la misma estructura -->
+        <!-- ... -->
+
+        <div class="chapter">
+            <h2>Capítulo 2: El Mapa del Tesoro</h2>
+            <img src="botella-mapa.jpg" alt="Botella con Mapa" class="chapter-image">
+            <p>Dentro del barco fantasma, algo brilló captando la atención de Spike...</p>
+            <a onclick="toggleText('cap2')" class="read-more">Leer más</a>
+            <div id="cap2" class="full-text">
+                <p>
+                    Con cautela, Spike y su amo abordaron el barco fantasma. Entre la niebla y los restos abandonados, una botella antigua brillaba con un resplandor misterioso. En su interior, un pergamino amarillento revelaba un mapa con marcas doradas que señalaban la ubicación de un tesoro legendario: las piedras de oro.
+    
+                    Sin dudarlo un instante, sabiendo que este era el destino que habían estado esperando, Spike y su amo tomaron el mapa y pusieron rumbo hacia la aventura que cambiaría sus vidas para siempre.
+                </p>
+            </div>
+        </div>
+    
+        <div class="chapter">
+            <h2>Capítulo 3: La Travesía</h2>
+            <img src="tormenta-mar.png" alt="Tormenta en el Mar" class="chapter-image">
+            <p>El viaje no sería fácil, tormentas y peligros acechaban en cada ola...</p>
+            <a onclick="toggleText('cap3')" class="read-more">Leer más</a>
+            <div id="cap3" class="full-text">
+                <p>
+                    Durante días y noches, Spike y su amo navegaron enfrentando tormentas furiosas y mares embravecidos. Cruzaron océanos enteros, bordearon continentes desconocidos, siempre guiados por aquel misterioso mapa que prometía riquezas inimaginables.
+    
+                    Finalmente, en el horizonte, apareció una pequeña isla solitaria. Su superficie estaba cubierta de extraños agujeros negros que parecían observarlos como ojos de araña, creando una visión inquietante pero fascinante.
+                </p>
+            </div>
+        </div>
+    
+        <div class="chapter">
+            <h2>Capítulo 4: El Descenso</h2>
+            <img src="cueva-oscura.png" alt="Cueva Misteriosa" class="chapter-image">
+            <p>Sin titubear, Spike se adentró en uno de los oscuros agujeros...</p>
+            <a onclick="toggleText('cap4')" class="read-more">Leer más</a>
+            <div id="cap4" class="full-text">
+                <p>
+                    Mientras su amo permanecía en la superficie, paralizado por el miedo, Spike demostró su valentía adentrándose en la oscuridad. Rodó por túneles interminables hasta llegar a una caverna inmensa donde bestias gigantescas lo esperaban.
+    
+                    A pesar de estar en desventaja, Spike luchó con fiereza contra las criaturas. Aunque resultó herido, su determinación no flaqueó. Siguió adelante, adentrándose más y más en las profundidades de la cueva, guiado por un resplandor dorado que lo llamaba.
+                </p>
+            </div>
+        </div>
+    
+        <div class="chapter">
+            <h2>Capítulo 5: El Guardián del Tesoro</h2>
+            <img src="dragon-tesoro.png" alt="Dragón y Tesoro" class="chapter-image">
+            <p>Al final del túnel, un brillo cegador revelaba montañas de piedras doradas...</p>
+            <a onclick="toggleText('cap5')" class="read-more">Leer más</a>
+            <div id="cap5" class="full-text">
+                <p>
+                    Las piedras de oro brillaban por todas partes, iluminando la caverna con su resplandor mágico. Pero antes de que Spike pudiera acercarse, un rugido ensordecedor sacudió las paredes de la cueva.
+    
+                    De las sombras emergió un imponente dragón que, para sorpresa de Spike, lo saludó por su nombre: "Spike, el valiente, has demostrado gran coraje al llegar hasta aquí. Si respondes correctamente a este acertijo, todas estas riquezas serán tuyas: 'Soy más valioso que el oro pero no puedo comprarse, más fuerte que el acero pero puede romperse, más peligroso que una espada pero puede salvarte. ¿Qué soy?'"
+    
+                    Continuará...
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>
+            <span>Spike: El Perro Pirata</span><br>
+            <span>© 2025 Todos los derechos reservados</span><br>
+            <span>Lucía Editorial</span>
+        </p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const fullTexts = document.querySelectorAll('.full-text');
+            fullTexts.forEach(text => {
+                text.style.display = 'none';
+            });
+        }
+
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+            
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                button.textContent = "Leer menos";
+            } else {
+                element.style.display = "none";
+                button.textContent = "Leer más";
+            }
+        }
+    </script>
+</body>
+</html>

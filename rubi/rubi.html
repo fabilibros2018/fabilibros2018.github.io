@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubí: El Arcoíris que Quería ser Humana</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', sans-serif;
+            background: linear-gradient(135deg, #ffdef2, #e7f0ff);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg, 
+                #ff0000, #ff7300, #fffb00, #48ff00, 
+                #00ffd5, #002bff, #7a00ff, #ff00c8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            padding: 0 20px;
+        }
+
+        a {
+            background: linear-gradient(45deg, #ff0000, #ff7300);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        /* Portada */
+        /* Portada */
+        .cover {
+            position: relative;
+            text-align: center;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            margin: 0;
+            display: block;
+        }
+
+        .cover h1 {
+            padding: 2rem;
+            margin: 1rem 0;
+        }
+
+        .title-name {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, 
+                #ff0066, #ff4d94, #ff99cc, #ff0066);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: gradient 3s ease infinite;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media (max-width: 767px) {
+            .cover img {
+                height: 50vh;
+            }
+            .title-name {
+                font-size: 2em;
+            }
+        }
+        .chapter-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        @media (min-width: 768px) {
+            .chapter-image {
+                max-width: 50%;  /* Cambiado de 80% a 50% */
+            }
+        }
+
+        /* Añadir estos estilos */
+        .chapter p:not(:first-of-type) {
+            display: none;
+        }
+
+        .full-text {
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* Estilo para el botón "Leer más" */
+        .read-more {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            padding: 5px;
+        }
+        /* [Resto de los estilos similares al original pero con gradientes de arcoíris] */
+        footer {
+            background: linear-gradient(135deg, 
+                rgba(255, 102, 178, 0.2), 
+                rgba(102, 178, 255, 0.2));
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        footer p {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: #555;
+            font-family: cursive;
+        }
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            border-radius: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    
+    
+    <!-- Modificar el título así: -->
+    <div class="cover">
+        <img src="arcoiris.jpg" alt="Portada del Libro" placeholder="Insertar imagen aquí">
+        <h1><span class="title-name">Rubí</span>: El Arcoíris que Quería ser Humana (Parte 1)</h1>
+    </div>
+    <div class="song-section">
+        <h2>♪ Colores en el Cielo ♪</h2>
+        <audio controls>
+            <source src="arcoiris.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+    <div class="content">
+        <div class="chapter">
+            <h2>Capítulo 1: Un Arcoíris Diferente</h2>
+            <img src="arcoiriss.jpg.jpg" alt="Rubí como arcoíris" class="chapter-image">
+            <p>En lo alto del cielo, donde las nubes danzan con el viento, vivía un hermoso arcoíris llamado Rubí...</p>
+            <!-- Modificar cada enlace "Leer más" así: -->
+            <a onclick="toggleText('cap1')" class="read-more">Leer más</a>
+            <div id="cap1" class="full-text">
+                <p>
+                    Rubí era el arcoíris más brillante que jamás se había visto. Sus colores resplandecían con una intensidad única: rojo como el amor, naranja como el atardecer, amarillo como el sol, verde como los bosques, azul como el mar, índigo como la noche y violeta como las flores más exóticas.
+
+                    Cada vez que aparecía, los niños gritaban de alegría y los adultos se detenían a admirar su belleza. Sin embargo, Rubí no se sentía satisfecha. Mientras observaba a los humanos desde lo alto, comenzó a preguntarse cómo sería vivir como ellos, caminar sobre la tierra, sentir el agua del mar, experimentar todas esas emociones que veía en sus rostros.
+                </p>
+            </div>
+        </div>
+            <!-- ... existing content ... -->
+    
+            <div class="chapter">
+                <h2>Capítulo 2: La Conversación con el Sol</h2>
+                <img src="sol.jpg.png" alt="El Sol personificado" class="chapter-image">
+                <p>Una tarde, mientras Rubí brillaba sobre el mar Caribe, el Sol notó su melancolía...</p>
+                <a onclick="toggleText('cap2')" class="read-more">Leer más</a>
+                <div id="cap2" class="full-text">
+                    <p>
+                        "¿Por qué suspiras tanto, pequeña Rubí?", preguntó el Sol con su voz cálida y profunda.
+    
+                        "Oh, Sol sabio", respondió Rubí, "cada día veo a los humanos vivir sus vidas, reír, llorar, abrazar... ¡Cómo desearía poder experimentar lo que ellos sienten! Si tan solo pudiera ser humana, mi existencia sería eterna y significativa".
+    
+                        El Sol, que había presenciado el nacimiento y ocaso de innumerables civilizaciones, sonrió con sabiduría. "Puedo concederte ese deseo, Rubí. Puedo convertirte en humana por un día completo. Pero recuerda, todo deseo tiene sus consecuencias".
+    
+                        Sin pensarlo dos veces, cegada por su anhelo, Rubí exclamó: "¡Sí, por favor! ¡Es lo que más deseo en el mundo!"
+                    </p>
+                </div>
+            </div>
+    
+            <div class="chapter">
+                <h2>Capítulo 3: Un Despertar Diferente</h2>
+                <img src="playa-margarita.png" alt="Playa de Margarita" class="chapter-image">
+                <img src="rubi-humana.png" alt="Rubí como humana" class="chapter-image">
+                <p>De repente, todo se volvió oscuro para Rubí, y cuando abrió los ojos, ya no estaba en el cielo...</p>
+                <a onclick="toggleText('cap3')" class="read-more">Leer más</a>
+                <div id="cap3" class="full-text">
+                    <p>
+                        Rubí se encontró en la isla de Margarita, sintiendo por primera vez la arena caliente bajo sus pies. Estaba desnuda, confundida y asustada. Su cuerpo humano era hermoso, pero vulnerable. El hambre, la sed y el calor eran sensaciones completamente nuevas y abrumadoras.
+    
+                        Intentó comunicarse con las personas que pasaban, pero de su boca solo salían sonidos incomprensibles. Nunca había necesitado hablar antes, y ahora no sabía cómo hacerlo. La gente la miraba con extrañeza y desaprobación. Algunos se reían, otros se alejaban asustados, y algunos llamaron a las autoridades.
+                    </p>
+                </div>
+            </div>
+    
+            <div class="chapter">
+                <h2>Capítulo 4: La Dura Realidad</h2>
+                <p>Las siguientes horas fueron una pesadilla para Rubí...</p>
+                <a onclick="toggleText('cap4')" class="read-more">Leer más</a>
+                <div id="cap4" class="full-text">
+                    <p>
+                        La policía la llevó detenida, pensando que estaba perturbada. En la celda, Rubí experimentó por primera vez lo que significaba estar encerrada, ella que siempre había sido tan libre en el cielo. No podía explicar quién era ni de dónde venía.
+    
+                        Cuando finalmente la liberaron, vagó por las calles bajo el sol abrasador. Su estómago dolía de hambre, su garganta ardía de sed, y su piel, antes hecha de luz y color, ahora estaba roja por las quemaduras del sol.
+                    </p>
+                </div>
+            </div>
+    
+            <div class="chapter">
+                <h2>Capítulo 5: El Atardecer de la Verdad</h2>
+                
+                <img src="atardecer.arcoiris.png" alt="Atardecer con colores de arcoíris" class="chapter-image">
+                <p>Al caer la tarde, Rubí llegó a una playa solitaria...</p>
+                <a onclick="toggleText('cap5')" class="read-more">Leer más</a>
+                <div id="cap5" class="full-text">
+                    <p>
+                        Exhausta y adolorida, se sentó en la arena mirando hacia el horizonte. El cielo comenzaba a teñirse de los mismos colores que ella solía lucir. Las lágrimas rodaron por sus mejillas mientras comprendía la verdadera lección.
+    
+                        "Cada ser tiene su propio propósito y belleza", pensó. "Yo deseaba ser humana sin entender que mi don era traer alegría y esperanza a otros desde el cielo. Quería escapar de quien era en vez de aceptar y valorar mi propia naturaleza".
+    
+                        Justo cuando el sol comenzaba a ocultarse, su voz resonó nuevamente: "Rubí, ¿has aprendido algo hoy?"
+    
+                        "Sí", respondió ella entre lágrimas, "pero ahora tengo una decisión más importante que tomar..."
+    
+                        El Sol sonrió misteriosamente y preguntó: "¿Te gustaría ser humana... para siempre?"
+    
+                        Continuará...
+                    </p>
+                </div>
+            </div>
+    
+        <!-- ... rest of the existing content ... -->
+
+        <!-- [Continuar con los demás capítulos siguiendo la historia] -->
+    </div>
+
+    <footer>
+        <p>
+            <span>Rubí: El Arcoíris que Quería ser Humana</span>
+            <span>© 2025 Todos los derechos reservados</span>
+            <span>Lucía Editorial</span>
+        </p>
+    </footer>
+
+    <script>
+        // Asegurar que todos los textos estén ocultos al cargar
+        window.onload = function() {
+            const fullTexts = document.querySelectorAll('.full-text');
+            fullTexts.forEach(text => {
+                text.style.display = 'none';
+            });
+        }
+
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+            
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                button.textContent = "Leer menos";
+            } else {
+                element.style.display = "none";
+                button.textContent = "Leer más";
+            }
+        }
+    </script>
+</body>
+</html>
