@@ -36,12 +36,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 12px 12px;
         }
         #frame {
             position: relative;
-            width: min(100vw - 24px, calc((100vh - 70px) * 12 / 7));
-            aspect-ratio: 12 / 7;
         }
         canvas {
             width: 100%;
@@ -52,24 +49,34 @@
             background: #bfe3ff;
             cursor: none;
         }
-        /* ===== móvil en vertical: pantalla completa ===== */
-        @media (pointer: coarse) and (orientation: portrait) {
-            #wrap { padding: 0; }
-            #frame {
-                width: 100vw;
-                height: 100vh;
-                aspect-ratio: auto;
-            }
-            #frame { height: 100dvh; }
-            canvas { border-radius: 0; box-shadow: none; }
-            .back-link { top: 10px; left: 10px; padding: 8px 14px; font-size: 0.8rem; }
-            #btnPause { top: 10px; right: 10px; }
-            #btnMute { top: 10px; right: 64px; }
-            .corner-btn { font-size: 0.85rem; padding: 6px 12px; }
-            h1 { font-size: 1.5rem; }
-            .sub { font-size: 0.85rem; }
-            .btn { padding: 12px 32px; font-size: 1.05rem; }
+        /* ===== aviso de giro para móvil en vertical ===== */
+        #rotate {
+            position: fixed;
+            inset: 0;
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            gap: 14px;
+            background: linear-gradient(180deg, #ffe8d9, #f9f3e4 60%, #e8f5e9);
+            color: #3a2e2e;
+            padding: 30px;
+            font-family: 'Fredoka', 'Comic Sans MS', sans-serif;
         }
+        #rotate .phone {
+            font-size: 4.5rem;
+            animation: spinHint 2.2s ease-in-out infinite;
+        }
+        @keyframes spinHint {
+            0% { transform: rotate(0deg); }
+            35% { transform: rotate(90deg); }
+            70% { transform: rotate(90deg); }
+            100% { transform: rotate(90deg); }
+        }
+        #rotate h1 { font-size: 1.7rem; color: #d8432f; }
+        #rotate p { font-size: 1rem; color: #7a4a32; max-width: 320px; line-height: 1.5; }
         .overlay {
             position: absolute;
             inset: 0;
@@ -81,9 +88,6 @@
             border-radius: 22px;
             padding: 20px;
             z-index: 10;
-        }
-        @media (pointer: coarse) and (orientation: portrait) {
-            .overlay { border-radius: 0; }
         }
         #menu {
             background: linear-gradient(180deg, rgba(255, 214, 178, 0.96), rgba(249, 243, 228, 0.97));
@@ -196,22 +200,19 @@
             background: linear-gradient(180deg, #ff6f61, #d8432f);
         }
         #seedBtn {
-            right: 16px;
-            bottom: calc(112px + env(safe-area-inset-bottom));
+            right: 112px;
+            bottom: calc(16px + env(safe-area-inset-bottom));
             width: 84px;
             height: 84px;
             font-size: 0.85rem;
             background: linear-gradient(180deg, #81c784, #2e7d32);
         }
-        @media (pointer: coarse) and (orientation: landscape) {
-            #seedBtn { right: 112px; bottom: calc(16px + env(safe-area-inset-bottom)); }
-        }
         #joyBase {
             position: absolute;
             left: 20px;
             bottom: calc(24px + env(safe-area-inset-bottom));
-            width: 132px;
-            height: 132px;
+            width: 128px;
+            height: 128px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
             border: 3px solid rgba(255, 255, 255, 0.55);
@@ -226,9 +227,9 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 58px;
-            height: 58px;
-            margin: -29px 0 0 -29px;
+            width: 56px;
+            height: 56px;
+            margin: -28px 0 0 -28px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 30%, #a5d6a7, #43a047 70%);
             border: 3px solid rgba(255, 255, 255, 0.9);
@@ -258,7 +259,7 @@
                 <button class="btn" id="btnPlay">▶ ¡A Volar!</button>
                 <div class="controls">
                     <span class="kbd">↑↓←→</span>/<span class="kbd">WASD</span> volar &nbsp;·&nbsp; <span class="kbd">ESPACIO</span> picotazo &nbsp;·&nbsp; <span class="kbd">X</span> semillas &nbsp;·&nbsp; <span class="kbd">P</span> pausa<br>
-                    Móvil: joystick para volar y botones 🌱 SEMILLAS + ¡PICOTAZO!
+                    Móvil: joystick para volar y botones 🌱 SEMILLAS + ¡PICOTAZO! (juega en horizontal)
                 </div>
             </div>
 
@@ -288,36 +289,46 @@
         </div>
     </div>
 
+    <div id="rotate">
+        <div class="phone">📱</div>
+        <h1>¡Gira tu teléfono!</h1>
+        <p>Tiko vuela mejor en horizontal. Pon el teléfono de lado y pulsa ▶ ¡A Volar!</p>
+    </div>
+
     <script>
     (function () {
         'use strict';
         var cv = document.getElementById('game');
         var ctx = cv.getContext('2d');
         var DPR = Math.min(2, window.devicePixelRatio || 1);
-        var portrait = false;
         var W = 960, H = 560;
 
         function computeSize() {
-            portrait = (window.innerWidth || 960) < (window.innerHeight || 560);
-            if (portrait) {
-                W = Math.round(window.innerWidth || 390);
-                H = Math.round(window.innerHeight || 844);
-            } else {
-                W = 960; H = 560;
+            var sw = window.innerWidth || 960, sh = window.innerHeight || 560;
+            var s = Math.min(sw / W, sh / H);
+            var fr = document.getElementById('frame');
+            if (fr) {
+                fr.style.width = Math.round(W * s) + 'px';
+                fr.style.height = Math.round(H * s) + 'px';
             }
-            cv.width = Math.round(W * DPR);
-            cv.height = Math.round(H * DPR);
-            ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
         }
         computeSize();
-        window.addEventListener('resize', function () {
-            computeSize();
-            if (state === 'play') resetGame();
-        });
-        window.addEventListener('orientationchange', function () {
-            computeSize();
-            if (state === 'play') resetGame();
-        });
+        window.addEventListener('resize', computeSize);
+        window.addEventListener('orientationchange', function () { setTimeout(computeSize, 250); });
+        cv.width = Math.round(W * DPR);
+        cv.height = Math.round(H * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+        /* ===== aviso de girar el móvil ===== */
+        var elRotate = document.getElementById('rotate');
+        function checkRotate() {
+            var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+            var portrait = (window.innerWidth || 0) < (window.innerHeight || 0);
+            elRotate.style.display = (coarse && portrait) ? 'flex' : 'none';
+        }
+        checkRotate();
+        window.addEventListener('resize', checkRotate);
+        window.addEventListener('orientationchange', function () { setTimeout(checkRotate, 250); });
 
         /* ================= AUDIO ================= */
         var AC = null;
@@ -368,6 +379,7 @@
         var bossTimer, bossIntro, bossHitCooldown, sinceRock;
         var keys = {}, pointer = null, lastTime = 0, hintStage = 0, seedCd = 0;
         var joy = { active: false, dx: 0, dy: 0, id: null };
+        var portrait = false; /* modo vertical desactivado: el juego solo se juega en horizontal */
 
         function resetGame() {
             player = {
@@ -380,6 +392,7 @@
             hearts = 3; score = 0; fruitCount = 0; prestige = 0; kingTime = 0;
             invuln = 0; shake = 0; hintStage = 0; seedCd = 0;
             lastTree = 0; lastMonkey = 0; lastFruit = 0; lastFeather = 0;
+            prevGap = 0;
             peckActive = 0;
             joyEnd();
         }
@@ -402,8 +415,14 @@
             if (joy.active && e.pointerId === joy.id) joyMove(e);
             else if (dragging) pointer = pos(e);
         });
-        window.addEventListener('pointerup', function (e) { dragging = false; pointer = null; if (joy.active && e.pointerId === joy.id) joyEnd(); });
-        window.addEventListener('pointercancel', function (e) { dragging = false; pointer = null; if (joy.active && e.pointerId === joy.id) joyEnd(); });
+        window.addEventListener('pointerup', function (e) {
+            dragging = false; pointer = null;
+            if (joy.active && e.pointerId === joy.id) joyEnd();
+        });
+        window.addEventListener('pointercancel', function (e) {
+            dragging = false; pointer = null;
+            if (joy.active && e.pointerId === joy.id) joyEnd();
+        });
         function pos(e) {
             var r = cv.getBoundingClientRect();
             return { x: (e.clientX - r.left) * (W / r.width), y: (e.clientY - r.top) * (H / r.height) };
@@ -492,7 +511,7 @@
             player.vx *= (1 - 6 * dt); player.vy *= (1 - 6 * dt);
             player.x += player.vx * dt; player.y += player.vy * dt;
             player.x = Math.max(25, Math.min(W - 25, player.x));
-            player.y = Math.max(40, Math.min(portrait ? H - 70 : 462, player.y));
+            player.y = Math.max(40, Math.min(462, player.y));
             if (Math.abs(player.vx) > 20) player.facing = player.vx > 0 ? 1 : -1;
 
             /* avance del mundo */
@@ -513,15 +532,18 @@
 
         /* ---------- generación del recorrido ---------- */
         var lastTree = 0, lastMonkey = 0, lastFruit = 0, lastFeather = 0;
+        var prevGap = 0;
         function updateRun(dt) {
-            if (worldX - lastTree > 230 + Math.random() * 140) {
+            if (worldX - lastTree > (portrait ? 300 + Math.random() * 160 : 230 + Math.random() * 140)) {
                 lastTree = worldX;
                 if (portrait) {
-                    var gapH = Math.random() < 0.3 ? 150 : 200;
-                    var gapCenter = 200 + Math.random() * (H - 420);
-                    trees.push({ top: gapCenter - gapH / 2, bottom: gapCenter + gapH / 2, w: W });
-                    if (Math.random() < 0.45) {
-                        fruits.push({ x: 60 + Math.random() * (W - 120), y: gapCenter - 70, r: 13, kind: 'mango' });
+                    var gapH = 190 + Math.random() * 50;
+                    var gapCenter = Math.max(170, Math.min(H - 190,
+                        prevGap + (Math.random() - 0.5) * 300));
+                    prevGap = gapCenter;
+                    trees.push({ top: gapCenter - gapH / 2 - 90, bottom: gapCenter + gapH / 2 - 90, w: W });
+                    if (Math.random() < 0.5) {
+                        fruits.push({ x: 60 + Math.random() * (W - 120), y: gapCenter - 90, r: 13, kind: 'mango' });
                     }
                 } else {
                     var gapY = 120 + Math.random() * 200;
@@ -1396,7 +1418,7 @@
             var i;
             /* corazones */
             var hx0 = portrait ? 20 : 34;
-            var hy = portrait ? 58 : 30;
+            var hy = portrait ? 120 : 30;
             for (i = 0; i < 3; i++) {
                 var hx = hx0 + i * 34;
                 if (i < hearts) {
