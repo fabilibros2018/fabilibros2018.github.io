@@ -240,6 +240,9 @@
         @media (pointer: coarse) {
             #peckBtn, #seedBtn, #joyBase { display: block; }
         }
+        #frame:not(.playing) #joyBase,
+        #frame:not(.playing) #peckBtn,
+        #frame:not(.playing) #seedBtn { display: none; }
     </style>
 </head>
 <body>
@@ -463,6 +466,7 @@
             elLose.classList.toggle('hidden', s !== 'lose');
             elPause.classList.toggle('hidden', s !== 'pause');
             btnPause.style.display = (s === 'play' || s === 'pause') ? 'block' : 'none';
+            document.getElementById('frame').classList.toggle('playing', s === 'play');
             if (s === 'play') audio();
         }
         document.getElementById('btnPlay').addEventListener('click', function () {
