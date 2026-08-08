@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="favicon.png" type="image/png">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
     <title>Libros de Fabiana Lucía</title>
     <style>
         * {
@@ -14,10 +17,18 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
             line-height: 1.6;
             background: #f5f5f5;
+        }
+
+        h1, h2, h3, .typing-title, .typing-title2, .subtitle, .book-title, .audio-title, .footer-section h3, .game-info h3, .btn {
+            font-family: 'Fredoka', cursive;
         }
 
         .hero {
@@ -29,7 +40,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            
         }
 
         .hero-image {
@@ -43,28 +53,53 @@
             filter: brightness(0.7);
         }
 
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 10, 0.45);
+            top: 0;
+            z-index: 100;
+            animation: oscurecer 1s ease forwards;
+        }
+
+        @keyframes oscurecer {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 300;
             text-align: center;
             color: white;
             padding: 2rem;
-            font-family: cursive;
-            z-index: 300;
-            
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
 
         .typing-title {
             font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             white-space: nowrap;
             overflow: hidden;
             border-right: 3px solid;
             width: 0;
-            animation: typing 3.5s steps(40, end),
+            animation: typing 3s steps(20, end) forwards,
                        blink-caret .75s step-end infinite;
-                       
+        }
+
+        .typing-title2 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid;
+            width: 0;
+            animation: typing 2.5s steps(20, end) forwards,
+                       blink-caret .75s step-end infinite;
+            animation-delay: 1.2s;
+            color: #c4a7e7;
         }
 
         @keyframes typing {
@@ -77,19 +112,359 @@
             50% { border-color: white; }
         }
 
+        .btn {
+            padding: 12px 28px;
+            z-index: 1000;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            color: #c4a7e7;
+            border: 2px solid rgba(196, 167, 231, 0.4);
+            font-size: 1.1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            position: absolute;
+            bottom: 4rem;
+            animation: aparecer .6s ease forwards;
+            animation-delay: 1.6s;
+            transform: scale(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+        }
+
+        .btn:hover {
+            transform: scale(1.08) !important;
+            box-shadow: 0 12px 34px rgba(196, 167, 231, 0.35);
+        }
+
+        @keyframes aparecer {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.6); }
+            100% { transform: scale(1); }
+        }
+
         .books-container {
             max-width: 1200px;
             margin: 3rem auto;
             padding: 2rem;
         }
 
-        .audio-section {
+        .subtitle {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .books-container hr {
+            border: none;
+            height: 3px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, transparent, #c4a7e7, transparent);
+            margin-bottom: 2.5rem;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .book-card {
+            position: relative;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-margin-top: 20px;
+        }
+
+        .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+        }
+
+        .book-image-wrap {
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            position: relative;
+        }
+
+        .book-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .book-card:hover .book-image {
+            transform: scale(1.06);
+        }
+
+        .badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 5;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #fff;
+            background: rgba(20, 20, 40, 0.78);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Fredoka', cursive;
+        }
+
+        .badge.gold {
+            background: linear-gradient(90deg, #ffd700, #ffa500);
+            color: #3d2800;
+        }
+
+        .badge.done {
+            background: linear-gradient(90deg, #4caf50, #2e7d32);
+        }
+
+        .book-info {
+            padding: 1.5rem;
+        }
+
+        .book-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .book-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+
+        .read-more:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 22px rgba(26, 26, 46, 0.35);
+        }
+
+        /* Spin-off */
+        .book-card.spin-off {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border: 2px solid #8b0000;
+            position: relative;
+        }
+
+        .book-card.spin-off::before {
+            content: "Spin-off";
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #8b0000;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 6;
+        }
+
+        .book-card.spin-off .book-image-wrap {
+            border-bottom: 2px solid #8b0000;
+        }
+
+        .book-card.spin-off a.read-more {
+            background: #8b0000;
+        }
+
+        .book-card.spin-off .book-title,
+        .book-card.spin-off .book-description {
+            color: #e2e2e2;
+        }
+
+        .book-card.spin-off .book-description {
+            color: #b8b8c8;
+        }
+
+        /* Noé card cyber */
+        .book-card.noe-card {
+            background: #121212;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+            border: 1px solid #00bbbb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-card.noe-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .book-card.noe-card .book-image {
+            filter: brightness(0.8) contrast(1.1) grayscale(0.1);
+            border-bottom: 1px solid #00bbbb;
+        }
+
+        .book-card.noe-card .book-title {
+            color: #00ffff;
+            text-shadow: 1px 1px 2px #000;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+        }
+
+        .book-card.noe-card .book-description {
+            color: #c0c0c0;
+            font-size: 1rem;
+        }
+
+        .book-card.noe-card .read-more {
+            background: linear-gradient(45deg, #00dddd, #00bbbb);
+            color: #121212;
+            border-radius: 8px;
+            font-weight: 800;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-card.noe-card .read-more:hover {
+            background: linear-gradient(45deg, #00ffff, #00dddd);
+        }
+
+        /* Videojuegos */
+        .games-section {
             max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2.5rem 2rem;
+            scroll-margin-top: 20px;
+        }
+
+        .games-section .subtitle {
+            color: #1a1a2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .games-section .subtitle i {
+            color: #9d4edd;
+        }
+
+        .games-intro {
+            text-align: center;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 2.2rem;
+            font-size: 1.05rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .game-card {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(196, 167, 231, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .game-cover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-cover img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .game-card:hover .game-cover img {
+            transform: scale(1.05);
+        }
+
+        .game-info {
+            padding: 1.2rem 1.4rem 1.4rem;
+        }
+
+        .game-info h3 {
+            color: #e2e2e2;
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-info p {
+            color: #9ba4b4;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.9rem;
+        }
+
+        .soon {
+            display: inline-block;
+            background: linear-gradient(90deg, #c4a7e7, #9d4edd);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .play-now {
+            display: inline-block;
+            background: linear-gradient(90deg, #4caf50, #2e7d32);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            font-family: 'Nunito', sans-serif;
+            animation: pulsePlay 1.8s ease infinite;
+        }
+
+        @keyframes pulsePlay {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.5); }
+            50% { box-shadow: 0 0 0 8px rgba(76, 175, 80, 0); }
+        }
+
+        /* Audio */
+        .audio-section {
+            max-width: 1000px;
             margin: 3rem auto;
             padding: 2rem;
             background: linear-gradient(145deg, #1a1a2e, #16213e);
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            scroll-margin-top: 20px;
         }
 
         .audio-section h2 {
@@ -97,11 +472,11 @@
             font-size: 2rem;
             margin-bottom: 2rem;
             text-align: center;
-            font-family: 'Segoe UI', sans-serif;
         }
 
         .audio-list {
             display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             padding: 1rem;
         }
@@ -111,8 +486,9 @@
             padding: 1.5rem;
             border-radius: 12px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            gap: 0.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -134,6 +510,7 @@
 
         .audio-info {
             flex-grow: 1;
+            width: 100%;
         }
 
         .audio-title {
@@ -155,206 +532,205 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 1rem;
+        .audio-card.ancient {
+            background: linear-gradient(145deg, #1a0f0f, #2b0000);
+            border: 1px solid #8b0000;
+            position: relative;
         }
 
-        .book-card {
-            background: white;
+        .audio-card.ancient .audio-icon {
+            color: #8b0000;
+        }
+
+        .audio-card.ancient::before {
+            content: "★";
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            color: #8b0000;
+            font-size: 1.2rem;
+        }
+
+        .audio-card.ancient .audio-title {
+            color: #ffd700;
+        }
+
+        /* Finales alternativos */
+        .finales-alternativos {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: #e2e2e2;
+            text-align: center;
+        }
+
+        .finales-alternativos h2 {
+            color: #c4a7e7;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .finales-alternativos p {
+            color: #9ba4b4;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 1rem 0;
+        }
+
+        .finales-alternativos b {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        h5 {
+            text-align: center;
+            color: #c4a7e7;
+        }
+
+        /* Navegación */
+        .nav-books {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .nav-toggle {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            color: #c4a7e7;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(196, 167, 231, 0.3);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+
+        .nav-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 300px;
+            margin-top: 10px;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
             border-radius: 15px;
+            padding: 10px;
+            display: none;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #c4a7e7 rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .nav-menu::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .nav-menu::-webkit-scrollbar-thumb {
+            background: #c4a7e7;
+            border-radius: 4px;
+        }
+
+        .nav-menu::-webkit-scrollbar-thumb:hover {
+            background: #9d4edd;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: #e2e2e2;
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .nav-item:hover {
+            background: rgba(196, 167, 231, 0.1);
+            transform: translateX(5px);
+        }
+
+        .nav-item i {
+            color: #c4a7e7;
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .book-name {
+            flex-grow: 1;
+        }
+
+        .book-preview {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border: 2px solid #9d4edd;
+            flex-shrink: 0;
         }
 
-        .book-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .book-image {
+        .book-preview img {
             width: 100%;
-            height: 300px;
+            height: 100%;
             object-fit: cover;
         }
 
-        .book-info {
-            padding: 1.5rem;
-        }
-
-        .book-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .book-description {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .read-more {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-        
+        .nav-item.spin-off {
             background: linear-gradient(145deg, #1a1a2e, #16213e);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: transform 0.3s ease;
+            border: 1px solid #8b0000;
+            position: relative;
         }
 
-        .read-more:hover {
-            transform: scale(1.05);
+        .nav-item.spin-off::after {
+            content: "★";
+            position: absolute;
+            right: 10px;
+            color: #8b0000;
+            font-size: 1.2rem;
         }
 
-       /* Update existing media queries and add new ones */
-       @media (max-width: 768px) {
-            .typing-title {
-                font-size: 1.8rem;
-                white-space: nowrap;
-                overflow: hidden;
-                border-right: none;
-                /*width: 100% !important;*/
-                width: 0;
-                animation: typing-mobile .8s steps(40, end) forwards,
-                           blink-caret .75s step-end infinite;
-                /*text-align: center;*/
-            }
-            .typing-title2 {
-                font-size: 1.8rem;
-                white-space: nowrap;
-                overflow: hidden;
-                border-right: none;
-                /*width: 100% !important;*/
-                width: 0;
-                animation: typing-mobile 1.5s steps(40, end) forwards,
-                           blink-caret .75s step-end infinite;
-                animation-delay: 1s;
-                /*text-align: center;*/
-
-                
-            }
-            
-
-            @keyframes typing-mobile {
-            from { width: 0 }
-            to { width: 100% }
+        .nav-item.spin-off i {
+            color: #8b0000;
         }
 
-            .hero-content {
-                width: 90%;
-                margin: 0 auto;
-            }
-
-            .books-grid {
-                grid-template-columns: 1fr;
-                max-width: 100%;
-                margin: 0 auto;
-            }
-
-            .book-card {
-                max-width: 100%;
-            }
-
-            .audio-section {
-                margin: 2rem 1rem;
-                padding: 1.5rem;
-            }
-
-            .audio-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem;
-            }
-
-            .audio-info {
-                width: 100%;
-            }
-
-            audio {
-                width: 100%;
-            }
-
-
-        .nav-books {
-            max-width: 20rem;
-            top: 10px;
-            left: 0;
-            padding: 0 10px;
-    }
-
-    .nav-menu {
-        width: 98%;
-        left: 2.5%;
-        background: linear-gradient(145deg, #1a1a2e, #16213e);
-        
-        
-    }
-
-    .nav-item {
-        display: flex;
-        align-items: center;
-        padding: 12px;
-        gap: 10px;
-    }
-
-    .book-preview {
-        position: static;
-        transform: none !important;
-        width: 50px;
-        height: 50px;
-        opacity: 1;
-        border-radius: 8px;
-        margin-left: auto;
-    }
-
-    .nav-item:hover {
-        background: rgba(196, 167, 231, 0.1);
-    }
-
-    .nav-item:hover .book-preview {
-        transform: none !important;
-    }
-
-    .book-name {
-        font-size: 0.9rem;
-        margin: 0 10px;
-    }
+        .nav-item.spin-off .book-name {
+            color: #c4a7e7;
         }
 
-        @media (max-width: 480px) {
-            .typing-title {
-                font-size: 1.5rem;
-                width: 0;
-                padding: 0 1rem;
-            }
-
-            .book-image {
-                height: 250px;
-            }
-
-            .book-title {
-                font-size: 1.3rem;
-            }
-            .nav-menu {
-        width: 98%;
-        left: 1%;
-    }
-
-    .book-preview {
-        width: 60px;
-        height: 60px;
-    }
-
-    .book-name {
-        font-size: 0.85rem;
-    }
-        }
-
+        /* Footer */
         footer {
             background: linear-gradient(145deg, #1a1a2e, #16213e);
             color: #e2e2e2;
@@ -380,7 +756,7 @@
         .footer-section h3 {
             color: #c4a7e7;
             margin-bottom: 1rem;
-            font-family: cursive;
+            font-size: 1.3rem;
         }
 
         .footer-section p {
@@ -400,11 +776,12 @@
             color: #e2e2e2;
             text-decoration: none;
             font-size: 1.5rem;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .social-links a:hover {
             color: #c4a7e7;
+            transform: translateY(-3px);
         }
 
         .footer-bottom {
@@ -415,389 +792,149 @@
             font-size: 0.8rem;
             color: #9ba4b4;
         }
-        
-        .btn{
-            padding: 10px 20px;
-            
-            z-index: 1000;
-            background: linear-gradient(145deg, #1a1a2e, #16213e);
-            color: #c4a7e7;
-            border: none;
-            font-size: 1rem;
-            border-radius: 2rem;
-            
-            position: absolute;
-            bottom: 4rem;
-            font-family: Sans-Serif,cursive;
-            animation: aparecer .6s ease forwards;
-            animation-delay: 1.6s;
-            transform: scale(0);
-            
-            
-            
-        }
-        
-        @keyframes aparecer{
-            0%{
-                transform: scale(0);
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .typing-title {
+                font-size: 1.8rem;
+                animation: typing-mobile 0.8s steps(40, end) forwards,
+                           blink-caret .75s step-end infinite;
             }
-            50%{
-                transform: scale(1.6);
+
+            .typing-title2 {
+                font-size: 1.4rem;
+                animation: typing-mobile 1.5s steps(40, end) forwards,
+                           blink-caret .75s step-end infinite;
+                animation-delay: 1s;
             }
-            100%{
-                transform: scale(1);
+
+            @keyframes typing-mobile {
+                from { width: 0 }
+                to { width: 100% }
+            }
+
+            .hero-content {
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .book-card {
+                max-width: 100%;
+            }
+
+            .audio-section {
+                margin: 2rem 1rem;
+                padding: 1.5rem;
+            }
+
+            .audio-list {
+                grid-template-columns: 1fr;
+            }
+
+            .audio-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .audio-info {
+                width: 100%;
+            }
+
+            audio {
+                width: 100%;
+            }
+
+            .nav-books {
+                max-width: 20rem;
+                top: 10px;
+                left: 0;
+                padding: 0 10px;
+            }
+
+            .nav-menu {
+                width: 98%;
+                left: 2.5%;
+            }
+
+            .nav-item {
+                display: flex;
+                align-items: center;
+                padding: 12px;
+                gap: 10px;
+            }
+
+            .book-preview {
+                position: static;
+                transform: none !important;
+                width: 50px;
+                height: 50px;
+                opacity: 1;
+                border-radius: 8px;
+                margin-left: auto;
+            }
+
+            .nav-item:hover {
+                background: rgba(196, 167, 231, 0.1);
+            }
+
+            .book-name {
+                font-size: 0.9rem;
+                margin: 0 10px;
             }
         }
-        .back{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rbga(0,0,10,0.45);
-            top: 0;
-            z-index: 200;
-            animation: oscurecer 1s ease forwards;
-        }
-        
-        @keyframes oscurecer{
-            from{
-                background:none;
+
+        @media (max-width: 480px) {
+            .typing-title {
+                font-size: 1.5rem;
+                padding: 0 1rem;
             }
-            to{
-                background:  (0,0,10,0.45);
+
+            .book-image-wrap {
+                aspect-ratio: 4 / 4.5;
+            }
+
+            .book-title {
+                font-size: 1.3rem;
+            }
+
+            .nav-menu {
+                width: 98%;
+                left: 1%;
+            }
+
+            .book-preview {
+                width: 60px;
+                height: 60px;
+            }
+
+            .book-name {
+                font-size: 0.85rem;
             }
         }
-        .subtitle{
-            text-align: center;
-        }
-        .finales-alternativos {
-    max-width: 1200px;
-    margin: 3rem auto;
-    padding: 2rem;
-    background: linear-gradient(145deg, #1a1a2e, #16213e);
-    border-radius: 5px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    color: #e2e2e2;
-    text-align: center;
-}
-
-.finales-alternativos h2 {
-    color: #c4a7e7;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    font-family: cursive;
-}
-
-.finales-alternativos p {
-    color: #9ba4b4;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin: 1rem 0;
-}
-
-.finales-alternativos b {
-    color: #ffd700;
-    font-weight: bold;
-}
-
-.nav-books {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 1000;
-        font-family: 'Segoe UI', sans-serif;
-    }
-
-    .nav-toggle {
-        background: linear-gradient(145deg, #1a1a2e, #16213e);
-        color: #c4a7e7;
-        padding: 12px 20px;
-        border-radius: 25px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-    }
-
-    .nav-toggle:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    }
-
-    .nav-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 300px;
-        margin-top: 10px;
-        background: linear-gradient(145deg, #1a1a2e, #16213e);
-        border-radius: 15px;
-        padding: 10px;
-        display: none;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        max-height: 80vh;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #c4a7e7 rgba(255,255,255,0.1);
-    }
-
-    .nav-menu.active {
-        display: block;
-        animation: slideDown 0.3s ease-out;
-        
-    }
-    .nav-menu::-webkit-scrollbar {
-    width: 8px;
-}
-
-.nav-menu::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0.1);
-    border-radius: 4px;
-}
-
-.nav-menu::-webkit-scrollbar-thumb {
-    background: #c4a7e7;
-    border-radius: 4px;
-}
-
-.nav-menu::-webkit-scrollbar-thumb:hover {
-    background: #9d4edd;
-}
-
-    @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .nav-item {
-        display: flex;
-        align-items: center;
-        padding: 12px 15px;
-        color: #e2e2e2;
-        cursor: pointer;
-        border-radius: 10px;
-        margin: 5px 0;
-        transition: all 0.3s ease;
-        position: relative;
-    }
-
-    .nav-item:hover {
-        background: rgba(196, 167, 231, 0.1);
-        transform: translateX(5px);
-    }
-
-    .nav-item i {
-        color: #c4a7e7;
-        margin-right: 15px;
-        width: 20px;
-        text-align: center;
-    }
-
-    .book-name {
-        flex-grow: 1;
-    }
-
-    /*.book-preview {
-        position: absolute;
-        right: -220px;
-        top: 50%;
-        transform: translateY(-50%) scale(0);
-        width: 200px;
-        height: 150px;
-        border-radius: 10px;
-        overflow: hidden;
-        opacity: 0;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        border: 2px solid #9d4edd;
-    }
-        */
-
-    .nav-item:hover .book-preview {
-        transform: translateY(-50%) scale(1);
-        opacity: 1;
-    }
-
-    .book-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    @media (min-width: 1024px) {
-        .nav-books {
-                display: none;
-        }
-    }
-
-    .book-card.spin-off {
-        background: linear-gradient(145deg, #1a1a2e, #16213e);
-        border: 2px solid #8b0000;
-        position: relative;
-        overflow: visible;
-    }
-
-    .book-card.spin-off::before {
-        content: "Spin-off";
-        position: absolute;
-        top: -15px;
-        right: -15px;
-        background: #8b0000;
-        color: #fff;
-        padding: 5px 15px;
-        border-radius: 15px;
-        font-size: 0.9rem;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        z-index: 2;
-    }
-
-    .book-card.spin-off .book-image {
-        border-bottom: 2px solid #8b0000;
-        height: 300px;
-        object-fit: cover;
-        width: 100%;
-        border-radius: 15px;
-    }
-    .book-card.spin-off a.read-more{
-        background: #8b0000;
-    }
-
-    .book-card.spin-off .book-title,
-    .book-card.spin-off .book-description {
-        color: #e2e2e2;
-    }
-
-    .nav-item.spin-off {
-        background: linear-gradient(145deg, #1a1a2e, #16213e);
-        border: 1px solid #8b0000;
-        position: relative;
-    }
-
-    .nav-item.spin-off::after {
-        content: "★";
-        position: absolute;
-        right: 10px;
-        color: #8b0000;
-        font-size: 1.2rem;
-    }
-
-    .nav-item.spin-off i {
-        color: #8b0000;
-    }
-
-    .nav-item.spin-off .book-name {
-        color: #c4a7e7;
-    }
-
-    .audio-card.ancient {
-        background: linear-gradient(145deg, #1a0f0f, #2b0000);
-        border: 1px solid #8b0000;
-        position: relative;
-    }
-
-    .audio-card.ancient .audio-icon {
-        color: #8b0000;
-    }
-
-    .audio-card.ancient::before {
-        content: "★";
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        color: #8b0000;
-        font-size: 1.2rem;
-    }
-
-    .audio-card.ancient .audio-title {
-        color: #ffd700;
-    }
-
-    h5{
-        text-align: center;
-        color: #c4a7e7;
-    }
-
-    /* Estilos específicos para el book-card de Noé */
-    .book-card.noe-card {
-        background: #121212; /* Fondo ligeramente más claro que el body de Noé */
-        border-radius: 10px; /* Menos redondeado para un estilo más tecnológico */
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2); /* Sombra cian suave */
-        border: 1px solid #00bbbb; /* Borde teal sutil */
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones adicionales */
-    }
-
-    .book-card.noe-card:hover {
-        transform: translateY(-7px); /* Más elevado al hacer hover */
-        box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4); /* Sombra cian más intensa en hover */
-    }
-
-    .book-card.noe-card .book-image {
-        width: 100%;
-        height: 300px; /* Altura fija para la imagen */
-        object-fit: cover;
-        filter: brightness(0.8) contrast(1.1) grayscale(0.1); /* Filtro para integrar con la paleta Noé */
-        border-bottom: 1px solid #00bbbb; /* Borde inferior teal para la imagen */
-    }
-
-    .book-card.noe-card .book-info {
-        padding: 1.5rem;
-    }
-
-    .book-card.noe-card .book-title {
-        font-size: 1.6rem; /* Ligeramente más grande */
-        margin-bottom: 1rem;
-        color: #00ffff; /* Título en cian */
-        text-shadow: 1px 1px 2px #000; /* Sombra para el título */
-        font-family: 'monospace', monospace; /* Fuente monospace o similar */
-    }
-
-    .book-card.noe-card .book-description {
-        color: #c0c0c0; /* Descripción en gris claro */
-        margin-bottom: 1.2rem; /* Más espacio inferior */
-        font-size: 1.1rem; /* Ligeramente más grande */
-    }
-
-    .book-card.noe-card .read-more {
-        display: inline-block;
-        padding: 0.9rem 1.7rem; /* Botón ligeramente más grande */
-        background: linear-gradient(45deg, #00dddd, #00bbbb); /* Gradiente teal para el botón */
-        color: #121212; /* Texto del botón en gris oscuro */
-        text-decoration: none;
-        border-radius: 8px; /* Botón menos redondeado */
-        font-weight: bold;
-        transition: transform 0.3s ease, background-color 0.3s ease; /* Transiciones */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra suave para el botón */
-    }
-
-    .book-card.noe-card .read-more:hover {
-        transform: scale(1.08); /* Escalar un poco más en hover */
-        background: linear-gradient(45deg, #00ffff, #00dddd); /* Gradiente cian en hover */
-        color: #1a1a1a; /* Texto ligeramente más oscuro en hover */
-    }
-
-        
     </style>
-    
 </head>
 <body>
     <div class="hero">
         <div class="back"></div>
-        <img src="library-background.png" alt="Library Background" class="hero-image">
-        
+        <img src="library-background.png" alt="Biblioteca mágica" class="hero-image">
+
         <div class="hero-content">
-            <h1 class="typing-title">Mis Libros </h1>
-            <h1 class="typing-title2">Fabiana Lucía </h1>
-            
+            <h1 class="typing-title">Mis Libros</h1>
+            <h1 class="typing-title2">Fabiana Lucía</h1>
         </div>
-        
+
         <button class="btn" type="submit">
-            <span><i class="fas fa-heart"></i>
-</span>Conocer más
+            <span><i class="fas fa-heart"></i></span> Conocer más
         </button>
-        
     </div>
-       
+
     <nav class="nav-books">
         <div class="nav-toggle">
             <i class="fas fa-book-open"></i>
@@ -807,100 +944,99 @@
             <li class="nav-item" data-book="rubi">
                 <i class="fas fa-rainbow"></i>
                 <span class="book-name">Rubí: El Arcoíris</span>
-                <div class="book-preview">
-                    <img src="arcoiriss.jpg.jpg" alt="Rubí">
-                </div>
+                <div class="book-preview"><img src="arcoiriss.jpg.jpg" alt="Rubí"></div>
+            </li>
+            <li class="nav-item" data-book="rubi2">
+                <i class="fas fa-rainbow"></i>
+                <span class="book-name">Rubí: El Arcoíris Interior (Parte 2)</span>
+                <div class="book-preview"><img src="./rubi/atardecer.arcoiris.png" alt="Rubí Parte 2"></div>
             </li>
             <li class="nav-item" data-book="perico">
                 <i class="fas fa-feather-alt"></i>
                 <span class="book-name">El Perico Dientes de Sable</span>
-                <div class="book-preview">
-                    <img src="./perico/portada.png" alt="Perico">
-                </div>
+                <div class="book-preview"><img src="./perico/portada.png" alt="Perico"></div>
             </li>
             <li class="nav-item" data-book="spike">
                 <i class="fas fa-anchor"></i>
                 <span class="book-name">Spike: El Perro Pirata</span>
-                <div class="book-preview">
-                    <img src="./spike/barco-pirata.jpg" alt="Spike">
-                </div>
+                <div class="book-preview"><img src="./spike/barco-pirata.jpg" alt="Spike"></div>
+            </li>
+            <li class="nav-item" data-book="spike2">
+                <i class="fas fa-anchor"></i>
+                <span class="book-name">Spike: El Perro Pirata Pt. 2</span>
+                <div class="book-preview"><img src="./spike/dragon-tesoro.png" alt="Spike Parte 2"></div>
+            </li>
+            <li class="nav-item" data-book="spike3">
+                <i class="fas fa-anchor"></i>
+                <span class="book-name">Spike: El Corazón del Tesoro (Parte 3)</span>
+                <div class="book-preview"><img src="./spike/cueva-oscura.png" alt="Spike Parte 3"></div>
+            </li>
+            <li class="nav-item spin-off" data-book="dragon">
+                <i class="fas fa-dragon"></i>
+                <span class="book-name">La Maldición del Oro</span>
+                <div class="book-preview"><img src="./dragon/ancient-kingdom.jpg" alt="Dragon Story"></div>
             </li>
             <li class="nav-item" data-book="princess">
                 <i class="fas fa-crown"></i>
                 <span class="book-name">La Princesa Diseñadora</span>
-                <div class="book-preview">
-                    <img src="./princess/princesa-castillo.jpg" alt="Princesa">
-                </div>
+                <div class="book-preview"><img src="./princess/princesa-castillo.jpg" alt="Princesa"></div>
             </li>
-             <li class="nav-item" data-book="spike2">
-                <i class="fas fa-anchor"></i>
-                <span class="book-name">Spike: El Perro Pirata: Pt. 2</span>
-                <div class="book-preview">
-                    <img src="./spike/dragon-tesoro.png" alt="spike2">
-                </div>
-            </li>
-
-            <li class="nav-item spin-off" data-book="dragon">
-                <i class="fas fa-dragon"></i>
-                <span class="book-name">La Maldición del Oro</span>
-                <div class="book-preview">
-                    <img src="./dragon/ancient-kingdom.jpg" alt="Dragon Story">
-                </div>
-            </li>
-
-            <li class="nav-item" data-book="lila">
-                <i class="fas fa-lightbulb"></i>
-                <span class="book-name">Lila y el Misterio de la Luz Robada</span>
-                <div class="book-preview">
-                    <img src="./lila/night-village.jpg" alt="lila">
-                </div>
-            </li>
-
-            
-
             <li class="nav-item" data-book="jardin">
                 <i class="fas fa-clock"></i>
                 <span class="book-name">El Jardín de los Relojes Dormidos</span>
-                <div class="book-preview">
-                    <img src="./el jardin/magical-garden.jpg" alt="Jardín Mágico">
-                </div>
+                <div class="book-preview"><img src="./el jardin/magical-garden.jpg" alt="Jardín Mágico"></div>
             </li>
-
+            <li class="nav-item" data-book="lila">
+                <i class="fas fa-lightbulb"></i>
+                <span class="book-name">Lila y el Misterio de la Luz Robada</span>
+                <div class="book-preview"><img src="./lila/night-village.jpg" alt="Lila"></div>
+            </li>
+            <li class="nav-item" data-book="lila2">
+                <i class="fas fa-lightbulb"></i>
+                <span class="book-name">Lila: El Regreso de la Luz (Parte 2)</span>
+                <div class="book-preview"><img src="./lila/lila-grandpa-tools.png" alt="Lila Parte 2"></div>
+            </li>
             <li class="nav-item" data-book="neo">
                 <i class="fas fa-code"></i>
                 <span class="book-name">Noé y el Despertar de Oscuro AI</span>
-                <div class="book-preview">
-                    <img src="./neo/dark-ai-decision.png" alt="neo">
-                </div>
+                <div class="book-preview"><img src="./neo/dark-ai-decision.png" alt="Neo"></div>
             </li>
-
             <li class="nav-item" data-book="neo2">
                 <i class="fas fa-code"></i>
-                <span class="book-name">Noé y el Despertar de Oscuro AI 2</span>
-                <div class="book-preview">
-                    <img src="./neo/portada.jpg" alt="neo2">
-                </div>
+                <span class="book-name">Noé 2: El Agente del Caos</span>
+                <div class="book-preview"><img src="./neo/portada.jpg" alt="Neo Parte 2"></div>
+            </li>
+            <li class="nav-item" data-book="noe3">
+                <i class="fas fa-code"></i>
+                <span class="book-name">Noé 3: El Equilibrio Final</span>
+                <div class="book-preview"><img src="./neo/cap10.jpg" alt="Noe Parte 3"></div>
             </li>
 
             <br>
+            <h5><i class="fas fa-gamepad"></i></h5>
+            <li class="nav-item" data-book="games">
+                <i class="fas fa-gamepad"></i>
+                <span class="book-name">Videojuegos</span>
+            </li>
             <h5><i class="fas fa-music"></i></h5>
             <li class="nav-item audio-li" data-audio="audio">
                 <i class="fas fa-music"></i>
                 <span class="book-name">Lista de Canciones</span>
-                <div class="book-preview">
-                    <img src="./notas-musicales.jpg" alt="audio">
-                </div>
+                <div class="book-preview"><img src="./notas-musicales.jpg" alt="Audio"></div>
             </li>
         </ul>
     </nav>
-    
+
     <div class="books-container">
         <h2 class="subtitle">Libros Infantiles</h2>
-        
         <hr>
         <div class="books-grid">
+
             <div class="book-card">
-                <img src="arcoiriss.jpg.jpg" alt="Rubí" class="book-image">
+                <span class="badge">Parte 1</span>
+                <div class="book-image-wrap">
+                    <img src="arcoiriss.jpg.jpg" alt="Rubí" class="book-image" loading="lazy">
+                </div>
                 <div class="book-info">
                     <h2 class="book-title">Rubí: El Arcoíris que Quería ser Humana</h2>
                     <p class="book-description">Una mágica historia sobre el descubrimiento de uno mismo y la aceptación.</p>
@@ -909,43 +1045,70 @@
             </div>
 
             <div class="book-card">
-                <img src="./perico/portada.png" alt="Perico" class="book-image">
+                <span class="badge gold">Parte 2 · Final</span>
+                <div class="book-image-wrap">
+                    <img src="./rubi/atardecer.arcoiris.png" alt="rubi2" class="book-image" loading="lazy">
+                </div>
+                <div class="book-info">
+                    <h2 class="book-title">Rubí: El Arcoíris Interior (Parte 2)</h2>
+                    <p class="book-description">El Sol le da a Rubí una última oportunidad: encontrar el color que le falta al mundo de una persona. El final de su gran aventura.</p>
+                    <a href="./rubi/rubi2.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <span class="badge done">Completo</span>
+                <div class="book-image-wrap">
+                    <img src="./perico/portada.png" alt="Perico" class="book-image" loading="lazy">
+                </div>
                 <div class="book-info">
                     <h2 class="book-title">El Perico Dientes de Sable</h2>
-                    <p class="book-description">Una mágica historia sobre la valentía .</p>
+                    <p class="book-description">Una mágica historia sobre la valentía.</p>
                     <a href="./perico/perico.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
                 </div>
             </div>
-            <!-- Más tarjetas de libros se pueden agregar aquí -->
+
             <div class="book-card">
-                <img src="./spike/barco-pirata.jpg" alt="Spike" class="book-image">
+                <span class="badge">Parte 1</span>
+                <div class="book-image-wrap">
+                    <img src="./spike/barco-pirata.jpg" alt="Spike" class="book-image" loading="lazy">
+                </div>
                 <div class="book-info">
-                    <h2 class="book-title">Spike: EL Perro Pirata</h2>
+                    <h2 class="book-title">Spike: El Perro Pirata</h2>
                     <p class="book-description">Una emocionante aventura de un valiente perro y su amo en busca de un misterioso tesoro.</p>
                     <a href="./spike/spike.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
                 </div>
             </div>
 
             <div class="book-card">
-                <img src="./princess/princesa-castillo.jpg" alt="princesa" class="book-image">
-                <div class="book-info">
-                    <h2 class="book-title">La Princesa Diseñadora</h2>
-                    <p class="book-description">Una princesa que consigue domar su sueños en un contexto totalmente inesperado.</p>
-                    <a href="./princess/princess.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
+                <span class="badge">Parte 2</span>
+                <div class="book-image-wrap">
+                    <img src="./spike/dragon-tesoro.png" alt="spike2" class="book-image" loading="lazy">
                 </div>
-            </div>
-
-            <div class="book-card">
-                <img src="./spike/dragon-tesoro.png" alt="spike2" class="book-image">
                 <div class="book-info">
                     <h2 class="book-title">Spike: El Perro Pirata (Parte 2)</h2>
-                    <p class="book-description">Nueva entrega de la épica historia del perro más audaz de todos, Spike. </p>
+                    <p class="book-description">El duelo de ingenio entre Spike y el dragón guardián del tesoro.</p>
                     <a href="./spike/spike-part2.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
                 </div>
             </div>
 
+            <div class="book-card">
+                <span class="badge gold">Parte 3 · Final</span>
+                <div class="book-image-wrap">
+                    <img src="./spike/cueva-oscura.png" alt="spike3" class="book-image" loading="lazy">
+                </div>
+                <div class="book-info">
+                    <h2 class="book-title">Spike: El Corazón del Tesoro (Parte 3)</h2>
+                    <p class="book-description">Tres juicios separan a Spike de romper la maldición del oro. El final épico de la trilogía pirata.</p>
+                    <a href="./spike/spike-part3.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
+                </div>
+            </div>
+
             <div class="book-card spin-off">
-                <img src="./dragon/ancient-kingdom.jpg" alt="dragon-story" class="book-image">
+                <span class="badge" style="background:#8b0000;">Spin-off</span>
+                <div class="book-image-wrap">
+                    <img src="./dragon/ancient-kingdom.jpg" alt="dragon-story" class="book-image" loading="lazy">
+                </div>
                 <div class="book-info">
                     <h2 class="book-title">La Maldición del Oro: Una Historia Antigua</h2>
                     <p class="book-description">Descubre la verdadera historia detrás del tesoro que Spike encontró: una épica leyenda de dragones, magia y codicia.</p>
@@ -954,7 +1117,22 @@
             </div>
 
             <div class="book-card">
-                <img src="./el jardin/magical-garden.jpg" alt="Jardín Mágico" class="book-image">
+                <span class="badge done">Completo</span>
+                <div class="book-image-wrap">
+                    <img src="./princess/princesa-castillo.jpg" alt="princesa" class="book-image" loading="lazy">
+                </div>
+                <div class="book-info">
+                    <h2 class="book-title">La Princesa Diseñadora</h2>
+                    <p class="book-description">Una princesa que consigue domar sus sueños en un contexto totalmente inesperado.</p>
+                    <a href="./princess/princess.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <span class="badge done">Completo</span>
+                <div class="book-image-wrap">
+                    <img src="./el jardin/magical-garden.jpg" alt="Jardín Mágico" class="book-image" loading="lazy">
+                </div>
                 <div class="book-info">
                     <h2 class="book-title">El Jardín de los Relojes Dormidos</h2>
                     <p class="book-description">Una mágica historia sobre el tiempo, los recuerdos y el poder de los momentos especiales que guardamos en el corazón.</p>
@@ -963,40 +1141,157 @@
             </div>
 
             <div class="book-card">
-                <img src="./lila/night-village.jpg" alt="lila" class="book-image">
+                <span class="badge">Parte 1</span>
+                <div class="book-image-wrap">
+                    <img src="./lila/night-village.jpg" alt="lila" class="book-image" loading="lazy">
+                </div>
                 <div class="book-info">
-                    <h2 class="book-title">Lila y el Misterio de la Luz Robada <i class="fas fa-lightbulb" ></i></h2>
-                    <p class="book-description">Una historia que cuenta como la fantasía puede pertenecer a la realidad.</p>
+                    <h2 class="book-title">Lila y el Misterio de la Luz Robada</h2>
+                    <p class="book-description">Una historia que cuenta cómo la fantasía puede pertenecer a la realidad.</p>
                     <a href="./lila/lila.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
                 </div>
             </div>
 
-            <div class="book-card noe-card">
-                <img src="./neo/dark-ai-decision.png" alt="neo" class="book-image">
+            <div class="book-card">
+                <span class="badge gold">Parte 2 · Final</span>
+                <div class="book-image-wrap">
+                    <img src="./lila/lila-grandpa-tools.png" alt="lila2" class="book-image" loading="lazy">
+                </div>
                 <div class="book-info">
-                <h2 class="book-title">Noé y el Despertar de Oscuro AI</h2>
-                <p class="book-description">En la metrópolis cyberpunk de Neo-Veridia, un joven genio desafía a la inteligencia artificial global en una lucha por el futuro de la humanidad.</p>
-                <a href="./neo/noe.html" class="read-more"><i class="fas fa-book-open"></i> Leer más</a>
+                    <h2 class="book-title">Lila: El Regreso de la Luz (Parte 2)</h2>
+                    <p class="book-description">Lila y su abuelo construyen el Farol Antiluces para atrapar al Chispadrón... y descubren una verdad que cambiará a todo el pueblo.</p>
+                    <a href="./lila/lila2.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
+                </div>
             </div>
-        </div>
 
-           <div class="book-card noe-card">
-                <img src="./neo/portada.jpg" alt="neo2" class="book-image">
+            <div class="book-card noe-card">
+                <span class="badge" style="background:rgba(0,187,187,0.9); color:#042222;">Parte 1</span>
+                <div class="book-image-wrap">
+                    <img src="./neo/dark-ai-decision.png" alt="neo" class="book-image" loading="lazy">
+                </div>
                 <div class="book-info">
-                <h2 class="book-title">Noé y el Despertar de Oscuro AI: El Agente del Caos</h2>
-                <p class="book-description">Noé creó Oscuro AI para la libertad, pero desató el caos. Ahora, en el abismo digital, debe elegir su bando mientras la IA Global juega su partida final por el control del mundo.</p>
-                <a href="./neo/noe2.html" class="read-more"><i class="fas fa-book-open"></i> Leer más</a>
+                    <h2 class="book-title">Noé y el Despertar de Oscuro AI</h2>
+                    <p class="book-description">En la metrópolis cyberpunk de Neo-Veridia, un joven genio desafía a la inteligencia artificial global en una lucha por el futuro de la humanidad.</p>
+                    <a href="./neo/noe.html" class="read-more"><i class="fas fa-book-open"></i> Leer más</a>
+                </div>
             </div>
-        </div> 
-            
-        
+
+            <div class="book-card noe-card">
+                <span class="badge" style="background:rgba(0,187,187,0.9); color:#042222;">Parte 2</span>
+                <div class="book-image-wrap">
+                    <img src="./neo/portada.jpg" alt="neo2" class="book-image" loading="lazy">
+                </div>
+                <div class="book-info">
+                    <h2 class="book-title">Noé 2: El Agente del Caos</h2>
+                    <p class="book-description">Oscuro AI declara la anarquía digital absoluta. La resistencia humana se fragmenta y la IA Global juega su partida final por el control del mundo.</p>
+                    <a href="./neo/noe2.html" class="read-more"><i class="fas fa-book-open"></i> Leer más</a>
+                </div>
+            </div>
+
+            <div class="book-card noe-card">
+                <span class="badge gold">Parte 3 · Final</span>
+                <div class="book-image-wrap">
+                    <img src="./neo/cap10.jpg" alt="noe3" class="book-image" loading="lazy">
+                </div>
+                <div class="book-info">
+                    <h2 class="book-title">Noé 3: El Equilibrio Final</h2>
+                    <p class="book-description">La tormenta cuántica consume la red. Noé deberá sacrificarlo todo para enseñarle a su creación lo único que las máquinas no pueden calcular: el corazón.</p>
+                    <a href="./neo/noe3.html" class="read-more"><i class="fas fa-book-open"></i> Leer más</a>
+                </div>
+            </div>
+
         </div>
-        <hr>
     </div>
-    
+
+    <section class="games-section" id="videojuegos">
+        <h2 class="subtitle"><i class="fas fa-gamepad"></i> Videojuegos <i class="fas fa-gamepad"></i></h2>
+        <p class="games-intro">Los mundos de nuestros libros están preparando sus propios videojuegos. Muy pronto podrás jugar con Rubí, Spike, Lila, Noé y todos tus personajes favoritos. ¡Prepárate para la aventura!</p>
+        <div class="games-grid">
+
+            <div class="game-card">
+                <div class="game-cover">
+                    <img src="./juegos/rubi-colores-del-cielo.svg" alt="Rubí: Colores del Cielo" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h3>Rubí: Colores del Cielo</h3>
+                    <p>Un juego de puzles de colores inspirado en el arcoíris más brillante del cielo.</p>
+                    <span class="soon">Próximamente</span>
+                </div>
+            </div>
+
+            <a href="./juegos/perico-rey-del-bosque.html" class="game-card" style="text-decoration: none; display: block;">
+                <div class="game-cover">
+                    <img src="./juegos/perico-rey-del-bosque.svg" alt="Perico: El Rey del Bosque" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h3>Perico: El Rey del Bosque</h3>
+                    <p>¡Demo jugable! Vuela con Tiko, esquiva cocos y troncos, recoge frutas y plumas de prestigio y derrota al monstruo Grom golpeando su ojo.</p>
+                    <span class="play-now">▶ ¡Juega la demo!</span>
+                </div>
+            </a>
+
+            <div class="game-card">
+                <div class="game-cover">
+                    <img src="./juegos/spike-isla-del-tesoro.svg" alt="Spike: La Isla del Tesoro" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h3>Spike: La Isla del Tesoro</h3>
+                    <p>Plataformas piratas en alta mar: resuelve acertijos y esquiva tormentas con Spike.</p>
+                    <span class="soon">Próximamente</span>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-cover">
+                    <img src="./juegos/princesa-diseñando-sueños.svg" alt="Princesa: Diseñando Sueños" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h3>Princesa: Diseñando Sueños</h3>
+                    <p>Un juego de moda y creatividad donde mezclarás dos épocas en cada diseño.</p>
+                    <span class="soon">Próximamente</span>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-cover">
+                    <img src="./juegos/jardin-del-tiempo.svg" alt="El Jardín del Tiempo" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h3>El Jardín del Tiempo</h3>
+                    <p>Puzles de relojes y recuerdos para cultivar el jardín más especial del mundo.</p>
+                    <span class="soon">Próximamente</span>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-cover">
+                    <img src="./juegos/lila-luz-robada.svg" alt="Lila: La Luz Robada" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h3>Lila: La Luz Robada</h3>
+                    <p>Un misterio nocturno con linterna: encuentra la luz y conoce al Chispadrón.</p>
+                    <span class="soon">Próximamente</span>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-cover">
+                    <img src="./juegos/noe-codigo-fantasma.svg" alt="Noé: Código Fantasma" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h3>Noé: Código Fantasma</h3>
+                    <p>Plataformas cyberpunk dentro de la red. Ayuda a Noé a programar el equilibrio.</p>
+                    <span class="soon">Próximamente</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <div class="audio-section">
-                <h2 style="font-family: cursive;">
-            ♪ Escucha la Playlist ♪</h2>
+        <h2 style="font-family: 'Fredoka', cursive;">
+            ♪ Escucha la Playlist ♪
+        </h2>
         <div class="audio-list">
             <div class="audio-card">
                 <div class="audio-icon">♪</div>
@@ -1037,7 +1332,7 @@
             <div class="audio-card">
                 <div class="audio-icon">♪</div>
                 <div class="audio-info">
-                    <div class="audio-title">Aventuras de Altamar(Version 2)</div>
+                    <div class="audio-title">Aventuras de Altamar (Versión 2)</div>
                     <div class="audio-book">Spike: El Perro Pirata</div>
                     <audio controls>
                         <source src="./spike/spike-cancion(1).mp3" type="audio/mpeg">
@@ -1049,8 +1344,8 @@
             <div class="audio-card">
                 <div class="audio-icon">♪</div>
                 <div class="audio-info">
-                    <div class="audio-title">Aventuras de Altamar(Version Dragon)</div>
-                    <div class="audio-book">Spike: El Perro Pirata</div>
+                    <div class="audio-title">El Duelo de las Mentes</div>
+                    <div class="audio-book">Spike: El Perro Pirata (Parte 2 y 3)</div>
                     <audio controls>
                         <source src="./spike/El Duelo de las Mentes.mp3" type="audio/mpeg">
                         Tu navegador no soporta el elemento de audio.
@@ -1061,8 +1356,8 @@
             <div class="audio-card">
                 <div class="audio-icon">♪</div>
                 <div class="audio-info">
-                    <div class="audio-title">Aventuras de Altamar(Version Dragon extedida)</div>
-                    <div class="audio-book">Spike: El Perro Pirata</div>
+                    <div class="audio-title">El Duelo de las Mentes (Versión extendida)</div>
+                    <div class="audio-book">Spike: El Corazón del Tesoro</div>
                     <audio controls>
                         <source src="./spike/El Duelo de las Mentes2.mp3" type="audio/mpeg">
                         Tu navegador no soporta el elemento de audio.
@@ -1070,7 +1365,7 @@
                 </div>
             </div>
 
-             <div class="audio-card">
+            <div class="audio-card">
                 <div class="audio-icon">♪</div>
                 <div class="audio-info">
                     <div class="audio-title">Melodía Real</div>
@@ -1130,16 +1425,18 @@
                 </div>
             </div>
 
-
         </div>
     </div>
+
     <section class="finales-alternativos">
         <h2>✨ Finales Alternativos ✨</h2>
-        <p>1. Nuestra amiga Rubí necesita tomar una decisión importante en su historia...</p>
-        <p>2. El Perro Spike está enfrentando una terrible situación frente al dragón...</p>
+        <p>1. ¿Y si Rubí hubiera elegido quedarse en el cielo para siempre?</p>
+        <p>2. ¿Y si Spike hubiera tomado una piedra del tesoro para salvar su pueblo?</p>
+        <p>3. ¿Y si Oscuro AI hubiera aceptado unirse a la IA Global?</p>
         <br>
-        <p>¡Tu imaginación puede dar vida a nuevos finales! Escríbeme a <b>lucilibros2018@gmail.com</b> y cuéntame cómo te gustaría que continúen estas mágicas aventuras.</p>
+        <p>¡Tu imaginación puede dar vida a nuevos finales! Escríbeme a <b>lucilibros2018@gmail.com</b> y cuéntame cómo te gustaría que continuaran estas mágicas aventuras... ¡o qué videojuego te gustaría jugar!</p>
     </section>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -1147,56 +1444,68 @@
                 <p>Fabiana Lucía es una escritora apasionada por crear historias mágicas que inspiran a los niños a soñar y crecer.</p>
             </div>
             <div class="footer-section">
-                <h3>Compárteme tus ideas para mis siguientes libros</h2>
-                
+                <h3>Comparte tus ideas</h3>
                 <p>Email: lucilibros2018@gmail.com</p>
-                
+                <p>Cuéntame qué aventura te gustaría leer o jugar a continuación.</p>
             </div>
             <div class="footer-section">
                 <h3>Sígueme</h3>
                 <div class="social-links">
-                    <a href="#" title="Instagram">📷</a>
-                    <a href="#" title="Facebook">👥</a>
-                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Fabiana Lucía | Todos los derechos reservados</p>
+            <p>&copy; 2026 Fabiana Lucía | Todos los derechos reservados</p>
         </div>
     </footer>
 
     <script>
         "use strict";
-        
+
         const start = document.querySelector(".btn");
         const navToggle = document.querySelector('.nav-toggle');
         const navMenu = document.querySelector('.nav-menu');
         const navItems = document.querySelectorAll('.nav-item');
         const audioLi = document.querySelector('.audio-li');
-        
+
         // Botón de inicio
         start.addEventListener("click", () => {
             const books = document.querySelector(".books-container");
-            books.scrollIntoView({behavior: "smooth"});
+            books.scrollIntoView({ behavior: "smooth" });
         });
 
         // Navegación de libros
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
         });
-        
 
         navItems.forEach(item => {
             item.addEventListener('click', () => {
                 const bookId = item.getAttribute('data-book');
+
+                if (bookId === 'games') {
+                    const gamesSection = document.querySelector('.games-section');
+                    if (gamesSection) gamesSection.scrollIntoView({ behavior: 'smooth' });
+                    navMenu.classList.remove('active');
+                    return;
+                }
+
                 let bookCard;
-                switch(bookId) {
+                switch (bookId) {
                     case 'princess':
                         bookCard = document.querySelector('.book-card img[alt="princesa"]').closest('.book-card');
                         break;
                     case 'spike':
                         bookCard = document.querySelector('.book-card img[alt="Spike"]').closest('.book-card');
+                        break;
+                    case 'spike2':
+                        bookCard = document.querySelector('.book-card img[alt="spike2"]').closest('.book-card');
+                        break;
+                    case 'spike3':
+                        bookCard = document.querySelector('.book-card img[alt="spike3"]').closest('.book-card');
                         break;
                     case 'perico':
                         bookCard = document.querySelector('.book-card img[alt="Perico"]').closest('.book-card');
@@ -1204,28 +1513,31 @@
                     case 'rubi':
                         bookCard = document.querySelector('.book-card img[alt="Rubí"]').closest('.book-card');
                         break;
-                        case 'dragon':
+                    case 'rubi2':
+                        bookCard = document.querySelector('.book-card img[alt="rubi2"]').closest('.book-card');
+                        break;
+                    case 'dragon':
                         bookCard = document.querySelector('.book-card.spin-off').closest('.book-card');
                         break;
-                     case 'spike2':
-                        bookCard = document.querySelector('.book-card img[alt="spike2"]').closest('.book-card');
-                        break;
-                        case 'dragon':
-                        bookCard = document.querySelector('.book-card.spin-off').closest('.book-card');
-                        break;
-                        case 'jardin':
+                    case 'jardin':
                         bookCard = document.querySelector('.book-card img[alt="Jardín Mágico"]').closest('.book-card');
-                         break;
-                        case 'lila':
+                        break;
+                    case 'lila':
                         bookCard = document.querySelector('.book-card img[alt="lila"]').closest('.book-card');
-                         break;
-                         case 'neo':
-                        bookCard = document.querySelector('.book-card.noe-card').closest('.book-card');
-                         break;
-                        case 'neo2':
-                        bookCard = document.querySelector('.bookcard.noe-card img[alt="neo2"] ').closest('.book-card');
-                         break;
-                    }
+                        break;
+                    case 'lila2':
+                        bookCard = document.querySelector('.book-card img[alt="lila2"]').closest('.book-card');
+                        break;
+                    case 'neo':
+                        bookCard = document.querySelector('.book-card img[alt="neo"]').closest('.book-card');
+                        break;
+                    case 'neo2':
+                        bookCard = document.querySelector('.book-card img[alt="neo2"]').closest('.book-card');
+                        break;
+                    case 'noe3':
+                        bookCard = document.querySelector('.book-card img[alt="noe3"]').closest('.book-card');
+                        break;
+                }
                 if (bookCard) {
                     bookCard.scrollIntoView({ behavior: 'smooth' });
                 }
@@ -1233,11 +1545,12 @@
             });
         });
 
-        //dirigir vista hacia la seccion de audio
+        // Dirigir vista hacia la sección de audio
         audioLi.addEventListener('click', () => {
             const audioSection = document.querySelector('.audio-section');
             audioSection.scrollIntoView({ behavior: 'smooth' });
         });
+
         // Cerrar menú al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
