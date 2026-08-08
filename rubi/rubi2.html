@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubí: El Arcoíris Interior (Parte 2)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(160deg, #ffe9f4 0%, #eef3ff 60%, #d9ecff 100%);
+            color: #4a4a5e;
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(6px);
+            color: #d63384;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            padding: 10px 18px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid rgba(214, 51, 132, 0.3);
+        }
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(214, 51, 132, 0.3);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fredoka', cursive;
+            text-align: center;
+            line-height: 1.25;
+        }
+
+        .cover {
+            position: relative;
+            width: 100%;
+            height: 68vh;
+            min-height: 420px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        .cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.85) saturate(1.15);
+        }
+        .cover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(20, 10, 40, 0.75) 0%, rgba(20, 10, 40, 0.15) 45%, rgba(20, 10, 40, 0.1) 100%);
+        }
+        .cover h1 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 8%;
+            z-index: 2;
+            padding: 0 1rem;
+            color: #ffffff;
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.55);
+        }
+        .title-name {
+            display: block;
+            font-size: clamp(2rem, 6vw, 3.4rem);
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ff6b9d, #ffd93d, #6bc5ff, #c77dff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.3rem;
+        }
+        .cover h1 .sub {
+            display: block;
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 400;
+            color: #f6e8ff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .song-section {
+            background: linear-gradient(145deg, #fff0f8, #eaf2ff);
+            border: 2px solid rgba(214, 51, 132, 0.35);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 0 auto 3rem;
+            max-width: 820px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(214, 51, 132, 0.12);
+        }
+        .song-section h2 {
+            color: #d63384;
+            font-size: 1.7rem;
+            margin-bottom: 1.2rem;
+        }
+        audio {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 30px;
+        }
+        .audio-note {
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            color: #8a7a9e;
+            font-style: italic;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.2rem;
+        }
+
+        .chapter {
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 22px;
+            padding: 2rem 1.8rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 24px rgba(90, 60, 140, 0.10);
+            border: 1px solid rgba(199, 125, 255, 0.25);
+            transition: box-shadow 0.3s ease;
+        }
+        .chapter:hover { box-shadow: 0 10px 32px rgba(214, 51, 132, 0.15); }
+
+        .chapter-icon {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #d63384;
+            margin-bottom: 0.8rem;
+        }
+
+        .chapter h2 {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            margin-bottom: 1.2rem;
+            color: #6c3fa0;
+        }
+
+        .chapter-image {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            margin: 0 auto 1.4rem;
+            display: block;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+            border: 3px solid #fff;
+            object-fit: cover;
+            max-height: 420px;
+        }
+
+        .chapter > p, .full-text p {
+            font-size: 1.12rem;
+            text-align: justify;
+            color: #55556b;
+            margin-bottom: 1rem;
+        }
+
+        .dialogue {
+            color: #b03cc4;
+            font-style: italic;
+            font-weight: 600;
+            display: block;
+            margin: 0.8rem 0;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin: 0.6rem auto;
+            text-align: center;
+            padding: 9px 24px;
+            color: #fff;
+            background: linear-gradient(90deg, #ff6b9d, #d63384);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border: none;
+            box-shadow: 0 4px 14px rgba(214, 51, 132, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .read-more:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.45);
+        }
+
+        .full-text {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.2rem 1.2rem 0.4rem;
+            border-left: 4px solid #c77dff;
+            border-radius: 0 14px 14px 0;
+            background: rgba(245, 238, 255, 0.6);
+        }
+
+        .the-end {
+            text-align: center;
+            margin: 3.5rem 0 1rem;
+            font-family: 'Fredoka', cursive;
+            font-size: 2.4rem;
+            color: #d63384;
+            letter-spacing: 4px;
+            text-shadow: 0 2px 10px rgba(214, 51, 132, 0.35);
+        }
+        .moral {
+            max-width: 780px;
+            margin: 0 auto 3rem;
+            background: linear-gradient(135deg, #fff3e0, #ffe9f4);
+            border: 2px solid #ffb74d;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 26px rgba(255, 152, 0, 0.15);
+        }
+        .moral h3 { color: #e65100; font-size: 1.5rem; margin-bottom: 1rem; }
+        .moral p { font-size: 1.1rem; text-align: center; color: #6d4c41; }
+
+        footer {
+            background: linear-gradient(135deg, #f7cfe3, #d9e4ff);
+            padding: 1.6rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 3px solid rgba(214, 51, 132, 0.35);
+        }
+        footer p {
+            font-family: 'Fredoka', cursive;
+            color: #7a3f6e;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 767px) {
+            .cover { height: 52vh; min-height: 320px; }
+            .chapter { padding: 1.4rem 1rem; }
+            .chapter > p, .full-text p { font-size: 1.02rem; }
+        }
+            /* ===== Escuchar en voz alta ===== */
+        .listen-player {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.82);
+            padding: 10px 16px;
+            border-radius: 40px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+            max-width: 94vw;
+        }
+        .lp-btn {
+            border: none;
+            border-radius: 30px;
+            padding: 9px 16px;
+            font-weight: 800;
+            cursor: pointer;
+            color: #ffffff;
+            background: linear-gradient(90deg, #ff6b9d, #d63384);
+            box-shadow: 0 3px 10px rgba(214,51,132,0.35);
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+        }
+        .lp-btn:hover { transform: translateY(-2px); }
+        .lp-label { color: #ffffff; font-size: 0.85rem; font-weight: 600; padding: 0 6px; }
+        .listen-chapter-btn {
+            display: inline-block;
+            margin: 0.6rem auto;
+            padding: 8px 18px;
+            background: transparent;
+            color: #ff6b9d;
+            border: 2px solid #ff6b9d;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .listen-chapter-btn:hover { background: #ff6b9d; color: #ffffff; }
+        .chapter.listening {
+            box-shadow: 0 0 0 3px #d63384, 0 10px 32px rgba(214,51,132,0.45);
+            border-color: #d63384;
+        }
+    
+        /* Espacio inferior para que el reproductor no tape el final del libro */
+        body { padding-bottom: 110px; }
+        @media (max-width: 767px) {
+            body { padding-bottom: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Volver a la biblioteca</a>
+
+    <div class="cover">
+        <img src="atardecer.arcoiris.png" alt="Atardecer con colores de arcoíris">
+        <h1>
+            <span class="title-name">Rubí</span>
+            <span class="sub">El Arcoíris Interior · Parte 2</span>
+        </h1>
+    </div>
+
+    <div class="song-section">
+        <h2>♪ Colores en el Cielo ♪</h2>
+        <audio controls>
+            <source src="arcoiris.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <p class="audio-note">La canción que acompaña a Rubí en su viaje más importante.</p>
+    </div>
+
+    <div class="content">
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-question-circle"></i></div>
+            <h2>Capítulo 6: El Eco del Corazón</h2>
+            <img src="arcoiriss.jpg.jpg" alt="Rubí brillando en el cielo" class="chapter-image">
+            <p>La noche cayó sobre la playa solitaria y Rubí seguía sentada en la arena, con los brazos alrededor de sus rodillas y el corazón lleno de preguntas...</p>
+            <button class="read-more" onclick="toggleText('cap6')">Leer más</button>
+            <div id="cap6" class="full-text">
+                <p>
+                    La pregunta del Sol quedó flotando en el aire como una burbuja de cristal: "¿Te gustaría ser humana... para siempre?". Rubí llevaba horas mirando las olas, y cada ola traía un recuerdo diferente. Recordó la libertad de bailar entre las nubes, la alegría de los niños cuando aparecía tras la lluvia, el orgullo de pintar el cielo con sus siete colores.
+                </p>
+                <p>
+                    Pero también recordó otras cosas, pequeñas cosas que había sentido durante su día como humana: el abrazo cálido de la arena en los pies, el sabor del agua dulce que un anciano le ofreció cuando la vio desmayarse de sed, la sonrisa tímida de una niña que le regaló una flor sin decir una palabra. Eran gestos diminutos, pero dentro de su corazón de arcoíris pesaban más que todas las estrellas del cielo.
+                </p>
+                <p>
+                    <span class="dialogue">"Sol sabio,"</span> murmuró Rubí hacia el horizonte, <span class="dialogue">"yo quería ser humana porque creía que mi vida como arcoíris no tenía propósito. Pero hoy aprendí que cada ser tiene el suyo. Lo que no sé es... cuál es el mío."</span>
+                </p>
+                <p>
+                    El Sol, que seguía brillando tímidamente al borde del mar, respondió con una voz que sonaba como cien campanas de plata: <span class="dialogue">"Rubí, nunca te he pedido que elijas en la oscuridad. Te concedo una última oportunidad: un segundo día como humana, pero esta vez con voz, con nombre y con una misión. Si al terminar el día encuentras la respuesta que buscas, la decisión será tuya para siempre. Si no la encuentras, volverás a tu cielo sin olvidar nada de lo aprendido."</span>
+                </p>
+                <p>
+                    <span class="dialogue">"¿Y cuál es mi misión?"</span> preguntó Rubí, poniéndose de pie con el corazón latiendo fuerte.
+                </p>
+                <p>
+                    <span class="dialogue">"Encuentra el color que le falta al mundo de una persona. Solo uno. Si lo encuentras, habrás encontrado tu respuesta."</span>
+                </p>
+                <p>
+                    Y antes de que Rubí pudiera responder, una luz dorada la envolvió por completo. Cuando la luz se desvaneció, ya no estaba en la playa vacía: estaba en el centro de un pueblo que no conocía, vestida con ropa sencilla y limpia, con el pelo recogido y una sensación extraña y maravillosa: la sensación de tener un corazón latiendo dentro del pecho.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-ship"></i></div>
+            <h2>Capítulo 7: El Pueblo de los Colores Apagados</h2>
+            <img src="playa-margarita.png" alt="Un pueblo junto al mar" class="chapter-image">
+            <p>Villa Esperanza se llamaba el pueblo, y nunca un nombre había sonado tan irónico. Era un pueblo de pescadores junto al mar, pero parecía un dibujo hecho con lápiz gris...</p>
+            <button class="read-more" onclick="toggleText('cap7')">Leer más</button>
+            <div id="cap7" class="full-text">
+                <p>
+                    Las casas estaban pintadas, pero la pintura estaba vieja y descascarada. Los barcos descansaban en la orilla con las redes rotas y los cascos agrietados. Los rostros de las personas eran como sus casas: apagados, con la mirada puesta en el suelo. Un cartel al borde del camino decía: "Fiesta del Arcoíris — tradición anual". Pero debajo, con letra temblorosa, alguien había escrito: "Suspendida este año".
+                </p>
+                <p>
+                    Rubí caminó por la calle principal preguntándose qué le faltaba a ese pueblo. Una panadera la miró con tristeza al venderle un pan aún caliente. Un pescador remendaba su red con manos cansadas. Y en la plaza, junto a la fuente seca, una niña de unos siete años pintaba con tizas de colores... pero todas las tizas estaban gastadas y solo quedaba polvo gris sobre el suelo.
+                </p>
+                <p>
+                    <span class="dialogue">"Hola,"</span> dijo Rubí, sentándose a su lado. <span class="dialogue">"¿Qué estás dibujando?"</span>
+                </p>
+                <p>
+                    La niña levantó la vista. Tenía los ojos grandes y brillantes, como dos charcos de lluvia. <span class="dialogue">"Un arcoíris,"</span> susurró. <span class="dialogue">"Pero no me salen los colores. Se acabaron las tizas y... a mi papá ya no le importa nada de eso."</span>
+                </p>
+                <p>
+                    <span class="dialogue">"¿Tu papá?"</span> preguntó Rubí suavemente.
+                </p>
+                <p>
+                    <span class="dialogue">"Mi papá era el capitán del barco más bonito del pueblo. El Aurora. Todos los años lo decorábamos para la Fiesta del Arcoíris y ganaba el primer premio. Pero la tormenta del año pasado lo destrozó, y ahora papá dice que los colores son para los niños y que él ya no tiene tiempo para sueños."</span> La niña miró a Rubí. <span class="dialogue">"Yo soy Ana. ¿Tú de dónde vienes?"</span>
+                </p>
+                <p>
+                    Rubí sonrió. En aquel momento sintió algo muy extraño: un cosquilleo en los dedos, como si sus colores quisieran salir. <span class="dialogue">"Vengo de muy lejos, Ana. Pero creo que he llegado justo donde debía. ¿Me enseñas tu pueblo?"</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-palette"></i></div>
+            <h2>Capítulo 8: La Caza del Color Perdido</h2>
+            <img src="rubi-humana.png" alt="Rubí como humana" class="chapter-image">
+            <p>Durante toda la mañana, Rubí y Ana recorrieron Villa Esperanza. Y Rubí descubrió algo que la llenó de asombro: el pueblo no había perdido los colores... los había guardado dentro, a la espera de alguien que los despertara...</p>
+            <button class="read-more" onclick="toggleText('cap8')">Leer más</button>
+            <div id="cap8" class="full-text">
+                <p>
+                    En la panadería, la señora Carmen tenía un frasco de jalea de mango del color del sol poniente, pero nunca lo abría: <span class="dialogue">"Lo guardo para el día en que haya algo que celebrar."</span> En el taller del señor Ortega había latas de pintura azul turquesa, sin estrenar, esperando que alguien se decidiera a pintar su verja. En la casa de la abuela Rosa, un árbol de flores fucsias florecía cada primavera y ella cortaba las flores para... nada. Las dejaba caer.
+                </p>
+                <p>
+                    <span class="dialogue">"¿Por qué nadie usa los colores que tiene?"</span> preguntó Rubí, confundida.
+                </p>
+                <p>
+                    <span class="dialogue">"Porque los colores son para celebrar,"</span> explicó Ana con sabiduría de niña vieja, <span class="dialogue">"y aquí ya nadie tiene ganas de celebrar desde que el Aurora se hundió."</span>
+                </p>
+                <p>
+                    Y entonces Rubí lo entendió. No le faltaba un color al pueblo: le faltaba la esperanza, que era el color de todos los colores. La Fiesta del Arcoíris no era un premio: era el motor que hacía girar la alegría del pueblo entero.
+                </p>
+                <p>
+                    <span class="dialogue">"Ana,"</span> dijo Rubí con los ojos brillando, <span class="dialogue">"¿y si este año sí celebramos la fiesta? ¿Y si arreglamos el Aurora entre todos, con los colores que cada persona ha guardado, y lo hacemos navegar en la noche de la fiesta?"</span>
+                </p>
+                <p>
+                    Ana la miró con la boca abierta. <span class="dialogue">"¿Arreglar el Aurora? Papá dice que es imposible. Que está demasiado roto."</span>
+                </p>
+                <p>
+                    <span class="dialogue">"Imposible,"</span> repitió Rubí con una sonrisa, <span class="dialogue">"es una palabra que solo existe cuando no tienes a nadie que te ayude a intentarlo. Vamos a convencerlos."</span>
+                </p>
+                <p>
+                    Y durante tres días, Rubí y Ana fueron de puerta en puerta. Al principio la gente se reía, luego se rascaba la cabeza, y poco a poco, como las gotas que forman un río, una señora trajo sus lienzos, un muchacho su martillo, la abuela Rosa sus flores fucsias para decorar, y el señor Ortega abrió por fin sus latas de pintura azul turquesa. El señor Roldán, el carpintero, apareció una mañana con su caja de herramientas y dijo: <span class="dialogue">"Un barco que ha sido querido nunca está del todo roto."</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-sun"></i></div>
+            <h2>Capítulo 9: El Secreto que el Sol Calló</h2>
+            <img src="sol.jpg.png" alt="El Sol brillando sobre el mar" class="chapter-image">
+            <p>La noche antes de la fiesta, mientras todos dormían, Rubí subió al cerro que miraba al pueblo y el mar. Las luces titilaban en las casas y el Aurora, reparado y reluciente, esperaba en la orilla como un caballo de carreras...</p>
+            <button class="read-more" onclick="toggleText('cap9')">Leer más</button>
+            <div id="cap9" class="full-text">
+                <p>
+                    <span class="dialogue">"Has encontrado tu color,"</span> dijo una voz dorada a su lado. El Sol se había quedado, contra toda ley del cielo, a escasos dedos del horizonte, iluminando la noche con una luz suave y secreta. <span class="dialogue">"El color que le faltaba a Villa Esperanza era la unión. Lo has sembrado tú, con tu voz y tu corazón."</span>
+                </p>
+                <p>
+                    <span class="dialogue">"Entonces... ya puedo volver a casa,"</span> dijo Rubí, y aunque sus palabras eran alegres, su voz temblaba un poquito.
+                </p>
+                <p>
+                    El Sol guardó silencio durante un largo momento. <span class="dialogue">"Rubí, debo decirte la verdad que he callado hasta ahora. Hay un precio que no te mencioné. Cada día que permanezcas en forma humana, tus colores se desvanecen un poco más. Si eliges quedarte para siempre, en un año serás una niña completamente común: hermosa, valiente y buena, pero sin un solo rastro de arcoíris en ti. El cielo perderá para siempre a su arcoíris más brillante."</span>
+                </p>
+                <p>
+                    Rubí sintió que el suelo se movía bajo sus pies. <span class="dialogue">"¿Y si me quedo solo esta noche... y me voy mañana?"</span>
+                </p>
+                <p>
+                    <span class="dialogue">"Entonces vivirás siempre con la pregunta de cómo habría sido tu vida aquí,"</span> respondió el Sol con ternura. <span class="dialogue">"He visto a muchos seres atormentados por lo que no se atrevieron a elegir, Rubí. El arrepentimiento pesa más que cualquier sacrificio. Esta vez, la decisión es completamente tuya. Tienes hasta el amanecer."</span>
+                </p>
+                <p>
+                    Rubí se sentó en la hierba y miró el pueblo. Vio a Ana, durmiendo con su sueño reparado. Vio al capitán, que esa tarde había sonreído por primera vez en un año mientras lijaba el casco del Aurora. Vio las luces de las casas encendidas a la vez, cosa que no pasaba desde hacía meses, porque ahora la gente tenía algo que hacer juntos y ya no apagaban todo temprano.
+                </p>
+                <p>
+                    Y entonces, con el corazón tranquilo como el mar en calma, Rubí supo lo que iba a hacer.
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-heart"></i></div>
+            <h2>Capítulo 10: El Arcoíris que Brilla por Dentro (Final)</h2>
+            <img src="atardecer.arcoiris.png" alt="El gran arcoíris sobre el pueblo" class="chapter-image">
+            <p>Llegó la tarde de la Fiesta del Arcoíris, y Villa Esperanza parecía otro lugar. Las calles olían a flores, a pan recién horneado y a pintura fresca. Y el Aurora, el barco que todos creían perdido, esperaba en la orilla vestido de gala...</p>
+            <button class="read-more" onclick="toggleText('cap10')">Leer más</button>
+            <div id="cap10" class="full-text">
+                <p>
+                    Cada casa había colgado una bandera de su color: roja, naranja, amarilla, verde, azul, índigo y violeta. Las banderas ondeaban al viento como si el pueblo entero fuera un arcoíris acostado sobre la colina. El capitán, el padre de Ana, caminaba alrededor del Aurora con las manos temblorosas, tocando la madera recién pintada con una sonrisa que le partía la cara en dos.
+                </p>
+                <p>
+                    <span class="dialogue">"¡Hoy navega el Aurora!"</span> gritó, y su voz sonó tan fuerte y clara que todos los del pueblo la oyeron y soltaron un grito de alegría.
+                </p>
+                <p>
+                    Cuando el sol comenzó a hundirse en el mar, pintando el cielo de naranja y rosa, el pueblo entero se reunió en la orilla. El Aurora, con sus banderas y sus flores fucsias, fue empujado al agua por cincuenta manos a la vez. Y cuando flotó, firme y orgulloso como antes de la tormenta, el capitán abrazó a su hija y lloró delante de todos, sin vergüenza, porque las lágrimas de alegría también son un color.
+                </p>
+                <p>
+                    Rubí observaba desde la arena, con las manos juntas y el corazón pleno. Sentía que sus colores se desvanecían lentamente, como acuarela bajo la lluvia, pero no sentía tristeza. Sentía paz.
+                </p>
+                <p>
+                    <span class="dialogue">"Ana,"</span> dijo, tomando la mano de la niña, <span class="dialogue">"mira el cielo."</span>
+                </p>
+                <p>
+                    Todos miraron. El cielo estaba despejado, sin una nube, sin una gota de lluvia. Pero en el horizonte, justo sobre el Aurora, algo brilló: un arco de luz, suave y tembloroso, como un suspiro de colores. No era un arcoíris de agua y sol. Era el reflejo del pueblo entero, de sus banderas y sus sonrisas, subiendo al cielo.
+                </p>
+                <p>
+                    <span class="dialogue">"El arcoíris no está en el cielo, Ana,"</span> susurró Rubí, con una voz que sonaba cada vez más a viento. <span class="dialogue">"El arcoíris está en el corazón. Y el tuyo, y el de tu papá, y el de todo este pueblo, está lleno de colores que ya nadie podrá apagar."</span>
+                </p>
+                <p>
+                    Ana apretó su mano con fuerza. <span class="dialogue">"¿Te vas, Rubí?"</span>
+                </p>
+                <p>
+                    Rubí sonrió, y en su sonrisa había siete colores. <span class="dialogue">"Me quedo, Ana. Pero no como arcoíris del cielo. Me quedo como Rubí, la niña del arcoíris interior. Y cada vez que alguien de este pueblo sea feliz, verás un destello a mi alrededor. Porque he aprendido que el arcoíris que amas nunca muere... solo cambia de cielo."</span>
+                </p>
+                <p>
+                    El Sol, desde el borde del mundo, sonrió y se hundió en el mar, satisfecho. La decisión de Rubí había sido la correcta, y lo sabía, porque era la más valiente de todas: elegir quedarse sabiendo que perdería su magia, para regalar la suya a los demás.
+                </p>
+                <p>
+                    Esa noche, el pueblo celebró hasta que las estrellas se cansaron de mirar. El Aurora navegó con sus luces encendidas, y sobre su mástil ondeaba una bandera blanca con un arcoíris pintado a mano. Y desde esa noche, cada vez que un barco de Villa Esperanza salía a la mar, los marineros contaban la leyenda de la niña del arcoíris interior, la que enseñó a todo un pueblo que el color más importante no se pinta en las paredes: se siembra en los corazones.
+                </p>
+            </div>
+        </div>
+
+        <p class="the-end">✦ Fin ✦</p>
+
+        <div class="moral">
+            <h3><i class="fas fa-lightbulb"></i> Lo que Rubí nos enseña</h3>
+            <p>Ser diferente no es un defecto: es un don. Cada ser tiene su propio propósito y su propia belleza, y el verdadero valor está en aceptarse a uno mismo para poder ofrecer lo mejor de nosotros a los demás.</p>
+        </div>
+
+    </div>
+
+    
+    <div style="text-align:center; padding:2.2rem 1rem 3.2rem; display:flex; flex-wrap:wrap; gap:0.9rem; justify-content:center;">
+        <a href="../index.html" style="display:inline-block; background:#1a1a2e; color:#ffffff; text-decoration:none; font-weight:700; padding:12px 26px; border-radius:30px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">Volver a la biblioteca</a>
+    </div>
+<footer>
+        <p>
+            <span>Rubí: El Arcoíris Interior · Parte 2</span><br>
+            <span>© 2026 Todos los derechos reservados</span><br>
+            <span>Lucía Editorial</span>
+        </p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const fullTexts = document.querySelectorAll('.full-text');
+            fullTexts.forEach(text => {
+                text.style.display = 'none';
+            });
+        }
+
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                button.textContent = "Leer menos";
+            } else {
+                element.style.display = "none";
+                button.textContent = "Leer más";
+            }
+        }
+    </script>
+<script>
+(function () {
+    if (!('speechSynthesis' in window)) return;
+    if (document.getElementById('lpPlay')) return;
+    var synth = window.speechSynthesis;
+    var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+    if (!chapters.length) return;
+    var current = -1, reading = false, paused = false, queue = [];
+
+    var bar = document.createElement('div');
+    bar.className = 'listen-player';
+    bar.innerHTML =
+        '<button type="button" class="lp-btn" id="lpPlay">Escuchar el libro</button>' +
+        '<button type="button" class="lp-btn lp-ctrl" id="lpPause" style="display:none">Pausa</button>' +
+        '<button type="button" class="lp-btn lp-ctrl" id="lpResume" style="display:none">Seguir</button>' +
+        '<button type="button" class="lp-btn lp-ctrl" id="lpStop" style="display:none">Detener</button>' +
+        '<span class="lp-label" id="lpLabel"></span>';
+    document.body.appendChild(bar);
+
+    chapters.forEach(function (ch, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'listen-chapter-btn';
+        b.textContent = 'Escuchar capítulo';
+        b.addEventListener('click', function () { startChapter(i); });
+        ch.appendChild(b);
+    });
+
+    function getVoice() {
+        var voices = synth.getVoices();
+        for (var i = 0; i < voices.length; i++) {
+            if (/^es/i.test(voices[i].lang)) return voices[i];
+        }
+        return null;
+    }
+
+    function chapterText(ch) {
+        var parts = [];
+        var h2 = ch.querySelector(':scope > h2');
+        if (h2) parts.push(h2.textContent);
+        for (var i = 0; i < ch.children.length; i++) {
+            var el = ch.children[i];
+            if (el.tagName === 'P') parts.push(el.textContent);
+        }
+        var ft = ch.querySelector('.full-text');
+        if (ft) {
+            ft.style.display = 'block';
+            var rm = ch.querySelector('.read-more');
+            if (rm) rm.textContent = 'Leer menos';
+            var ps = ft.querySelectorAll('p');
+            for (var j = 0; j < ps.length; j++) parts.push(ps[j].textContent);
+        }
+        return parts.join(' ');
+    }
+
+    function chunkText(text) {
+        var words = text.split(/\s+/);
+        var out = [], cur = [], len = 0;
+        for (var i = 0; i < words.length; i++) {
+            var w = words[i];
+            if (!w) continue;
+            cur.push(w); len += w.length + 1;
+            if (len > 160 && /[.!?]$/.test(w)) {
+                out.push(cur.join(' ')); cur = []; len = 0;
+            }
+        }
+        if (cur.length) out.push(cur.join(' '));
+        return out;
+    }
+
+    function sayNext() {
+        if (paused) return;
+        if (!queue.length) { current++; speakChapter(); return; }
+        var u = new SpeechSynthesisUtterance(queue.shift());
+        var v = getVoice();
+        if (v) u.voice = v;
+        u.lang = 'es';
+        u.rate = 0.95;
+        u.pitch = 1.05;
+        u.onend = sayNext;
+        u.onerror = function () { if (synth.speaking) sayNext(); else finish(); };
+        synth.speak(u);
+    }
+
+    function speakChapter() {
+        if (current < 0 || current >= chapters.length) { finish(); return; }
+        var ch = chapters[current];
+        highlight(ch);
+        ch.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        queue = chunkText(chapterText(ch));
+        if (!queue.length) { current++; speakChapter(); return; }
+        sayNext();
+    }
+
+    function startChapter(i) { synth.cancel(); current = i; reading = true; paused = false; updateUI(); speakChapter(); }
+    function playAll() { synth.cancel(); current = 0; reading = true; paused = false; updateUI(); speakChapter(); }
+    function pauseR() { if (reading && !paused) { synth.pause(); paused = true; updateUI(); } }
+    function resumeR() { if (reading && paused) { synth.resume(); paused = false; updateUI(); } }
+    function stopR() { synth.cancel(); current = -1; reading = false; paused = false; queue = []; clearHighlight(); updateUI(); }
+    function finish() { reading = false; paused = false; queue = []; updateUI(); }
+
+    function highlight(ch) { clearHighlight(); ch.classList.add('listening'); }
+    function clearHighlight() { chapters.forEach(function (c) { c.classList.remove('listening'); }); }
+
+    function updateUI() {
+        document.getElementById('lpPlay').style.display = reading ? 'none' : '';
+        document.getElementById('lpPause').style.display = (reading && !paused) ? '' : 'none';
+        document.getElementById('lpResume').style.display = (reading && paused) ? '' : 'none';
+        document.getElementById('lpStop').style.display = reading ? '' : 'none';
+        document.getElementById('lpLabel').textContent = reading ? (paused ? 'Pausado' : 'Escuchando...') : 'Pulsa Escuchar para oír el libro';
+    }
+
+    document.getElementById('lpPlay').addEventListener('click', playAll);
+    document.getElementById('lpPause').addEventListener('click', pauseR);
+    document.getElementById('lpResume').addEventListener('click', resumeR);
+    document.getElementById('lpStop').addEventListener('click', stopR);
+    if (synth.onvoiceschanged) synth.onvoiceschanged = getVoice;
+    window.addEventListener('beforeunload', function () { synth.cancel(); });
+    updateUI();
+})();
+</script>
+</body>
+</html>

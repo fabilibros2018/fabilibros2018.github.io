@@ -150,15 +150,147 @@
             border-radius: 30px;
         }
 
+    
+        .back-link {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            color: #1a1a2e;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            padding: 10px 18px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+        }
+            /* ===== Estilo unificado ===== */
+        .chapter {
+            background: rgba(255,255,255,0.8);
+            border-radius: 22px;
+            padding: 2rem 1.8rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 24px rgba(214,51,132,0.15);
+            border: 1px solid rgba(214,51,132,0.3);
+            transition: box-shadow 0.3s ease;
+        }
+        .chapter:hover { box-shadow: 0 10px 32px rgba(214,51,132,0.28); }
+        .chapter h2 { font-size: clamp(1.3rem, 4vw, 1.8rem); margin-bottom: 1.2rem; }
+        .chapter > p, .full-text p { font-size: 1.12rem; text-align: justify; color: #55556b; margin-bottom: 1rem; }
+        .read-more {
+            display: inline-block;
+            margin: 0.6rem auto;
+            text-align: center;
+            padding: 9px 24px;
+            color: #ffffff;
+            background: linear-gradient(90deg, #ff6b9d, #d63384);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border: none;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(214,51,132,0.15);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .read-more:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 20px rgba(214,51,132,0.28); }
+        .full-text {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.2rem 1.2rem 0.4rem;
+            border-left: 4px solid #d63384;
+            border-radius: 0 14px 14px 0;
+            background: rgba(255,224,242,0.6);
+        }
+        .chapter-image {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            margin: 0 auto 1.4rem;
+            display: block;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            border: 3px solid #ffffff;
+            object-fit: cover;
+            max-height: 420px;
+        }
+        /* ===== Escuchar en voz alta ===== */
+        .listen-player {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.82);
+            padding: 10px 16px;
+            border-radius: 40px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+            max-width: 94vw;
+        }
+        .lp-btn {
+            border: none;
+            border-radius: 30px;
+            padding: 9px 16px;
+            font-weight: 800;
+            cursor: pointer;
+            color: #ffffff;
+            background: linear-gradient(90deg, #ff6b9d, #d63384);
+            box-shadow: 0 3px 10px rgba(214,51,132,0.15);
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+        }
+        .lp-btn:hover { transform: translateY(-2px); }
+        .lp-label { color: #ffffff; font-size: 0.85rem; font-weight: 600; padding: 0 6px; }
+        .listen-chapter-btn {
+            display: inline-block;
+            margin: 0.6rem auto;
+            padding: 8px 18px;
+            background: transparent;
+            color: #ff6b9d;
+            border: 2px solid #ff6b9d;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .listen-chapter-btn:hover { background: #ff6b9d; color: #ffffff; }
+        .chapter.listening {
+            box-shadow: 0 0 0 3px #d63384, 0 10px 32px rgba(214,51,132,0.28);
+            border-color: #d63384;
+        }
+        @media (max-width: 767px) {
+            .chapter { padding: 1.4rem 1rem; }
+            .chapter > p, .full-text p { font-size: 1.02rem; }
+        }
+    
+        /* Espacio inferior para que el reproductor no tape el final del libro */
+        body { padding-bottom: 110px; }
+        @media (max-width: 767px) {
+            body { padding-bottom: 150px; }
+        }
     </style>
 </head>
 <body>
+    <a href="../index.html" class="back-link">Volver a la biblioteca</a>
     
     
     
-    <!-- Modificar el título así: -->
+    
     <div class="cover">
-        <img src="arcoiris.jpg" alt="Portada del Libro" placeholder="Insertar imagen aquí">
+        <img src="arcoiris.jpg" alt="Portada del Libro">
         <h1><span class="title-name">Rubí</span>: El Arcoíris que Quería ser Humana (Parte 1)</h1>
     </div>
     <div class="song-section">
@@ -173,7 +305,7 @@
             <h2>Capítulo 1: Un Arcoíris Diferente</h2>
             <img src="arcoiriss.jpg.jpg" alt="Rubí como arcoíris" class="chapter-image">
             <p>En lo alto del cielo, donde las nubes danzan con el viento, vivía un hermoso arcoíris llamado Rubí...</p>
-            <!-- Modificar cada enlace "Leer más" así: -->
+            
             <a onclick="toggleText('cap1')" class="read-more">Leer más</a>
             <div id="cap1" class="full-text">
                 <p>
@@ -183,7 +315,7 @@
                 </p>
             </div>
         </div>
-            <!-- ... existing content ... -->
+            
     
             <div class="chapter">
                 <h2>Capítulo 2: La Conversación con el Sol</h2>
@@ -259,7 +391,11 @@
         <!-- [Continuar con los demás capítulos siguiendo la historia] -->
     </div>
 
-    <footer>
+    <div style="text-align:center; padding:2.2rem 1rem 3.2rem; display:flex; flex-wrap:wrap; gap:0.9rem; justify-content:center;">
+        <a href="rubi2.html" style="display:inline-block; background:#e91e63; color:#ffffff; text-decoration:none; font-weight:800; padding:12px 26px; border-radius:30px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">Continuar con la Parte 2</a>
+        <a href="../index.html" style="display:inline-block; background:#1a1a2e; color:#ffffff; text-decoration:none; font-weight:700; padding:12px 26px; border-radius:30px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">Volver a la biblioteca</a>
+    </div>
+<footer>
         <p>
             <span>Rubí: El Arcoíris que Quería ser Humana</span>
             <span>© 2025 Todos los derechos reservados</span>
@@ -289,5 +425,128 @@
             }
         }
     </script>
+
+    
+<script>
+(function () {
+    if (!('speechSynthesis' in window)) return;
+    if (document.getElementById('lpPlay')) return;
+    var synth = window.speechSynthesis;
+    var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+    if (!chapters.length) return;
+    var current = -1, reading = false, paused = false, queue = [];
+
+    var bar = document.createElement('div');
+    bar.className = 'listen-player';
+    bar.innerHTML =
+        '<button type="button" class="lp-btn" id="lpPlay">Escuchar el libro</button>' +
+        '<button type="button" class="lp-btn lp-ctrl" id="lpPause" style="display:none">Pausa</button>' +
+        '<button type="button" class="lp-btn lp-ctrl" id="lpResume" style="display:none">Seguir</button>' +
+        '<button type="button" class="lp-btn lp-ctrl" id="lpStop" style="display:none">Detener</button>' +
+        '<span class="lp-label" id="lpLabel"></span>';
+    document.body.appendChild(bar);
+
+    chapters.forEach(function (ch, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'listen-chapter-btn';
+        b.textContent = 'Escuchar capítulo';
+        b.addEventListener('click', function () { startChapter(i); });
+        ch.appendChild(b);
+    });
+
+    function getVoice() {
+        var voices = synth.getVoices();
+        for (var i = 0; i < voices.length; i++) {
+            if (/^es/i.test(voices[i].lang)) return voices[i];
+        }
+        return null;
+    }
+
+    function chapterText(ch) {
+        var parts = [];
+        var h2 = ch.querySelector(':scope > h2');
+        if (h2) parts.push(h2.textContent);
+        for (var i = 0; i < ch.children.length; i++) {
+            var el = ch.children[i];
+            if (el.tagName === 'P') parts.push(el.textContent);
+        }
+        var ft = ch.querySelector('.full-text');
+        if (ft) {
+            ft.style.display = 'block';
+            var rm = ch.querySelector('.read-more');
+            if (rm) rm.textContent = 'Leer menos';
+            var ps = ft.querySelectorAll('p');
+            for (var j = 0; j < ps.length; j++) parts.push(ps[j].textContent);
+        }
+        return parts.join(' ');
+    }
+
+    function chunkText(text) {
+        var words = text.split(/\s+/);
+        var out = [], cur = [], len = 0;
+        for (var i = 0; i < words.length; i++) {
+            var w = words[i];
+            if (!w) continue;
+            cur.push(w); len += w.length + 1;
+            if (len > 160 && /[.!?]$/.test(w)) {
+                out.push(cur.join(' ')); cur = []; len = 0;
+            }
+        }
+        if (cur.length) out.push(cur.join(' '));
+        return out;
+    }
+
+    function sayNext() {
+        if (paused) return;
+        if (!queue.length) { current++; speakChapter(); return; }
+        var u = new SpeechSynthesisUtterance(queue.shift());
+        var v = getVoice();
+        if (v) u.voice = v;
+        u.lang = 'es';
+        u.rate = 0.95;
+        u.pitch = 1.05;
+        u.onend = sayNext;
+        u.onerror = function () { if (synth.speaking) sayNext(); else finish(); };
+        synth.speak(u);
+    }
+
+    function speakChapter() {
+        if (current < 0 || current >= chapters.length) { finish(); return; }
+        var ch = chapters[current];
+        highlight(ch);
+        ch.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        queue = chunkText(chapterText(ch));
+        if (!queue.length) { current++; speakChapter(); return; }
+        sayNext();
+    }
+
+    function startChapter(i) { synth.cancel(); current = i; reading = true; paused = false; updateUI(); speakChapter(); }
+    function playAll() { synth.cancel(); current = 0; reading = true; paused = false; updateUI(); speakChapter(); }
+    function pauseR() { if (reading && !paused) { synth.pause(); paused = true; updateUI(); } }
+    function resumeR() { if (reading && paused) { synth.resume(); paused = false; updateUI(); } }
+    function stopR() { synth.cancel(); current = -1; reading = false; paused = false; queue = []; clearHighlight(); updateUI(); }
+    function finish() { reading = false; paused = false; queue = []; updateUI(); }
+
+    function highlight(ch) { clearHighlight(); ch.classList.add('listening'); }
+    function clearHighlight() { chapters.forEach(function (c) { c.classList.remove('listening'); }); }
+
+    function updateUI() {
+        document.getElementById('lpPlay').style.display = reading ? 'none' : '';
+        document.getElementById('lpPause').style.display = (reading && !paused) ? '' : 'none';
+        document.getElementById('lpResume').style.display = (reading && paused) ? '' : 'none';
+        document.getElementById('lpStop').style.display = reading ? '' : 'none';
+        document.getElementById('lpLabel').textContent = reading ? (paused ? 'Pausado' : 'Escuchando...') : 'Pulsa Escuchar para oír el libro';
+    }
+
+    document.getElementById('lpPlay').addEventListener('click', playAll);
+    document.getElementById('lpPause').addEventListener('click', pauseR);
+    document.getElementById('lpResume').addEventListener('click', resumeR);
+    document.getElementById('lpStop').addEventListener('click', stopR);
+    if (synth.onvoiceschanged) synth.onvoiceschanged = getVoice;
+    window.addEventListener('beforeunload', function () { synth.cancel(); });
+    updateUI();
+})();
+</script>
 </body>
 </html>
