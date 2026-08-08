@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#a5d6a7"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+  <rect x="280" y="0" width="60" height="800" fill="#6d4c41"/>
+  <circle cx="120" cy="140" r="90" fill="#e0e0e0"/>
+  <circle cx="120" cy="140" r="58" fill="#ffffff"/>
+  <circle cx="96" cy="124" r="10" fill="#263238"/>
+  <circle cx="144" cy="124" r="10" fill="#263238"/>
+  <path d="M 100 168 Q 120 186 140 168" stroke="#ef5350" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 60 210 L 120 260 L 180 210 L 120 180 Z" fill="#81c784"/>
+  <ellipse cx="340" cy="150" rx="70" ry="34" fill="#388e3c"/>
+  <ellipse cx="430" cy="200" rx="55" ry="28" fill="#2e7d32"/>
+  <ellipse cx="160" cy="280" rx="45" ry="24" fill="#43a047"/>
+  <circle cx="420" cy="330" r="18" fill="#ffb300"/>
+  <circle cx="460" cy="360" r="24" fill="#f44336"/>
+  <circle cx="140" cy="380" r="20" fill="#e91e63"/>
+  <ellipse cx="300" cy="560" rx="220" ry="40" fill="#1b5e20"/>
+  <rect x="180" y="712" width="240" height="64" rx="14" fill="rgba(0,0,0,0.35)"/>
+  <text x="300" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff">Perico: El Rey del Bosque</text>
+  <rect x="170" y="66" width="260" height="46" rx="23" fill="#8e24aa"/>
+  <text x="300" y="97" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">PRÓXIMAMENTE</text>
+  <text x="300" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#f1f8e9">AVENTURA DE VUELO Y AMISTAD</text>
+</svg>

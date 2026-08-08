@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a1259"/>
+      <stop offset="100%" stop-color="#9d4edd"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+  <circle cx="120" cy="130" r="44" fill="#ffd700"/>
+  <circle cx="120" cy="130" r="30" fill="#fff59d"/>
+  <circle cx="480" cy="110" r="6" fill="#ffffff"/>
+  <circle cx="440" cy="160" r="5" fill="#ffffff"/>
+  <circle cx="510" cy="190" r="7" fill="#ffffff"/>
+  <circle cx="90" cy="260" r="5" fill="#ffffff"/>
+  <circle cx="160" cy="220" r="6" fill="#ffffff"/>
+  <path d="M 300 300 L 210 380 L 230 380 L 235 480 L 365 480 L 370 380 L 390 380 Z" fill="#e0aaff"/>
+  <path d="M 300 300 L 260 360 L 340 360 Z" fill="#c77dff"/>
+  <path d="M 300 250 L 250 300 L 350 300 Z" fill="#ffd700"/>
+  <circle cx="286" cy="270" r="8" fill="#7b2cbf"/>
+  <circle cx="314" cy="270" r="8" fill="#7b2cbf"/>
+  <path d="M 260 420 L 340 420 L 340 620 L 260 620 Z" fill="#e1bee7"/>
+  <path d="M 260 420 Q 300 480 340 420 Z" fill="#ce93d8"/>
+  <path d="M 340 420 Q 380 470 380 560 L 340 560 Z" fill="#ce93d8"/>
+  <path d="M 260 420 Q 220 470 220 560 L 260 560 Z" fill="#ce93d8"/>
+  <circle cx="240" cy="640" r="14" fill="#ffd700"/>
+  <circle cx="360" cy="640" r="14" fill="#ffd700"/>
+  <rect x="180" y="712" width="240" height="64" rx="14" fill="rgba(0,0,0,0.35)"/>
+  <text x="300" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#ffffff">Princesa: Diseñando Sueños</text>
+  <rect x="170" y="66" width="260" height="46" rx="23" fill="#8e24aa"/>
+  <text x="300" y="97" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">PRÓXIMAMENTE</text>
+  <text x="300" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#f3e5f5">JUEGO DE MODA Y CREATIVIDAD</text>
+</svg>
