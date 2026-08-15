@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>La Araña de Tinta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            font-family: 'Fredoka', 'Comic Sans MS', sans-serif;
+            background: linear-gradient(180deg, #2a1a5e, #1a1033 70%);
+            color: #f0e8ff;
+            overflow: hidden;
+            touch-action: none;
+            overscroll-behavior: none;
+        }
+        .back-link {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 3000;
+            background: rgba(255, 255, 255, 0.92);
+            color: #1a1a2e;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 10px 18px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        #wrap {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #frame { position: relative; }
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 22px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+            background: #fdf9f0;
+        }
+        /* ===== HUD ===== */
+        #hud {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 15;
+            pointer-events: none;
+            font-size: 1.05rem;
+            line-height: 1.55;
+            color: #fff;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+        }
+        #hud .hearts { font-size: 1.3rem; letter-spacing: 2px; }
+        #hud .row { display: flex; gap: 18px; flex-wrap: wrap; align-items: baseline; }
+        #hud b { color: #c4b5fd; }
+        /* ===== aviso de giro para móvil en vertical ===== */
+        #rotate {
+            position: fixed;
+            inset: 0;
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            gap: 14px;
+            background: linear-gradient(180deg, #2a1a5e, #1a1033 70%);
+            color: #f0e8ff;
+            padding: 30px;
+            font-family: 'Fredoka', 'Comic Sans MS', sans-serif;
+        }
+        #rotate .phone { font-size: 4.5rem; animation: spinHint 2.2s ease-in-out infinite; }
+        @keyframes spinHint {
+            0% { transform: rotate(0deg); }
+            35% { transform: rotate(90deg); }
+            70% { transform: rotate(90deg); }
+            100% { transform: rotate(90deg); }
+        }
+        #rotate h1 { font-size: 1.7rem; color: #c4b5fd; }
+        #rotate p { font-size: 1rem; color: #b7a6e8; max-width: 320px; line-height: 1.5; }
+        .overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 22px;
+            padding: 24px;
+            z-index: 10;
+            background: rgba(16, 10, 34, 0.85);
+            backdrop-filter: blur(5px);
+        }
+        .hidden { display: none; }
+        h1 {
+            font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+            color: #c4b5fd;
+            text-shadow: 0 3px 0 rgba(0, 0, 0, 0.4);
+            margin-bottom: 6px;
+        }
+        h1 .tinta { color: #a78bfa; }
+        .menu-card {
+            background: linear-gradient(170deg, rgba(52, 32, 108, 0.92), rgba(24, 14, 48, 0.95));
+            border: 2px solid rgba(167, 139, 250, 0.5);
+            border-radius: 34px;
+            padding: 2.4rem 2.6rem 2.2rem;
+            max-width: 720px;
+            width: 92%;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        .menu-badge {
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.9rem;
+            background: radial-gradient(circle at 32% 28%, rgba(196, 181, 253, 0.55), rgba(76, 29, 149, 0.85));
+            border: 3px solid rgba(196, 181, 253, 0.7);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.5);
+            animation: floatBadge 3s ease-in-out infinite;
+        }
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .menu-card h1 { font-size: clamp(1.8rem, 5vw, 3.1rem); margin-bottom: 6px; }
+        .menu-tag {
+            display: inline-block;
+            background: rgba(167, 139, 250, 0.18);
+            border: 1px solid rgba(167, 139, 250, 0.45);
+            color: #c4b5fd;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            padding: 5px 16px;
+            margin-bottom: 14px;
+        }
+        .sub {
+            font-size: clamp(0.88rem, 1.6vw, 1.08rem);
+            color: #d9ccff;
+            max-width: 620px;
+            line-height: 1.65;
+            margin: 0 auto 22px;
+            padding: 0 10px;
+        }
+        .features { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 26px; }
+        .feature {
+            flex: 1 1 150px;
+            max-width: 200px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(196, 181, 253, 0.3);
+            border-radius: 18px;
+            padding: 14px 12px 12px;
+        }
+        .feature .ico { font-size: 1.7rem; display: block; margin-bottom: 6px; }
+        .feature b { display: block; color: #fff; font-size: 1.02rem; margin-bottom: 3px; }
+        .feature small { color: #b7a6e8; font-size: 0.78rem; line-height: 1.4; display: block; }
+        .btn {
+            font-family: 'Fredoka', 'Comic Sans MS', sans-serif;
+            font-size: clamp(1.05rem, 2vw, 1.35rem);
+            font-weight: 700;
+            border: none;
+            border-radius: 40px;
+            padding: 16px 52px;
+            color: #fff;
+            background: linear-gradient(90deg, #7c3aed, #4c1d95);
+            box-shadow: 0 10px 28px rgba(76, 29, 149, 0.55);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin: 6px;
+        }
+        .btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 14px 34px rgba(124, 58, 237, 0.65); }
+        .btn.gold { background: linear-gradient(90deg, #a78bfa, #7c3aed); box-shadow: 0 10px 28px rgba(124, 58, 237, 0.5); }
+        .btn.small { padding: 10px 24px; font-size: 0.95rem; }
+        .controls {
+            font-size: clamp(0.75rem, 1.4vw, 0.92rem);
+            color: #c9bdf2;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(196, 181, 253, 0.2);
+            border-radius: 16px;
+            padding: 12px 20px;
+            margin-top: 20px;
+            line-height: 1.7;
+            max-width: 100%;
+        }
+        .kbd {
+            display: inline-block;
+            background: #fff;
+            border: 1px solid #c9b8e6;
+            border-bottom-width: 3px;
+            border-radius: 7px;
+            padding: 1px 9px;
+            font-weight: 700;
+            font-size: 0.85em;
+            color: #4a3a78;
+        }
+        .hint-title { font-size: 1.5rem; color: #a78bfa; margin-bottom: 8px; }
+        .stats { display: flex; gap: 26px; justify-content: center; flex-wrap: wrap; font-size: 1.1rem; color: #d9ccff; margin: 14px 0; }
+        .stats b { font-size: 1.4rem; color: #c4b5fd; }
+        .spider-big { font-size: 3rem; margin-bottom: 6px; }
+        .corner-btn {
+            position: absolute;
+            z-index: 20;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            border-radius: 30px;
+            padding: 8px 14px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.9);
+            color: #4a3a78;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        #btnPause { top: 12px; right: 12px; }
+        #btnMute { top: 12px; right: 64px; }
+        .action-btn {
+            position: absolute;
+            z-index: 20;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            color: #fff;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+            display: none;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            line-height: 1.15;
+        }
+        .action-btn:active { transform: scale(0.93); }
+        #jumpBtn {
+            right: 16px;
+            bottom: calc(16px + env(safe-area-inset-bottom));
+            width: 92px;
+            height: 92px;
+            font-size: 0.95rem;
+            background: linear-gradient(180deg, #a78bfa, #6d28d9);
+        }
+        #joyBase {
+            position: absolute;
+            left: 20px;
+            bottom: calc(24px + env(safe-area-inset-bottom));
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.3), rgba(124, 58, 237, 0.08));
+            border: 3px solid rgba(124, 58, 237, 0.55);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            z-index: 20;
+            display: none;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        #joyKnob {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 56px;
+            height: 56px;
+            margin: -28px 0 0 -28px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #c4b5fd, #7c3aed 70%);
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+            transition: transform 0.05s linear;
+        }
+        @media (pointer: coarse) {
+            #jumpBtn, #joyBase { display: block; }
+        }
+        #frame:not(.playing) #joyBase,
+        #frame:not(.playing) #jumpBtn { display: none; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link">Volver a la biblioteca</a>
+    <div id="wrap">
+        <div id="frame">
+            <canvas id="game" width="960" height="560"></canvas>
+            <div id="hud">
+                <div class="hearts" id="hudHearts">♥♥♥</div>
+                <div class="row">
+                    <span>Letras: <b id="hudLetters">0/8</b></span>
+                    <span>Página <b id="hudPage">1</b>/3</span>
+                    <span><b id="hudScore">0</b> pts</span>
+                </div>
+            </div>
+            <button id="btnPause" class="corner-btn">II Pausa</button>
+            <button id="btnMute" class="corner-btn">Sonido: Sí</button>
+            <button id="jumpBtn" class="action-btn">⬆<br>¡SALTA!</button>
+            <div id="joyBase"><div id="joyKnob"></div></div>
+
+            <div id="menu" class="overlay">
+                <div class="menu-card">
+                    <div class="menu-badge">🕷️</div>
+                    <span class="menu-tag">Aventura de tinta y saltos</span>
+                    <h1>La Araña <span class="tinta">de Tinta</span></h1>
+                    <p class="sub">Tinta vive dentro de un libro. Salta por las páginas flotantes, recoge las letras que se escaparon, esquiva las manchas de tinta... ¡y llega hasta la mano de Clara para pasar de página!</p>
+                    <div class="features">
+                        <div class="feature"><span class="ico">🕹️</span><b>Muévete</b><small>Teclado, ratón o joystick</small></div>
+                        <div class="feature"><span class="ico">⬆️</span><b>Salta</b><small>Espacio o botón ¡SALTA!</small></div>
+                        <div class="feature"><span class="ico">🔤</span><b>Recoge letras</b><small>Esquiva las manchas</small></div>
+                    </div>
+                    <button class="btn" id="btnPlay">▶ ¡A Tejer!</button>
+                    <div class="controls">
+                        <span class="kbd">←→</span> mover &nbsp;·&nbsp; <span class="kbd">ESPACIO</span> saltar &nbsp;·&nbsp; <span class="kbd">P</span> pausa<br>
+                        Móvil: joystick para moverse y botón ⬆ ¡SALTA! (juega en horizontal)
+                    </div>
+                </div>
+            </div>
+
+            <div id="lose" class="overlay hidden">
+                <div class="spider-big">💧</div>
+                <h1>¡Tinta se manchó!</h1>
+                <p class="sub">La mancha la cubrió por completo... ¡PLAS! Pero las arañas de tinta nunca se rinden: se sacuden la tinta y vuelven a saltar. ¡Inténtalo otra vez!</p>
+                <div class="stats" id="loseStats"></div>
+                <button class="btn" id="btnRetry">🔄 Reintentar</button>
+                <button class="btn small" id="btnMenuLose">Menú</button>
+            </div>
+
+            <div id="win" class="overlay hidden">
+                <div class="spider-big">🖐️🕷️</div>
+                <h1>¡Tinta y la <span class="tinta">Mano de Clara</span>!</h1>
+                <p class="sub">La mano entró en el libro y tocó la patita de Tinta con mucho cuidado. La tinta no se corrió: se quedó quieta y feliz. Recuerda: la imaginación y la realidad son mejores cuando van... ¡de la mano!</p>
+                <div class="stats" id="winStats"></div>
+                <button class="btn gold" id="btnAgain">▶ Jugar otra vez</button>
+                <button class="btn small" id="btnMenuWin">Menú</button>
+            </div>
+
+            <div id="pause" class="overlay hidden">
+                <div class="hint-title">⏸ Pausa</div>
+                <button class="btn" id="btnResume">Seguir tejiendo</button>
+                <button class="btn small" id="btnMenuPause">Menú</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="rotate">
+        <div class="phone">📱</div>
+        <h1>¡Gira tu teléfono!</h1>
+        <p>Tinta teje mejor en horizontal. Pon el teléfono de lado y pulsa ▶ ¡A Tejer!</p>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+        var cv = document.getElementById('game');
+        var ctx = cv.getContext('2d');
+        var DPR = Math.min(2, window.devicePixelRatio || 1);
+        var W = 960, H = 560;
+
+        function computeSize() {
+            var sw = window.innerWidth || 960, sh = window.innerHeight || 560;
+            var s = Math.min(sw / W, sh / H);
+            var fr = document.getElementById('frame');
+            if (fr) {
+                fr.style.width = Math.round(W * s) + 'px';
+                fr.style.height = Math.round(H * s) + 'px';
+            }
+        }
+        computeSize();
+        window.addEventListener('resize', computeSize);
+        window.addEventListener('orientationchange', function () { setTimeout(computeSize, 250); });
+        cv.width = Math.round(W * DPR);
+        cv.height = Math.round(H * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+        /* ===== aviso de girar el móvil ===== */
+        var elRotate = document.getElementById('rotate');
+        function checkRotate() {
+            var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+            var portrait = (window.innerWidth || 0) < (window.innerHeight || 0);
+            elRotate.style.display = (coarse && portrait) ? 'flex' : 'none';
+        }
+        checkRotate();
+        window.addEventListener('resize', checkRotate);
+        window.addEventListener('orientationchange', function () { setTimeout(checkRotate, 250); });
+
+        /* ================= AUDIO ================= */
+        var AC = null;
+        function audio() {
+            if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} }
+            return AC;
+        }
+        var muted = false;
+        function tone(freq, dur, type, vol, slide) {
+            if (muted) return;
+            var ac = audio(); if (!ac) return;
+            var o = ac.createOscillator(), g = ac.createGain();
+            o.type = type || 'square';
+            o.frequency.setValueAtTime(freq, ac.currentTime);
+            if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(30, slide), ac.currentTime + dur);
+            g.gain.setValueAtTime(vol || 0.12, ac.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
+            o.connect(g); g.connect(ac.destination);
+            o.start(); o.stop(ac.currentTime + dur);
+        }
+        var sfx = {
+            jump: function () { tone(340, 0.08, 'square', 0.07); tone(520, 0.08, 'triangle', 0.06); },
+            letter: function () { tone(620, 0.09, 'square', 0.1); setTimeout(function () { tone(830, 0.12, 'square', 0.1); }, 70); },
+            hit: function () { tone(180, 0.25, 'sawtooth', 0.16, 60); },
+            page: function () { var n = [523, 659, 784, 1047]; for (var i = 0; i < n.length; i++) (function (f, d) { setTimeout(function () { tone(f, 0.14, 'triangle', 0.14); }, d); })(n[i], i * 110); },
+            hand: function () { tone(880, 0.09, 'sine', 0.12); setTimeout(function () { tone(1174, 0.1, 'sine', 0.12); }, 80); setTimeout(function () { tone(1568, 0.16, 'sine', 0.12); }, 160); },
+            win: function () { var n = [523, 659, 784, 1047, 784, 1047, 1319]; for (var i = 0; i < n.length; i++) (function (f, d) { setTimeout(function () { tone(f, 0.18, 'triangle', 0.15); }, d); })(n[i], i * 130); },
+            lose: function () { var n = [392, 330, 262, 196]; for (var i = 0; i < n.length; i++) (function (f, d) { setTimeout(function () { tone(f, 0.22, 'triangle', 0.13); }, d); })(n[i], i * 160); }
+        };
+
+        /* ================= ESTADO ================= */
+        var state = 'menu';
+        var player, platforms, letters, blots, particles, popups, hand;
+        var worldX, hearts, score, page, invuln, shake, time, dashCd;
+        var keys = {}, pointer = null;
+        var joy = { active: false, dx: 0, dy: 0, id: null };
+        var LEVELS = [
+            { letters: 8,  blots: 6,  platforms: 7,  len: 2600, seed: 11 },
+            { letters: 10, blots: 9,  platforms: 9,  len: 3200, seed: 23 },
+            { letters: 12, blots: 12, platforms: 11, len: 3800, seed: 37 }
+        ];
+        var LETTER_CHARS = ['A', 'Ñ', 'S', 'T', 'I', 'N', 'R', 'E', 'O', 'M', 'C', 'L'];
+        var LETTER_COLORS = ['#6d28d9', '#7c3aed', '#8b5cf6', '#4c1d95', '#a78bfa', '#9333ea'];
+        var GROUND_Y = 500;
+
+        function resetGame() {
+            page = 0;
+            hearts = 3;
+            score = 0;
+            invuln = 0;
+            time = 0;
+            buildLevel(0);
+            updateHud();
+            joyEnd();
+        }
+
+        function buildLevel(p) {
+            var cfg = LEVELS[p];
+            var seed = cfg.seed;
+            function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+
+            platforms = [{ x: 0, y: GROUND_Y, w: 30000, h: 12 }];
+            letters = []; blots = []; particles = []; popups = [];
+            hand = null;
+
+            /* plataformas en escalera: el salto alcanza ~104px, pasos máx 70px */
+            var x = 220;
+            var py = 415; /* primera plataforma alcanzable desde el suelo (500-415=85px) */
+            for (var i = 0; i < cfg.platforms; i++) {
+                var pw = 130 + rnd() * 90;
+                py += (rnd() - 0.5) * 140;
+                var py2 = Math.max(245, Math.min(440, py));
+                if (Math.abs(py2 - platforms[platforms.length - 1].y) > 70) {
+                    py2 = platforms[platforms.length - 1].y + (py2 > platforms[platforms.length - 1].y ? 70 : -70);
+                    py2 = Math.max(245, Math.min(440, py2));
+                }
+                py = py2;
+                platforms.push({ x: x, y: py, w: pw, h: 12 });
+                x += pw + 110 + rnd() * 130;
+            }
+            var levelEnd = cfg.len;
+
+            /* letras sobre las plataformas */
+            for (i = 0; i < cfg.letters; i++) {
+                var pl = platforms[1 + Math.floor(rnd() * (platforms.length - 1))];
+                var lx = pl.x + 30 + rnd() * Math.max(40, pl.w - 60);
+                var ly = pl.y - 55;
+                letters.push({
+                    x: lx, y: ly,
+                    ch: LETTER_CHARS[Math.floor(rnd() * LETTER_CHARS.length)],
+                    color: LETTER_COLORS[Math.floor(rnd() * LETTER_COLORS.length)],
+                    t: rnd() * 6, taken: false
+                });
+            }
+
+            /* manchas de tinta sobre el suelo y plataformas */
+            for (i = 0; i < cfg.blots; i++) {
+                var onGround = rnd() < 0.4;
+                var bx, by;
+                if (onGround) {
+                    bx = 300 + rnd() * (levelEnd - 500);
+                    by = GROUND_Y - 14;
+                } else {
+                    var bp = platforms[Math.floor(rnd() * platforms.length)];
+                    bx = bp.x + 20 + rnd() * Math.max(40, bp.w - 40);
+                    by = bp.y - 14;
+                }
+                blots.push({ x: bx, y: by, r: 14 + rnd() * 8, t: rnd() * 6, vx: (rnd() - 0.5) * 40, vy: 0 });
+            }
+
+            /* la mano de Clara al final: alcanzable desde el suelo */
+            hand = { x: levelEnd + 120, y: GROUND_Y - 60, active: false };
+
+            player = { x: 60, y: GROUND_Y - 40, w: 30, h: 26, vx: 0, vy: 0, onGround: true, facing: 1, t: 0 };
+            worldX = 0;
+            invuln = 0;
+            dashCd = 0;
+        }
+
+        /* ================= ENTRADAS ================= */
+        document.addEventListener('keydown', function (e) {
+            var k = e.key.toLowerCase();
+            if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].indexOf(k) >= 0) e.preventDefault();
+            keys[k] = true;
+            if (k === ' ' && state === 'play') jump();
+            if ((k === 'p' || k === 'escape') && state === 'play') setState('pause');
+            if ((k === 'p' || k === 'escape') && state === 'pause') setState('play');
+        });
+        document.addEventListener('keyup', function (e) { keys[e.key.toLowerCase()] = false; });
+
+        var dragging = false;
+        cv.addEventListener('pointerdown', function (e) { dragging = true; pointer = pos(e); });
+        window.addEventListener('pointermove', function (e) {
+            if (joy.active && e.pointerId === joy.id) joyMove(e);
+            else if (dragging) pointer = pos(e);
+        });
+        window.addEventListener('pointerup', function (e) {
+            dragging = false; pointer = null;
+            if (joy.active && e.pointerId === joy.id) joyEnd();
+        });
+        window.addEventListener('pointercancel', function (e) {
+            dragging = false; pointer = null;
+            if (joy.active && e.pointerId === joy.id) joyEnd();
+        });
+        function pos(e) {
+            var r = cv.getBoundingClientRect();
+            return { x: (e.clientX - r.left) * (W / r.width), y: (e.clientY - r.top) * (H / r.height) };
+        }
+        document.getElementById('jumpBtn').addEventListener('pointerdown', function (e) { e.preventDefault(); jump(); });
+
+        joyBase.addEventListener('pointerdown', function (e) {
+            e.preventDefault();
+            joy.active = true; joy.id = e.pointerId;
+            joyBase.setPointerCapture(e.pointerId);
+            joyMove(e);
+        });
+        function joyMove(e) {
+            var r = joyBase.getBoundingClientRect();
+            var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+            var dx = e.clientX - cx, dy = e.clientY - cy;
+            var maxR = r.width / 2;
+            var len = Math.sqrt(dx * dx + dy * dy);
+            if (len > maxR) { dx = dx / len * maxR; dy = dy / len * maxR; len = maxR; }
+            var k = len / maxR;
+            if (k < 0.12) k = 0;
+            joy.dx = (dx / maxR) * k;
+            joy.dy = (dy / maxR) * k;
+            joyKnob.style.transform = 'translate(' + (dx * 0.68) + 'px,' + (dy * 0.68) + 'px)';
+        }
+        function joyEnd() {
+            joy.active = false; joy.dx = 0; joy.dy = 0; joy.id = null;
+            joyKnob.style.transform = 'translate(0,0)';
+        }
+
+        /* ================= BOTONES ================= */
+        function setState(s) {
+            state = s;
+            document.getElementById('menu').classList.toggle('hidden', s !== 'menu');
+            document.getElementById('win').classList.toggle('hidden', s !== 'win');
+            document.getElementById('lose').classList.toggle('hidden', s !== 'lose');
+            document.getElementById('pause').classList.toggle('hidden', s !== 'pause');
+            document.getElementById('btnPause').style.display = (s === 'play' || s === 'pause') ? 'block' : 'none';
+            document.getElementById('frame').classList.toggle('playing', s === 'play');
+            if (s === 'play') audio();
+        }
+        document.getElementById('btnPlay').addEventListener('click', function () { resetGame(); setState('play'); });
+        document.getElementById('btnRetry').addEventListener('click', function () { resetGame(); setState('play'); });
+        document.getElementById('btnAgain').addEventListener('click', function () { resetGame(); setState('play'); });
+        function toMenu() { resetGame(); setState('menu'); }
+        document.getElementById('btnMenuLose').addEventListener('click', toMenu);
+        document.getElementById('btnMenuWin').addEventListener('click', toMenu);
+        document.getElementById('btnMenuPause').addEventListener('click', toMenu);
+        document.getElementById('btnResume').addEventListener('click', function () { setState('play'); });
+        document.getElementById('btnPause').addEventListener('click', function () { if (state === 'play') setState('pause'); });
+        document.getElementById('btnMute').addEventListener('click', function () {
+            muted = !muted;
+            document.getElementById('btnMute').textContent = muted ? 'Sonido: No' : 'Sonido: Sí';
+        });
+
+        /* ================= LÓGICA ================= */
+        function jump() {
+            if (state !== 'play' || !player.onGround) return;
+            player.vy = -560;
+            player.onGround = false;
+            sfx.jump();
+        }
+
+        function update(dt) {
+            time += dt;
+            if (invuln > 0) invuln -= dt;
+            if (shake > 0) shake -= dt * 4;
+            if (dashCd > 0) dashCd -= dt;
+
+            if (state === 'play') {
+                /* control horizontal */
+                var dir = 0;
+                if (keys['arrowleft'] || keys['a']) dir -= 1;
+                if (keys['arrowright'] || keys['d']) dir += 1;
+                if (joy.active && dir === 0) dir = joy.dx;
+                else if (pointer && dir === 0 && !joy.active) {
+                    var pdx = (pointer.x + worldX) - player.x;
+                    if (Math.abs(pdx) > 12) dir = pdx > 0 ? 1 : -1;
+                }
+                player.vx += (dir * 260 - player.vx) * Math.min(1, dt * 10);
+                if (Math.abs(player.vx) > 10) player.facing = player.vx > 0 ? 1 : -1;
+
+                /* gravedad */
+                player.vy += 1500 * dt;
+                if (player.vy > 800) player.vy = 800;
+
+                /* mover */
+                player.x += player.vx * dt;
+                player.y += player.vy * dt;
+
+                /* colisión con plataformas (coordenadas de mundo) */
+                player.onGround = false;
+                for (var i = 0; i < platforms.length; i++) {
+                    var p = platforms[i];
+                    if (player.x + player.w > p.x && player.x < p.x + p.w) {
+                        /* aterrizar encima */
+                        if (player.vy >= 0 && player.y + player.h > p.y && player.y + player.h < p.y + p.h + 20) {
+                            player.y = p.y - player.h;
+                            player.vy = 0;
+                            player.onGround = true;
+                        }
+                        /* choque lateral (desde abajo) */
+                        else if (player.vy < 0 && player.y > p.y - 30 && player.y < p.y + p.h) {
+                            player.y = p.y + p.h;
+                            player.vy = 0;
+                        }
+                    }
+                }
+                /* suelo general */
+                if (player.y + player.h > GROUND_Y) {
+                    player.y = GROUND_Y - player.h;
+                    player.vy = 0;
+                    player.onGround = true;
+                }
+                if (player.y < -100) {
+                    player.y = -100; player.vy = 0;
+                }
+
+                /* avance del mundo: sigue al jugador a la derecha */
+                var targetX = Math.min(player.x - W * 0.35, LEVELS[page].len + 160);
+                worldX += (targetX - worldX) * Math.min(1, dt * 8);
+                if (worldX < 0) worldX = 0;
+
+                /* letras */
+                for (i = letters.length - 1; i >= 0; i--) {
+                    var l = letters[i];
+                    l.t += dt;
+                    var bob = Math.sin(l.t * 3) * 4;
+                    if (Math.abs(player.x + player.w / 2 - l.x) < 30 && Math.abs(player.y + player.h / 2 - (l.y + bob)) < 30) {
+                        score += 15;
+                        addPopup(l.x - worldX, l.y - 30, '+15 ' + l.ch);
+                        burst(l.x - worldX, l.y, l.color, 8);
+                        sfx.letter();
+                        letters.splice(i, 1);
+                        updateHud();
+                    }
+                }
+
+                /* manchas de tinta */
+                if (invuln <= 0) {
+                    for (i = blots.length - 1; i >= 0; i--) {
+                        var b = blots[i];
+                        b.t += dt;
+                        var bobY = Math.sin(b.t * 2) * 4;
+                        if (Math.abs(player.x + player.w / 2 - b.x) < b.r + 14 && Math.abs(player.y + player.h / 2 - (b.y + bobY)) < b.r + 14) {
+                            hurt();
+                            break;
+                        }
+                    }
+                }
+
+                /* la mano de Clara */
+                if (hand && !hand.active && letters.length === 0) {
+                    hand.active = true;
+                    score += hearts * 50;
+                    addPopup(hand.x - worldX, hand.y - 60, '+' + (hearts * 50) + ' de bonus', '#ffd54f');
+                    addPopup(hand.x - worldX, hand.y - 30, '¡A la mano de Clara!', '#ffd54f');
+                    sfx.page();
+                    updateHud();
+                }
+                if (hand && hand.active) {
+                    if (Math.abs(player.x + player.w / 2 - hand.x) < 40 && Math.abs(player.y + player.h / 2 - hand.y) < 70) {
+                        sfx.hand();
+                        if (page >= LEVELS.length - 1) { winGame(); }
+                        else { nextPage(); }
+                    }
+                }
+            }
+
+            /* partículas */
+            for (i = particles.length - 1; i >= 0; i--) {
+                var pt = particles[i];
+                pt.x += pt.vx * dt; pt.y += pt.vy * dt; pt.vy += 300 * dt;
+                pt.life -= dt;
+                if (pt.life <= 0) particles.splice(i, 1);
+            }
+            /* popups */
+            for (i = popups.length - 1; i >= 0; i--) {
+                popups[i].y -= 34 * dt; popups[i].life -= dt;
+                if (popups[i].life <= 0) popups.splice(i, 1);
+            }
+        }
+
+        function nextPage() {
+            page++;
+            buildLevel(page);
+            updateHud();
+            sfx.page();
+        }
+
+        function hurt() {
+            if (invuln > 0) return;
+            hearts--;
+            invuln = 1.6;
+            shake = 1;
+            sfx.hit();
+            burst(player.x - worldX, player.y, '#7c3aed', 12);
+            updateHud();
+            if (hearts <= 0) loseGame();
+        }
+
+        function updateHud() {
+            var total = LEVELS[page].letters;
+            var got = total - letters.length;
+            document.getElementById('hudHearts').textContent = '♥'.repeat(Math.max(0, hearts)) + '♡'.repeat(Math.max(0, 3 - hearts));
+            document.getElementById('hudLetters').textContent = got + '/' + total;
+            document.getElementById('hudPage').textContent = (page + 1);
+            document.getElementById('hudScore').textContent = score;
+        }
+
+        function winGame() {
+            state = 'win';
+            document.getElementById('win').classList.remove('hidden');
+            document.getElementById('btnPause').style.display = 'none';
+            document.getElementById('winStats').innerHTML =
+                '<div><b>' + score + '</b><br>puntos</div>' +
+                '<div><b>3</b><br>páginas</div>' +
+                '<div><b>' + hearts + '/3</b><br>corazones</div>';
+            sfx.win();
+        }
+
+        function loseGame() {
+            state = 'lose';
+            document.getElementById('lose').classList.remove('hidden');
+            document.getElementById('btnPause').style.display = 'none';
+            document.getElementById('loseStats').innerHTML =
+                '<div><b>' + score + '</b><br>puntos</div>' +
+                '<div><b>' + (page + 1) + '/3</b><br>página</div>' +
+                '<div><b>' + letters.length + '</b><br>letras por recoger</div>';
+            sfx.lose();
+        }
+
+        function addPopup(x, y, txt, color) { popups.push({ x: x, y: y, txt: txt, life: 1.2, color: color || '#4c1d95' }); }
+        function burst(x, y, color, n) {
+            for (var i = 0; i < n; i++) {
+                var a = Math.random() * Math.PI * 2, s = 60 + Math.random() * 220;
+                particles.push({ x: x, y: y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 60, life: 0.5 + Math.random() * 0.4, color: color, r: 2.5 + Math.random() * 3 });
+            }
+        }
+
+        /* ================= DIBUJO ================= */
+        function draw() {
+            ctx.save();
+            if (shake > 0) {
+                ctx.translate((Math.random() - 0.5) * shake * 12, (Math.random() - 0.5) * shake * 12);
+            }
+            drawBackground();
+            drawPlatforms();
+            drawLetters();
+            drawBlots();
+            drawHand();
+            drawPlayer();
+            drawParticles();
+            drawPopups();
+            drawHudCanvas();
+            ctx.restore();
+        }
+
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#fdf9f0');
+            g.addColorStop(1, '#efe7dc');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+
+            /* líneas de cuaderno */
+            ctx.strokeStyle = 'rgba(76, 29, 149, 0.08)';
+            ctx.lineWidth = 1;
+            for (var y = 44; y < H; y += 32) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+            }
+            ctx.strokeStyle = 'rgba(124, 58, 237, 0.2)';
+            ctx.beginPath(); ctx.moveTo(26, 0); ctx.lineTo(26, H); ctx.stroke();
+
+            /* puntuación flotante */
+            var chars = ['?', '!', '¡', 'A', 'Ñ', 'S', 'T', '.', ',', '¿'];
+            ctx.font = 'bold 22px Fredoka, Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            for (var i = 0; i < 14; i++) {
+                var sx = ((i * 137 + 60 - worldX * 0.15) % 1500 + 1500) % 1500 - 260;
+                var sy = 40 + (i % 4) * 70;
+                ctx.fillStyle = 'rgba(124, 58, 237, 0.10)';
+                ctx.fillText(chars[i % chars.length], sx, sy);
+            }
+
+            /* borde inferior del libro */
+            var pg = ctx.createLinearGradient(0, GROUND_Y, 0, H);
+            pg.addColorStop(0, '#e6dbc6');
+            pg.addColorStop(1, '#d8c9ae');
+            ctx.fillStyle = pg;
+            ctx.fillRect(0, GROUND_Y, W, H - GROUND_Y);
+            ctx.strokeStyle = 'rgba(76, 29, 149, 0.2)';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(0, GROUND_Y); ctx.lineTo(W, GROUND_Y); ctx.stroke();
+        }
+
+        function drawPlatforms() {
+            for (var i = 0; i < platforms.length; i++) {
+                var p = platforms[i];
+                var sx = p.x - worldX;
+                if (sx > W + 100 || sx + p.w < -100) continue;
+                if (i === 0) continue; /* el suelo se dibuja aparte */
+                ctx.fillStyle = '#f7f1e4';
+                ctx.fillRect(sx, p.y, p.w, p.h);
+                ctx.fillStyle = '#6d28d9';
+                ctx.fillRect(sx, p.y, p.w, 4);
+            }
+        }
+
+        function drawLetters() {
+            for (var i = 0; i < letters.length; i++) {
+                var l = letters[i];
+                var lx = l.x - worldX;
+                if (lx < -40 || lx > W + 40) continue;
+                var bob = Math.sin(l.t * 3) * 4;
+                var pulse = 1 + Math.sin(l.t * 4) * 0.08;
+                ctx.fillStyle = l.color;
+                ctx.beginPath(); ctx.arc(lx, l.y + bob, 15 * pulse, 0, 7); ctx.fill();
+                ctx.fillStyle = '#fff';
+                ctx.beginPath(); ctx.arc(lx - 5, l.y + bob - 5, 4, 0, 7); ctx.fill();
+                ctx.fillStyle = l.color;
+                ctx.font = 'bold 17px Fredoka, Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(l.ch, lx, l.y + bob + 1);
+            }
+        }
+
+        function drawBlots() {
+            for (var i = 0; i < blots.length; i++) {
+                var b = blots[i];
+                var bx = b.x - worldX;
+                if (bx < -80 || bx > W + 80) continue;
+                var bobY = Math.sin(b.t * 2) * 4;
+                var pulse = 1 + Math.sin(b.t * 3) * 0.05;
+                ctx.fillStyle = '#312e81';
+                ctx.beginPath(); ctx.arc(bx, b.y + bobY, b.r * pulse, 0, 7); ctx.fill();
+                ctx.beginPath(); ctx.arc(bx - b.r * 0.5 * pulse, b.y + bobY - b.r * 0.35, b.r * 0.45 * pulse, 0, 7); ctx.fill();
+                ctx.beginPath(); ctx.arc(bx + b.r * 0.55 * pulse, b.y + bobY - b.r * 0.2, b.r * 0.4 * pulse, 0, 7); ctx.fill();
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.45)';
+                ctx.beginPath(); ctx.arc(bx - b.r * 0.3, b.y + bobY - b.r * 0.3, b.r * 0.16, 0, 7); ctx.fill();
+            }
+        }
+
+        function drawHand() {
+            if (!hand || !hand.active) return;
+            var hx = hand.x - worldX;
+            var wave = Math.sin(time * 3) * 0.1;
+            ctx.save();
+            ctx.translate(hx, hand.y);
+            ctx.rotate(-0.25 + wave);
+            ctx.fillStyle = '#f6c9a0';
+            /* muñeca */
+            ctx.fillRect(-14, 0, 28, 90);
+            /* palma */
+            ctx.beginPath(); ctx.ellipse(0, 0, 32, 36, 0, 0, 7); ctx.fill();
+            /* dedos */
+            for (var i = 0; i < 4; i++) {
+                ctx.fillRect(-21 + i * 13, -48 - (i % 2) * 6, 13, 48 + (i % 2) * 6);
+            }
+            /* pulgar */
+            ctx.fillRect(20, -8, 13, 30);
+            ctx.strokeStyle = 'rgba(180, 120, 90, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.ellipse(0, 0, 32, 36, 0, 0, 7); ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawPlayer() {
+            var p = player;
+            if (invuln > 0 && Math.floor(time * 12) % 2 === 0) return;
+            p.t += 0.016;
+            var f = p.facing;
+            var cx = p.x - worldX + p.w / 2, cy = p.y + p.h / 2;
+            var moving = Math.abs(p.vx) > 20;
+            var s = moving ? Math.sin(p.t * 14) * 0.3 : 0;
+
+            ctx.save();
+            ctx.translate(cx, cy);
+
+            /* patas */
+            ctx.strokeStyle = '#1a1a2e';
+            ctx.lineWidth = 3.5;
+            ctx.lineCap = 'round';
+            for (var i = 0; i < 4; i++) {
+                var ph = s * (i % 2 === 0 ? 1 : -1);
+                ctx.beginPath();
+                ctx.moveTo(-4, -5);
+                ctx.quadraticCurveTo(-12, 8 + ph * 6, -20, 16 + ph * 8);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(4, -5);
+                ctx.quadraticCurveTo(12, 8 + ph * 6, 20, 16 + ph * 8);
+                ctx.stroke();
+            }
+            /* cuerpo */
+            ctx.fillStyle = '#1a1a2e';
+            ctx.beginPath(); ctx.ellipse(0, 0, 14, 12, 0, 0, 7); ctx.fill();
+            /* cabeza */
+            ctx.beginPath(); ctx.arc(f * 8, -2, 9, 0, 7); ctx.fill();
+            /* ojos */
+            ctx.fillStyle = '#fff';
+            ctx.beginPath(); ctx.arc(f * 11, -4, 3.4, 0, 7); ctx.fill();
+            ctx.beginPath(); ctx.arc(f * 6, -6, 2.8, 0, 7); ctx.fill();
+            ctx.fillStyle = '#8b5cf6';
+            ctx.beginPath(); ctx.arc(f * 11, -4, 1.6, 0, 7); ctx.fill();
+            ctx.beginPath(); ctx.arc(f * 6, -6, 1.3, 0, 7); ctx.fill();
+            /* mosca de adorno */
+            ctx.fillStyle = '#312e81';
+            ctx.beginPath(); ctx.arc(-f * 3, 4, 3, 0, 7); ctx.fill();
+            ctx.restore();
+        }
+
+        function drawParticles() {
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                ctx.globalAlpha = Math.max(0, p.life / 0.5);
+                ctx.fillStyle = p.color;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        function drawPopups() {
+            ctx.font = 'bold 18px Fredoka, Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            for (var i = 0; i < popups.length; i++) {
+                var p = popups[i];
+                ctx.globalAlpha = Math.max(0, Math.min(1, p.life));
+                ctx.fillStyle = p.color || '#4c1d95';
+                ctx.fillText(p.txt, p.x, p.y);
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        function drawHudCanvas() {                /* flecha hacia la mano */
+            if (hand && hand.active) {
+                var hx = hand.x - worldX;
+                var dir = hx > player.x - worldX ? 1 : -1;
+                ctx.font = 'bold 30px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#6d28d9';
+                ctx.fillText(dir > 0 ? '→' : '←', dir > 0 ? W - 60 : 60, H / 2);
+            }
+            /* contador de letras restantes flotando sobre el jugador */
+            var total = LEVELS[page].letters;
+            var got = total - letters.length;
+            if (got < total) {
+                ctx.font = 'bold 13px Fredoka, Arial';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'rgba(76, 29, 149, 0.7)';
+                ctx.fillText(got + '/' + total, player.x - worldX + player.w / 2, player.y - 14);
+            }
+        }
+
+        /* ================= BUCLE ================= */
+        var last = 0;
+        function loop(ts) {
+            var dt = Math.min(0.05, (ts - last) / 1000 || 0.016);
+            last = ts;
+            update(dt);
+            draw();
+            requestAnimationFrame(loop);
+        }
+        resetGame();
+        requestAnimationFrame(loop);
+    })();
+    </script>
+</body>
+</html>

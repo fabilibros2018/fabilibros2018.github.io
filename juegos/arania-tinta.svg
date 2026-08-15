@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22163f"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="800" fill="url(#bg)"/>
+
+  <!-- estrellitas de tinta -->
+  <circle cx="90" cy="120" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="160" cy="200" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="520" cy="150" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="480" cy="260" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="120" cy="340" r="2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="540" cy="380" r="2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="70" cy="460" r="3" fill="#ffffff" opacity="0.7"/>
+
+  <!-- letras flotando -->
+  <text x="80" y="250" font-family="Arial, sans-serif" font-size="34" font-weight="bold" fill="#c4b5fd">A</text>
+  <text x="520" y="90" font-family="Arial, sans-serif" font-size="34" font-weight="bold" fill="#c4b5fd">Ñ</text>
+  <text x="55" y="180" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#e9d5ff">S</text>
+  <text x="535" y="320" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#e9d5ff">T</text>
+  <text x="120" y="90" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ddd6fe">¡</text>
+  <text x="460" y="470" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ddd6fe">?</text>
+
+  <!-- libro abierto -->
+  <path d="M 60 560 Q 160 500 300 520 L 300 680 Q 160 660 60 680 Z" fill="#fdf6ec"/>
+  <path d="M 540 560 Q 440 500 300 520 L 300 680 Q 440 660 540 680 Z" fill="#fdf6ec"/>
+  <path d="M 60 560 Q 160 500 300 520" fill="none" stroke="#e0d2c0" stroke-width="4"/>
+  <path d="M 540 560 Q 440 500 300 520" fill="none" stroke="#e0d2c0" stroke-width="4"/>
+  <line x1="300" y1="520" x2="300" y2="680" stroke="#c9b8a0" stroke-width="5"/>
+  <path d="M 70 560 L 285 522" stroke="#efe6d6" stroke-width="2"/>
+  <path d="M 530 560 L 315 522" stroke="#efe6d6" stroke-width="2"/>
+
+  <!-- mancha de tinta en la página -->
+  <ellipse cx="440" cy="600" rx="52" ry="22" fill="url(#ink)" opacity="0.85"/>
+  <ellipse cx="455" cy="592" rx="14" ry="8" fill="#1a1a2e"/>
+
+  <!-- araña de tinta sobre la página -->
+  <g>
+    <!-- patas -->
+    <path d="M 405 585 Q 380 560 365 545" stroke="#1a1a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 405 592 Q 375 580 355 580" stroke="#1a1a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 405 600 Q 378 606 358 615" stroke="#1a1a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 410 607 Q 390 625 378 640" stroke="#1a1a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 405 585 Q 430 558 445 540" stroke="#1a1a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 405 592 Q 435 578 455 572" stroke="#1a1a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 405 600 Q 432 604 452 610" stroke="#1a1a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 410 607 Q 430 622 442 636" stroke="#1a1a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- cuerpo -->
+    <ellipse cx="405" cy="596" rx="22" ry="18" fill="#1a1a2e"/>
+    <circle cx="395" cy="588" r="4" fill="#ffffff"/>
+    <circle cx="413" cy="588" r="4" fill="#ffffff"/>
+    <circle cx="396" cy="588" r="2" fill="#8b5cf6"/>
+    <circle cx="414" cy="588" r="2" fill="#8b5cf6"/>
+  </g>
+
+  <!-- mano de Clara bajando hacia la página -->
+  <g transform="rotate(-18 470 300)">
+    <rect x="412" y="150" width="26" height="100" rx="13" fill="#f6c9a0"/>
+    <rect x="446" y="130" width="26" height="120" rx="13" fill="#f6c9a0"/>
+    <rect x="480" y="142" width="26" height="108" rx="13" fill="#f6c9a0"/>
+    <rect x="514" y="172" width="26" height="80" rx="13" fill="#f6c9a0"/>
+    <ellipse cx="472" cy="290" rx="72" ry="62" fill="#f6c9a0"/>
+    <path d="M 430 240 Q 470 260 515 245" stroke="#e8b48c" stroke-width="3" fill="none"/>
+    <ellipse cx="470" cy="288" rx="26" ry="20" fill="#e8b48c" opacity="0.35"/>
+  </g>
+
+  <!-- subtítulo -->
+  <text x="300" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#ddd6fe">TINTA Y REALIDAD DE LA MANO</text>
+
+  <!-- badge próximamente -->
+  <rect x="170" y="60" width="260" height="46" rx="23" fill="#8e24aa"/>
+  <text x="300" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">PRÓXIMAMENTE</text>
+
+  <!-- título -->
+  <rect x="130" y="706" width="340" height="64" rx="14" fill="rgba(0,0,0,0.45)"/>
+  <text x="300" y="748" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#ffffff">La Araña de Tinta</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="32%" r="80%">
+      <stop offset="0%" stop-color="#33205e"/>
+      <stop offset="55%" stop-color="#1c1b3a"/>
+      <stop offset="100%" stop-color="#0e0d1f"/>
+    </radialGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg)"/>
+
+  <!-- Telaraña de fondo -->
+  <g stroke="#ffffff" stroke-opacity="0.09" fill="none" stroke-width="2">
+    <circle cx="400" cy="420" r="95"/>
+    <circle cx="400" cy="420" r="180"/>
+    <circle cx="400" cy="420" r="265"/>
+    <line x1="135" y1="420" x2="665" y2="420"/>
+    <line x1="400" y1="155" x2="400" y2="685"/>
+    <line x1="212" y1="232" x2="588" y2="608"/>
+    <line x1="588" y1="232" x2="212" y2="608"/>
+    <line x1="335" y1="690" x2="465" y2="690"/>
+    <line x1="465" y1="690" x2="560" y2="760"/>
+  </g>
+
+  <!-- Letras flotantes -->
+  <g fill="#c4b5fd" fill-opacity="0.45" font-family="Georgia, serif" font-size="52" font-weight="bold">
+    <text x="85" y="230">A</text>
+    <text x="655" y="170">Ñ</text>
+    <text x="110" y="780">S</text>
+    <text x="660" y="820">T</text>
+    <text x="640" y="330">?</text>
+    <text x="150" y="340">!</text>
+    <text x="700" y="560">.</text>
+    <text x="80" y="560">,</text>
+  </g>
+
+  <!-- Mancha de tinta bajo la araña -->
+  <path d="M400 520 C 430 560, 470 580, 455 615 C 440 650, 360 650, 345 615 C 330 580, 370 560, 400 520 Z" fill="#8b5cf6" fill-opacity="0.55"/>
+  <circle cx="330" cy="600" r="14" fill="#8b5cf6" fill-opacity="0.45"/>
+  <circle cx="468" cy="610" r="10" fill="#8b5cf6" fill-opacity="0.4"/>
+
+  <!-- Araña de tinta -->
+  <g stroke="url(#ink)" stroke-width="11" stroke-linecap="round" fill="none">
+    <!-- patas izquierdas -->
+    <path d="M360 395 Q 300 365, 265 405"/>
+    <path d="M350 415 Q 275 415, 245 460"/>
+    <path d="M355 435 Q 295 470, 272 515"/>
+    <path d="M368 450 Q 330 505, 320 545"/>
+    <!-- patas derechas -->
+    <path d="M440 395 Q 500 365, 535 405"/>
+    <path d="M450 415 Q 525 415, 555 460"/>
+    <path d="M445 435 Q 505 470, 528 515"/>
+    <path d="M432 450 Q 470 505, 480 545"/>
+  </g>
+  <!-- cabeza -->
+  <circle cx="400" cy="380" r="30" fill="url(#ink)"/>
+  <!-- cuerpo -->
+  <ellipse cx="400" cy="440" rx="55" ry="42" fill="url(#ink)"/>
+  <!-- ojos -->
+  <circle cx="386" cy="372" r="7" fill="#f5e9ff"/>
+  <circle cx="414" cy="372" r="7" fill="#f5e9ff"/>
+  <circle cx="386" cy="372" r="3" fill="#0e0d1f"/>
+  <circle cx="414" cy="372" r="3" fill="#0e0d1f"/>
+
+  <!-- Título -->
+  <text x="400" y="880" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="46" font-weight="bold" fill="#f5e9ff">La Araña de Tinta</text>
+  <text x="400" y="934" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="bold" fill="#c4b5fd">que Quería Ser de Verdad</text>
+</svg>

@@ -986,6 +986,11 @@
                 <span class="book-name">El Jardín de los Relojes Dormidos</span>
                 <div class="book-preview"><img src="./el jardin/magical-garden.jpg" alt="Jardín Mágico"></div>
             </li>
+            <li class="nav-item" data-book="arania">
+                <i class="fas fa-spider"></i>
+                <span class="book-name">La Araña de Tinta</span>
+                <div class="book-preview"><img src="./arania/portada.svg" alt="arania"></div>
+            </li>
             <li class="nav-item" data-book="lila">
                 <i class="fas fa-lightbulb"></i>
                 <span class="book-name">Lila y el Misterio de la Luz Robada</span>
@@ -1141,6 +1146,18 @@
             </div>
 
             <div class="book-card">
+                <span class="badge" style="background:linear-gradient(90deg,#7c3aed,#c026d3);">Nuevo</span>
+                <div class="book-image-wrap">
+                    <img src="./arania/portada.svg" alt="arania" class="book-image" loading="lazy">
+                </div>
+                <div class="book-info">
+                    <h2 class="book-title">La Araña de Tinta que Quería Ser de Verdad</h2>
+                    <p class="book-description">Una araña de tinta que vive dentro de un libro descubre que afuera hay otra araña: la mano de una niña. ¿Y si la imaginación y la realidad se dieran la mano? (Literalmente.)</p>
+                    <a href="./arania/arania.html" class="read-more"><i class="fas fa-book-open"></i> Leer</a>
+                </div>
+            </div>
+
+            <div class="book-card">
                 <span class="badge">Parte 1</span>
                 <div class="book-image-wrap">
                     <img src="./lila/night-village.jpg" alt="lila" class="book-image" loading="lazy">
@@ -1225,7 +1242,7 @@
                 </div>
                 <div class="game-info">
                     <h3>Perico: El Rey del Bosque</h3>
-                    <p>¡Demo jugable! Vuela con Tiko, esquiva cocos y troncos, recoge frutas y plumas de prestigio y derrota al monstruo Grom golpeando su ojo.</p>
+                    <p>¡Demo jugable! A pantalla completa en el celular: vuela con el joystick, lanza semillas 🌱, esquiva cocos y troncos, recoge frutas y plumas de prestigio y derrota al monstruo Grom golpeando su ojo.</p>
                     <span class="play-now">▶ ¡Juega la demo!</span>
                 </div>
             </a>
@@ -1284,6 +1301,17 @@
                     <span class="soon">Próximamente</span>
                 </div>
             </div>
+
+            <a href="./juegos/arania-tinta.html" class="game-card" style="text-decoration: none; display: block;">
+                <div class="game-cover">
+                    <img src="./juegos/arania-tinta.svg" alt="La Araña de Tinta" loading="lazy">
+                </div>
+                <div class="game-info">
+                    <h3>La Araña de Tinta</h3>
+                    <p>¡Demo jugable! Guía a Tinta por las páginas del libro: recoge todas las letras, esquiva manchas de tinta y palabras enredadas, y llega hasta la mano de Clara. En pantalla completa en el celular.</p>
+                    <span class="play-now">▶ ¡Juega la demo!</span>
+                </div>
+            </a>
 
         </div>
     </section>
@@ -1425,6 +1453,18 @@
                 </div>
             </div>
 
+            <div class="audio-card">
+                <div class="audio-icon">♪</div>
+                <div class="audio-info">
+                    <div class="audio-title">La Canción de la Araña de Tinta</div>
+                    <div class="audio-book">La Araña de Tinta que Quería Ser de Verdad</div>
+                    <audio controls>
+                        <source src="./arania/araña.mp3" type="audio/mpeg">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -1521,6 +1561,9 @@
                         break;
                     case 'jardin':
                         bookCard = document.querySelector('.book-card img[alt="Jardín Mágico"]').closest('.book-card');
+                        break;
+                    case 'arania':
+                        bookCard = document.querySelector('.book-card img[alt="arania"]').closest('.book-card');
                         break;
                     case 'lila':
                         bookCard = document.querySelector('.book-card img[alt="lila"]').closest('.book-card');

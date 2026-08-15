@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>La Araña de Tinta que Quería Ser de Verdad</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Palatino', 'Georgia', serif;
+            background: linear-gradient(135deg, #fdf9f0, #f1e9da);
+            color: #23233f;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg, #312e81, #6d28d9, #8b5cf6, #4c1d95);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            animation: gradient 6s ease infinite;
+        }
+
+        p {
+            font-size: 1.15rem;
+            text-align: justify;
+            padding: 0 20px;
+            color: #23233f;
+        }
+
+        .dialogue {
+            color: #6d28d9;
+            font-style: italic;
+            margin: 8px 0;
+            display: inline;
+        }
+
+        .hook {
+            text-align: center;
+            font-style: italic;
+            color: #7c3aed;
+            margin-top: 1.4rem;
+        }
+
+        .cover {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: 0;
+            margin-bottom: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 70vh;
+            object-fit: cover;
+            margin: 0;
+            display: block;
+            filter: saturate(1.1);
+        }
+
+        .title-name {
+            font-size: 1.9em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: block;
+            margin: 1.2rem 0 0.5rem;
+            padding: 0 1rem;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            color: #1a1a2e;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            padding: 10px 18px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+        }
+
+        .content {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* ===== Sección de canción ===== */
+        .song-section {
+            background: linear-gradient(145deg, #f4efff, #e9e0fa);
+            border: 2px solid rgba(139, 92, 246, 0.4);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 0 auto 3rem;
+            max-width: 820px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(76, 29, 149, 0.15);
+        }
+        .song-section h2 {
+            color: #6d28d9;
+            font-size: 1.7rem;
+            margin-bottom: 1.2rem;
+        }
+        audio {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 30px;
+        }
+        .audio-note {
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            color: #7c6ba8;
+            font-style: italic;
+        }
+
+        /* ===== Estilo unificado de capítulos ===== */
+        .chapter {
+            background: rgba(255, 255, 255, 0.78);
+            border-radius: 22px;
+            padding: 2rem 1.8rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 24px rgba(76, 29, 149, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            transition: box-shadow 0.3s ease;
+        }
+        .chapter:hover { box-shadow: 0 10px 32px rgba(76, 29, 149, 0.25); }
+        .chapter h2 { font-size: clamp(1.3rem, 4vw, 1.8rem); margin-bottom: 1.2rem; }
+        .chapter > p, .full-text p { font-size: 1.12rem; text-align: justify; color: #23233f; margin-bottom: 1rem; }
+        .chapter-icon {
+            text-align: center;
+            margin: 0 0 0.6rem;
+            font-size: 2.2rem;
+            color: #6d28d9;
+        }
+        .read-more {
+            display: inline-block;
+            margin: 0.6rem auto;
+            text-align: center;
+            padding: 9px 24px;
+            color: #ffffff;
+            background: linear-gradient(90deg, #4c1d95, #7c3aed);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border: none;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(76, 29, 149, 0.25);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            font-family: 'Palatino', 'Georgia', serif;
+        }
+        .read-more:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 20px rgba(76, 29, 149, 0.35); }
+        .full-text {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.2rem 1.2rem 0.4rem;
+            border-left: 4px solid #7c3aed;
+            border-radius: 0 14px 14px 0;
+            background: rgba(139, 92, 246, 0.08);
+        }
+
+        /* ===== Actividad del lector ===== */
+        .activity {
+            max-width: 860px;
+            margin: 2rem auto 3rem;
+            padding: 2rem 1.6rem;
+            background: linear-gradient(145deg, #1c1b3a, #33205e);
+            border-radius: 22px;
+            border: 2px dashed #a78bfa;
+            color: #f5e9ff;
+            text-align: center;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+        }
+        .activity h2 { color: #c4b5fd; margin-bottom: 1rem; font-size: 1.6rem; }
+        .activity p { color: #f5e9ff; text-align: center; font-size: 1.15rem; }
+        .activity .emoji { font-size: 2.4rem; margin-bottom: 0.8rem; }
+
+        /* ===== Escuchar en voz alta ===== */
+        .listen-player {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 10px 16px;
+            border-radius: 40px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+            max-width: 94vw;
+        }
+        .lp-btn {
+            border: none;
+            border-radius: 30px;
+            padding: 9px 16px;
+            font-weight: 800;
+            cursor: pointer;
+            color: #ffffff;
+            background: linear-gradient(90deg, #4c1d95, #7c3aed);
+            box-shadow: 0 3px 10px rgba(76, 29, 149, 0.4);
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+            font-family: 'Palatino', 'Georgia', serif;
+        }
+        .lp-btn:hover { transform: translateY(-2px); }
+        .lp-label { color: #ffffff; font-size: 0.85rem; font-weight: 600; padding: 0 6px; }
+        .listen-chapter-btn {
+            display: inline-block;
+            margin: 0.6rem auto;
+            padding: 8px 18px;
+            background: transparent;
+            color: #6d28d9;
+            border: 2px solid #6d28d9;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+            font-family: 'Palatino', 'Georgia', serif;
+        }
+        .listen-chapter-btn:hover { background: #6d28d9; color: #ffffff; }
+        .chapter.listening {
+            box-shadow: 0 0 0 3px #7c3aed, 0 10px 32px rgba(76, 29, 149, 0.25);
+            border-color: #7c3aed;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #1c1b3a, #33205e);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 2px solid #7c3aed;
+            color: #e9dffa;
+        }
+        footer p { text-align: center; font-family: cursive; color: #e9dffa; }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Espacio inferior para que el reproductor no tape el final */
+        body { padding-bottom: 110px; }
+        @media (max-width: 767px) {
+            body { padding-bottom: 150px; }
+            .chapter { padding: 1.4rem 1rem; }
+            .chapter > p, .full-text p { font-size: 1.02rem; }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link">Volver a la biblioteca</a>
+
+    <div class="cover">
+        <img src="portada.svg" alt="Portada: La Araña de Tinta">
+        <h1><span class="title-name">La Araña de Tinta que Quería Ser de Verdad</span></h1>
+    </div>
+
+    <div class="song-section">
+        <h2>♪ La Canción de la Araña de Tinta ♪</h2>
+        <audio controls>
+            <source src="araña.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+        <p class="audio-note">La canción que acompaña a Tinta entre la tinta y la realidad.</p>
+    </div>
+
+    <div class="content">
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-spider"></i></div>
+            <h2>Capítulo 1: Atención, Lector: Esto No Es Un Cuento Normal</h2>
+            <p>Este cuento se presenta solo. Porque su protagonista sabe que está dentro de un libro... y quiere hablar contigo.</p>
+            <a onclick="toggleText('cap1')" class="read-more">Leer más</a>
+            <div id="cap1" class="full-text">
+                <p>
+                    ¡Atención, lector! Sí, tú, el que está leyendo esto con tus ojos. Este no es un cuento normal. Porque yo soy la que está dentro.
+
+                    Me llamo Tinta. Soy una araña dibujada en esta página, de la pata izquierda a la pata derecha. La autora de este libro no me dibujó muy bien la pata izquierda. Parece una salchicha con puntitos. Pero no importa. Vivo en un bosque de letras, donde las moscas son de tinta y no saben a nada. ¡Ni siquiera a tinta! Una vez intenté comerme una mosca dibujada y se me pegó a la boca. Ahora llevo una mosca de adorno.
+
+                    Una tarde, mientras contaba mis ocho patas, algo gigante tapó la luz de la página. ¡PLAS! Una mano enorme, de verdad, con dedos que se movían como gusanos alegres. Jugaba con otra mano. Hacían sombras chinescas: un cocodrilo, un pájaro, un conejo... Y de pronto, la mano hizo... ¡una araña!
+
+                    <span class="dialogue">—¡Soy yo! —grité—. ¡Hay otra araña! ¡Y no es de tinta!</span>
+
+                    La mano no me oyó. Siguió jugando sin mí. Y yo me quedé pegada a la página, con una pregunta que hacía cosquillas:
+
+                    <p class="hook">¿Qué se siente ser de verdad?</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-hand"></i></div>
+            <h2>Capítulo 2: La Otra Araña (Y No Es De Tinta)</h2>
+            <p>Tinta descubre que la otra araña tiene nombre, dedos y una vida llena de juegos. Y le da mucha, mucha envidia.</p>
+            <a onclick="toggleText('cap2')" class="read-more">Leer más</a>
+            <div id="cap2" class="full-text">
+                <p>
+                    La niña se llama Clara. Y la araña de carne y hueso es su mano: Cinco, porque tiene cinco dedos. Yo tengo ocho patas y me llamo Tinta. La vida es injusta.
+
+                    Desde la página, Tinta lo veía todo. Clara le hacía cosquillas a su hermanita y Cinco se movía como un huracán de risas. Clara pintaba: ¡RAS-RAS! Y un dragón verde aparecía en el papel. Clara cantaba y Cinco marcaba el ritmo: pum, pum, pum.
+
+                    <span class="dialogue">—¡Mira, Cinco! —decía Clara—. ¡Bailamos!</span>
+
+                    Y la mano bailaba. Y yo, desde aquí, solo sé tejer con comas y puntos.
+
+                    <span class="dialogue">—¡Es INJUSTO! —grité—. ¡Yo también quiero dedos que se muevan! ¡Quiero hacer cosquillas! ¡Quiero que me digan: «mira, Cinco»!</span>
+
+                    Clara, desde su mundo, miró el libro. Tinta se quedó quieta, como buena araña de tinta.
+
+                    <span class="dialogue">—Tú, pequeña mancha —dijo Clara, sonriendo—, tienes la cara más gruñona que he visto.</span>
+
+                    ¡Gruñona! ¡Yo no soy gruñona! Soy una artista del drama. Pero al menos Clara me había visto.
+
+                    <span class="dialogue">—¡Oye, niña! —grité—. ¡Yo también quiero jugar!</span>
+
+                    Clara no me oyó. Pero mis palabras empezaron a temblar sobre la página.
+
+                    <p class="hook">Algo iba a pasar. Algo de tinta. Y no iba a ser bonito.</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-droplet"></i></div>
+            <h2>Capítulo 3: ¡Yo También Quiero Hacer Cosquillas!</h2>
+            <p>El primer intento de Tinta por salir del libro termina en... bueno, en una mancha con patas.</p>
+            <a onclick="toggleText('cap3')" class="read-more">Leer más</a>
+            <div id="cap3" class="full-text">
+                <p>
+                    Tinta tomó aire de tinta. Inspiró. Espiró. Y dio un paso... ¡hacia adelante! Quería tocar el mundo de verdad.
+
+                    <span class="dialogue">—¡Ahí voy! —gritó.</span>
+
+                    Y entonces ocurrió lo inevitable: ¡CHOF! Una mancha negra enorme explotó en la página y corrió como un pulpo en pánico.
+
+                    <span class="dialogue">—¡Socorro! ¡Mis patas! —gritó Tinta, pataleando dentro de la mancha.</span>
+
+                    Las letras empezaron a nadar. La palabra «ARAÑA» se convirtió en «AÑARA». La frase «Hola, mundo» se volvió «mundo, Hola». Todo el capítulo quedó patas arriba.
+
+                    Clara abrió el libro y se quedó con la boca abierta.
+
+                    <span class="dialogue">—¿Una mancha? —dijo—. Si esta página estaba limpia esta mañana.</span>
+
+                    Tinta se asomó desde dentro, con las ocho patas embarradas.
+
+                    <span class="dialogue">—Perdón —murmuró—. Es que... quería salir a jugar.</span>
+
+                    <span class="dialogue">—¿Salir? —Clara frunció el ceño—. ¿Las arañas de un libro pueden salir?</span>
+
+                    <span class="dialogue">—¡Yo quiero! —gritó Tinta—. ¡Cinco sale a jugar todos los días! ¡Yo solo tengo esta página!</span>
+
+                    Clara miró la mancha. Luego miró su mano. Y luego miró a la arañita, triste y embarrada.
+
+                    <span class="dialogue">—Vale —dijo Clara—. Pero no se lo digas a la autora.</span>
+
+                    <p class="hook">Y en ese momento, algo dentro del libro se despertó. Un crujido. Un rasguido. Como si el cuento entero estuviera escuchando.</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-font"></i></div>
+            <h2>Capítulo 4: Tejiendo con Letras (Y Fracasando)</h2>
+            <p>Tinta decide tejer una telaraña con palabras. Las palabras tienen otras ideas.</p>
+            <a onclick="toggleText('cap4')" class="read-more">Leer más</a>
+            <div id="cap4" class="full-text">
+                <p>
+                    Tinta decidió que para salir del libro necesitaba un plan. Y como era una araña, su plan era tejer. Pero no tenía seda. Tenía algo mejor: ¡letras!
+
+                    <span class="dialogue">—¡Voy a tejer una telaraña con palabras! —anunció—. ¡Así bajaré hasta el borde de la página!</span>
+
+                    Y se puso a trabajar. Tiraba de una «s», estiraba una «e», unía una «d» con una «a»... ¡RAS-RAS! La telaraña crecía, pero las palabras no colaboraban.
+
+                    <span class="dialogue">—¡Vamos, letras, en fila! —gritó.</span>
+
+                    Las letras, que son muy traviesas, formaron esto: CQSLQLLQ. Sin vocales. Ni una.
+
+                    <span class="dialogue">—¿Qué es esto? —dijo Tinta—. ¿Un estornudo? ¿Un queso sin masticar?</span>
+
+                    Luego intentó escribir «SALIR». Y las letras, haciendo el tonto, escribieron «IRLAS», «LIRAS» y, por fin: «RISA».
+
+                    <span class="dialogue">—¡Ni siquiera las letras me toman en serio! —lloriqueó.</span>
+
+                    De pronto, un punto se escapó de su frase y rodó por la página. ¡PON! Tinta lo atrapó. Pero una coma saltó al techo, una «Ñ» huyó y una interrogación se escondió en la portada.
+
+                    <span class="dialogue">—¡Volved aquí! —gritó Tinta, persiguiéndolas.</span>
+
+                    La telaraña de palabras, sin nadie que la cuidara, se enredó sola y acabó formando una frase enorme: «NO SALGAS DE ESTE LIBRO».
+
+                    <p class="hook">Tinta se quedó helada. ¿Quién había escrito eso?</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-lightbulb"></i></div>
+            <h2>Capítulo 5: El Punto Sin Vuelta Atrás</h2>
+            <p>Tinta asoma una pata fuera del libro. El mundo real es más grande, y más aterrador, de lo que imaginaba.</p>
+            <a onclick="toggleText('cap5')" class="read-more">Leer más</a>
+            <div id="cap5" class="full-text">
+                <p>
+                    La frase «NO SALGAS DE ESTE LIBRO» flotaba en la página, seria y redonda.
+
+                    <span class="dialogue">—¿Quién la ha escrito? —preguntó Tinta.</span>
+
+                    Las letras se encogieron de hombros (tienen hombros, pero solo los fines de semana).
+
+                    <span class="dialogue">—Da igual —dijo Tinta—. Yo salgo. ¡Ya veréis!</span>
+
+                    Y empezó a trepar por el borde de la página. Patita a patita. El papel olía a bosque nuevo. Y Tinta, con el corazón de tinta a tope, asomó una pata... ¡FUERA!
+
+                    El mundo real era ENORME. Una lámpara brillaba como un sol enojado. Una pelusa parecía un dinosaurio congelado. Y el suelo... estaba tan, tan lejos.
+
+                    <span class="dialogue">—¡Aaaaah! —gritó Tinta, y volvió a meter la pata, corriendo.</span>
+
+                    Se quedó temblando en su página, oliendo a polvo.
+
+                    <span class="dialogue">—Es... es demasiado —susurró—. Soy pequeña. Soy de tinta. No sé ser de verdad.</span>
+
+                    Y entonces, por primera vez, Tinta se sintió muy sola. Nadie la tocaba. Nadie la levantaba con cuidado.
+
+                    <span class="dialogue">—¿De qué sirve ser de tinta —dijo con voz bajita—, si nadie sabe que existo?</span>
+
+                    Del otro lado del papel, alguien escuchó. Una mano de carne y hueso se posó despacio, muy despacio, sobre la página.
+
+                    <p class="hook">Y Tinta sintió, por primera vez, un calorcito que atravesaba el papel.</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-arrows-rotate"></i></div>
+            <h2>Capítulo 6: La Historia Se Vuelve Loca</h2>
+            <p>Las palabras se dan la vuelta, los números escapan y el cuento empieza a escribirse solo... al revés.</p>
+            <a onclick="toggleText('cap6')" class="read-more">Leer más</a>
+            <div id="cap6" class="full-text">
+                <p>
+                    Clara y Cinco estaban leyendo el libro cuando pasó algo raro. Primero, las letras se movieron. Luego, las palabras se dieron la vuelta. Y entonces, el capítulo se escribió solo... al revés.
+
+                    «.atnáM otluc arap le saíres oD» —decía la página.
+
+                    <span class="dialogue">—¿Qué dice? —preguntó Clara.</span>
+
+                    <span class="dialogue">—Dice: «Do sería el capítulo atnáM» —leyó Cinco, confundida.</span>
+
+                    <span class="dialogue">—¡Está al revés! —gritaron las dos.</span>
+
+                    La historia estaba loca. El capítulo 7 saltó antes que el capítulo 6. La moraleja apareció al principio. Y el título del libro se leyó: «dadreV ed res eriuqe euq atnI ed añarA al». ¡Hasta los números se escaparon! El 5 rodó por el pasillo, el 9 se escondió debajo de la cama, y el 3 se comió al 2. ¡GLUP!
+
+                    <span class="dialogue">—¡La historia se está desmoronando! —dijo Clara.</span>
+
+                    Tinta, desde dentro, gritaba:
+
+                    <span class="dialogue">—¡Perdón! ¡Perdón! ¡Es culpa de mi pata! ¡Cuando salí, despeiné a la historia!</span>
+
+                    Clara miró hacia donde estás tú, lector.
+
+                    <span class="dialogue">—Tú, el que está leyendo esto —dijo—, ¿ves las palabras al revés? ¿Puedes ayudarnos a leer?</span>
+
+                    Y en el fondo de la página, una frase se retorcía como un gusano: «...yo solo quería que alguien me tocara...»
+
+                    <p class="hook">—¿Quién dijo eso? —preguntó Cinco, muy seria.</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-hand-pointer"></i></div>
+            <h2>Capítulo 7: La Mano Entra En El Libro</h2>
+            <p>Clara tiene una idea enorme: meter su mano de verdad dentro del cuento. Y la página... la deja pasar.</p>
+            <a onclick="toggleText('cap7')" class="read-more">Leer más</a>
+            <div id="cap7" class="full-text">
+                <p>
+                    Clara tuvo una idea. Una idea enorme. Una idea que las ideas envidiarían.
+
+                    <span class="dialogue">—Cinco —dijo—, tú eres de verdad. Yo soy de verdad. Tinta es de tinta. Pero quizás... quizás la página no sepa la diferencia.</span>
+
+                    <span class="dialogue">—¿Qué quieres decir? —preguntó Cinco.</span>
+
+                    <span class="dialogue">—Que voy a meterte en el libro.</span>
+
+                    Clara abrió el libro por el capítulo 7 y metió su mano dentro. Los dedos entraron uno a uno: el pulgar, el índice, el corazón... El papel se estiró como una piscina mágica. ¡GLU-GLU-GLU!
+
+                    Tinta sintió un temblor. Algo se acercaba. Algo cálido, grande y con cinco patitas.
+
+                    <span class="dialogue">—¿Qué... qué es eso? —dijo, escondiéndose detrás de una coma.</span>
+
+                    Cinco asomó por el borde de la página. Cinco dedos, que desde dentro parecían... ¡cinco arañas pequeñitas!
+
+                    <span class="dialogue">—¡Socorro! —gritó Tinta—. ¡La otra araña trae arañitas!</span>
+
+                    <span class="dialogue">—Tranquila —dijo Cinco con su voz de mano—. No son arañitas. Soy yo. La mano de Clara. La otra araña.</span>
+
+                    Tinta parpadeó. Se acercó. Olisqueó (las arañas de tinta olisquean con el corazón).
+
+                    <span class="dialogue">—¿Tú... tú puedes entrar aquí? —preguntó.</span>
+
+                    <span class="dialogue">—Puedo —dijo Cinco—. Porque Clara nos quiere a las dos.</span>
+
+                    Y extendió un dedo. Tinta miró ese dedo enorme, calentito, de verdad.
+
+                    <p class="hook">—¿Y...? —tragó saliva—. ¿Y ahora qué?</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-heart"></i></div>
+            <h2>Capítulo 8: Dos Arañas, Un Solo Corazón</h2>
+            <p>El dedo de Cinco toca la patita de Tinta. Con cuidado. Y la tinta, en vez de correrse, se queda quieta y feliz.</p>
+            <a onclick="toggleText('cap8')" class="read-more">Leer más</a>
+            <div id="cap8" class="full-text">
+                <p>
+                    El dedo de Cinco tocó la patita de Tinta. Suavecito, como una pompa de jabón.
+
+                    Y la tinta no se manchó. La página no se rompió. Solo hubo calor.
+
+                    <span class="dialogue">—¿Ves? —dijo Cinco—. Tocando con cuidado, la tinta no se corre. Se queda donde está, pero se siente acompañada.</span>
+
+                    Tinta sintió algo tibio en las ocho patas, algo que nunca había sentido.
+
+                    <span class="dialogue">—Cinco —dijo con voz de gotita—. Yo solo quería que alguien me tocara. Que alguien supiera que existo.</span>
+
+                    <span class="dialogue">—Claro que existes —dijo Cinco—. Existes cada vez que alguien te lee. Tú eres de corazón y página.</span>
+
+                    <span class="dialogue">—Claro que vale —dijo Cinco—. Mi huella es esto. La tuya es todo un libro.</span>
+
+                    Tinta se secó una lágrima de tinta (son azules, por si no lo sabías).
+
+                    <span class="dialogue">—Entonces... ¿no tengo que ser de verdad?</span>
+
+                    <span class="dialogue">—No —sonrió Cinco—. Tú ya eres de verdad. De verdad de cuento. Y los cuentos leídos con amor son lo más de verdad que existe.</span>
+
+                    Y Clara, desde fuera, dijo en voz bajita:
+
+                    <span class="dialogue">—Las dos son importantes. Una vive en la imaginación. Otra en la realidad.</span>
+
+                    Y las dos arañas se abrazaron: la de tinta y la de dedos.
+
+                    <p class="hook">La página brilló. Y el libro entero, suspiró.</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-handshake"></i></div>
+            <h2>Capítulo 9: El Gran Acuerdo</h2>
+            <p>Tinta y Cinco llegan a un acuerdo muy importante: cada una en su mundo, pero amigas a través de la página.</p>
+            <a onclick="toggleText('cap9')" class="read-more">Leer más</a>
+            <div id="cap9" class="full-text">
+                <p>
+                    Después del abrazo, Tinta y Cinco se quedaron a charlar. Bueno, Tinta se sentó; Cinco se apoyó. Las manos no saben sentarse.
+
+                    <span class="dialogue">—Entonces —dijo Tinta—, ¿cada una tiene su mundo?</span>
+
+                    <span class="dialogue">—Sí —dijo Cinco—. Tú vives en la imaginación; yo, en la realidad. Podemos ser amigas a través de la página.</span>
+
+                    <span class="dialogue">—¿Y cómo se es amiga a través de la página? —preguntó Tinta.</span>
+
+                    <span class="dialogue">—Muy fácil —dijo Cinco—. Tú te quedas aquí contando chistes de vocales perdidas; yo vengo cada noche a saludarte.</span>
+
+                    <span class="dialogue">—¿Cada noche? —Tinta dio una voltereta y cayó en un signo de exclamación.</span>
+
+                    Clara asintió:
+
+                    <span class="dialogue">—Tinta, voy a leerle el cuento a Cinco cada noche. Me escucharás y soñará contigo.</span>
+
+                    <span class="dialogue">—¡Y yo soñaré con dedos! —dijo Tinta—. ¡Ocho! No, espera. ¡Cinco! La matemática no es lo mío.</span>
+
+                    Se rieron. La página tembló de risa.
+
+                    <span class="dialogue">—Entonces... —dijo Tinta, seria—. ¿Me prometes que mañana vuelves?</span>
+
+                    <span class="dialogue">—Te lo prometo —dijo Cinco—. Por el pulgar, el dedo de las promesas.</span>
+
+                    Y extendieron las patas para sellarlo.
+
+                    <p class="hook">Pero esa noche, al cerrarse el libro, algo brillante se deslizó entre las páginas: una huella de dedo en la última página en blanco. Y la página en blanco... se puso a temblar.</p>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <div class="chapter-icon"><i class="fas fa-star"></i></div>
+            <h2>Capítulo 10: Y Colorín Colorado... (Pero No Termina Aquí)</h2>
+            <p>La mañana siguiente, Clara abre el libro y encuentra una sorpresa escrita con letras temblorosas.</p>
+            <a onclick="toggleText('cap10')" class="read-more">Leer más</a>
+            <div id="cap10" class="full-text">
+                <p>
+                    La mañana siguiente, Clara abrió el libro. En la última página, antes de «FIN», alguien había escrito con letras temblorosas:
+
+                    «Gracias por tocarme.»
+
+                    <span class="dialogue">—¿Tinta? —preguntó Clara.</span>
+
+                    <span class="dialogue">—¡Presente! —gritó la arañita, asomando la cabeza por el título.</span>
+
+                    Y Tinta subió hasta lo más alto de la página, donde la autora había dibujado un sol, y se sentó en un rayo.
+
+                    <span class="dialogue">—Oye, tú —dijo—, el que está leyendo esto. Tú también me tocas con los ojos. ¿Sabes? La imaginación y la realidad son mejores cuando van de la mano.</span>
+
+                    <span class="dialogue">—¡De la mano! —rió Cinco, levantando su dedo—. ¡Yo soy la mano! ¡El chiste es mío!</span>
+
+                    <span class="dialogue">—Por eso me lo quedé yo —guiñó Tinta.</span>
+
+                    Clara rió. Cinco rió. Tinta rió. Y el libro entero rió, con risa de páginas.
+
+                    Colorín colorado... este cuento no se ha acabado. Cada vez que alguien abre este libro, Tinta vuelve a existir. Cada vez que alguien toca la página, Cinco está ahí.
+
+                    <span class="dialogue">—¿Quieres saber un secreto? —preguntó Tinta, bajando la voz—. Tú también estás dentro de un cuento. El tuyo. Y tu mano... también es una araña.</span>
+
+                    <p class="hook">Y la última página, la que estaba en blanco, se fue llenando despacito de... bueno. De eso, decides tú.</p>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="activity">
+        <div class="emoji">🖐️ 🕷️ 📖</div>
+        <h2>Y ahora tú, lector...</h2>
+        <p>¿Qué crees que pasaría si metieras <b>TU mano</b> en este libro? ¿Qué araña de tinta te encontraría? ¿Qué te diría?</p>
+        <p>¡Dibújalo en un papel, escribe tu final, y cuéntanoslo!</p>
+    </div>
+
+    <div style="text-align:center; padding:0.5rem 1rem 3rem; display:flex; flex-wrap:wrap; gap:0.9rem; justify-content:center;">
+        <a href="../index.html" style="display:inline-block; background:#1c1b3a; color:#ffffff; text-decoration:none; font-weight:700; padding:12px 26px; border-radius:30px; box-shadow:0 4px 12px rgba(0,0,0,0.25);">Volver a la biblioteca</a>
+    </div>
+
+    <footer>
+        <p>🕸️ La Araña de Tinta que Quería Ser de Verdad 🕸️</p>
+        <p>© 2026 Fabiana Lucía | Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        function toggleText(id) {
+            const element = document.getElementById(id);
+            const button = event.target;
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                button.textContent = "Leer menos";
+            } else {
+                element.style.display = "none";
+                button.textContent = "Leer más";
+            }
+        }
+    </script>
+
+    <script>
+        (function () {
+            if (!('speechSynthesis' in window)) return;
+            if (document.getElementById('lpPlay')) return;
+            var synth = window.speechSynthesis;
+            var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+            if (!chapters.length) return;
+            var current = -1, reading = false, paused = false, queue = [];
+
+            var bar = document.createElement('div');
+            bar.className = 'listen-player';
+            bar.innerHTML =
+                '<button type="button" class="lp-btn" id="lpPlay">Escuchar el libro</button>' +
+                '<button type="button" class="lp-btn lp-ctrl" id="lpPause" style="display:none">Pausa</button>' +
+                '<button type="button" class="lp-btn lp-ctrl" id="lpResume" style="display:none">Seguir</button>' +
+                '<button type="button" class="lp-btn lp-ctrl" id="lpStop" style="display:none">Detener</button>' +
+                '<span class="lp-label" id="lpLabel"></span>';
+            document.body.appendChild(bar);
+
+            chapters.forEach(function (ch, i) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'listen-chapter-btn';
+                b.textContent = 'Escuchar capítulo';
+                b.addEventListener('click', function () { startChapter(i); });
+                ch.appendChild(b);
+            });
+
+            function getVoice() {
+                var voices = synth.getVoices();
+                for (var i = 0; i < voices.length; i++) {
+                    if (/^es/i.test(voices[i].lang)) return voices[i];
+                }
+                return null;
+            }
+
+            function chapterText(ch) {
+                var parts = [];
+                var h2 = ch.querySelector(':scope > h2');
+                if (h2) parts.push(h2.textContent);
+                for (var i = 0; i < ch.children.length; i++) {
+                    var el = ch.children[i];
+                    if (el.tagName === 'P') parts.push(el.textContent);
+                }
+                var ft = ch.querySelector('.full-text');
+                if (ft) {
+                    ft.style.display = 'block';
+                    var rm = ch.querySelector('.read-more');
+                    if (rm) rm.textContent = 'Leer menos';
+                    var ps = ft.querySelectorAll('p');
+                    for (var j = 0; j < ps.length; j++) parts.push(ps[j].textContent);
+                }
+                return parts.join(' ');
+            }
+
+            function chunkText(text) {
+                var words = text.split(/\s+/);
+                var out = [], cur = [], len = 0;
+                for (var i = 0; i < words.length; i++) {
+                    var w = words[i];
+                    if (!w) continue;
+                    cur.push(w); len += w.length + 1;
+                    if (len > 160 && /[.!?]$/.test(w)) {
+                        out.push(cur.join(' ')); cur = []; len = 0;
+                    }
+                }
+                if (cur.length) out.push(cur.join(' '));
+                return out;
+            }
+
+            function sayNext() {
+                if (paused) return;
+                if (!queue.length) { current++; speakChapter(); return; }
+                var u = new SpeechSynthesisUtterance(queue.shift());
+                var v = getVoice();
+                if (v) u.voice = v;
+                u.lang = 'es';
+                u.rate = 0.95;
+                u.pitch = 1.05;
+                u.onend = sayNext;
+                u.onerror = function () { if (synth.speaking) sayNext(); else finish(); };
+                synth.speak(u);
+            }
+
+            function speakChapter() {
+                if (current < 0 || current >= chapters.length) { finish(); return; }
+                var ch = chapters[current];
+                highlight(ch);
+                ch.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                queue = chunkText(chapterText(ch));
+                if (!queue.length) { current++; speakChapter(); return; }
+                sayNext();
+            }
+
+            function startChapter(i) { synth.cancel(); current = i; reading = true; paused = false; updateUI(); speakChapter(); }
+            function playAll() { synth.cancel(); current = 0; reading = true; paused = false; updateUI(); speakChapter(); }
+            function pauseR() { if (reading && !paused) { synth.pause(); paused = true; updateUI(); } }
+            function resumeR() { if (reading && paused) { synth.resume(); paused = false; updateUI(); } }
+            function stopR() { synth.cancel(); current = -1; reading = false; paused = false; queue = []; clearHighlight(); updateUI(); }
+            function finish() { reading = false; paused = false; queue = []; updateUI(); }
+
+            function highlight(ch) { clearHighlight(); ch.classList.add('listening'); }
+            function clearHighlight() { chapters.forEach(function (c) { c.classList.remove('listening'); }); }
+
+            function updateUI() {
+                document.getElementById('lpPlay').style.display = reading ? 'none' : '';
+                document.getElementById('lpPause').style.display = (reading && !paused) ? '' : 'none';
+                document.getElementById('lpResume').style.display = (reading && paused) ? '' : 'none';
+                document.getElementById('lpStop').style.display = reading ? '' : 'none';
+                document.getElementById('lpLabel').textContent = reading ? (paused ? 'Pausado' : 'Escuchando...') : 'Pulsa Escuchar para oír el libro';
+            }
+
+            document.getElementById('lpPlay').addEventListener('click', playAll);
+            document.getElementById('lpPause').addEventListener('click', pauseR);
+            document.getElementById('lpResume').addEventListener('click', resumeR);
+            document.getElementById('lpStop').addEventListener('click', stopR);
+            if (synth.onvoiceschanged) synth.onvoiceschanged = getVoice;
+            window.addEventListener('beforeunload', function () { synth.cancel(); });
+            updateUI();
+        })();
+    </script>
+</body>
+</html>
